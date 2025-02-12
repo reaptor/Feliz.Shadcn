@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RootNamespace>Fable.Shadcn</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Helpers.fs" />
+    <Compile Include="Shadcn.fs" />
+    <Compile Include="Props.fs" />
+    <Compile Include="Variants.fs" />
+    <None Include="Generate.fsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Feliz" Version="2.9.0" />
+  </ItemGroup>
+
+</Project>
