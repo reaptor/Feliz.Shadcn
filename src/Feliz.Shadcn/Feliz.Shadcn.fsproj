@@ -11,6 +11,7 @@
     <Compile Include="Shadcn.fs" />
     <Compile Include="Props.fs" />
     <Compile Include="Variants.fs" />
+    <Compile Include="RadixUI.fs" />
     <None Include="Generate.fsx" />
   </ItemGroup>
 
