@@ -6,6 +6,9 @@
     <Authors>Kristofer Löfberg</Authors>
     <Version>0.9.0</Version>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Copyright>Reaptor 2025</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +17,13 @@
     <Compile Include="Props.fs" />
     <Compile Include="RadixUI.fs" />
     <None Include="Generate.fsx" />
+
+    <Content Include="../../README.md" Pack="true" PackagePath="">
+      <Link>README.md</Link>
+    </Content>
+    <Content Include="../../LICENSE" Pack="true" PackagePath="">
+      <Link>LICENSE</Link>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
