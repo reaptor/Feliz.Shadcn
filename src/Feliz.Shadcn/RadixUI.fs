@@ -67,7 +67,7 @@ module RadixUI =
 
     [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let checked = {|
+    let checked' = {|
         boolean = prop.custom ("checkedState", "boolean")
         indeterminate = prop.custom ("checkedState", "indeterminate")
     |}
@@ -84,12 +84,12 @@ module RadixUI =
     type accordion =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline type' = accordion.type'
-        static member inline value(value: string) = prop.custom ("value", value)
-        static member inline defaultValue(value: string) = prop.custom ("defaultValue", value)
-        static member inline onValueChange(value: string -> unit) = prop.custom ("onValueChange", value)
-        static member inline value(value: string seq) = prop.custom ("value", value)
-        static member inline defaultValue(value: string seq) = prop.custom ("defaultValue", value)
-        static member inline onValueChange(value: string[] -> unit) = prop.custom ("onValueChange", value)
+        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
+        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
+        static member inline value (value: string seq) = prop.custom ("value", value)
+        static member inline defaultValue (value: string seq) = prop.custom ("defaultValue", value)
+        static member inline onValueChange (value: string [] -> unit) = prop.custom ("onValueChange", value)
         static member inline collapsible = prop.custom ("collapsible", null)
         static member inline disabled = prop.custom ("disabled", null)
         static member inline dir = direction
@@ -98,7 +98,7 @@ module RadixUI =
     type accordionItem =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
 
     type accordionTrigger =
         static member inline asChild = prop.custom ("asChild", null)
@@ -110,14 +110,14 @@ module RadixUI =
     type alertDialog =
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
 
     type alertDialogTrigger =
         static member inline asChild = prop.custom ("asChild", null)
 
     type alertDialogPortal =
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline container(value: HTMLElement) = prop.custom ("container", value)
+        static member inline container (value: HTMLElement) = prop.custom ("container", value)
 
     type alertDialogOverlay =
         static member inline asChild = prop.custom ("asChild", null)
@@ -126,9 +126,9 @@ module RadixUI =
     type alertDialogContent =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline onOpenAutoFocus(value: Event -> unit) = prop.custom ("onOpenAutoFocus", value)
-        static member inline onCloseAutoFocus(value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onOpenAutoFocus (value: Event -> unit) = prop.custom ("onOpenAutoFocus", value)
+        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
 
     type alertDialogCancel =
         static member inline asChild = prop.custom ("asChild", null)
@@ -144,36 +144,34 @@ module RadixUI =
 
     type aspectRatio =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline ratio(value: int) = prop.custom ("ratio", value)
+        static member inline ratio (value: int) = prop.custom ("ratio", value)
 
     type avatar =
         static member inline asChild = prop.custom ("asChild", null)
 
     type avatarImage =
         static member inline asChild = prop.custom ("asChild", null)
-
-        static member inline onLoadingStatusChange(value: string -> unit) =
-            prop.custom ("onLoadingStatusChange", value)
+        static member inline onLoadingStatusChange (value: string -> unit) = prop.custom ("onLoadingStatusChange", value)
 
     type avatarFallback =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline delayMs(value: int) = prop.custom ("delayMs", value)
+        static member inline delayMs (value: int) = prop.custom ("delayMs", value)
 
     type checkbox =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultChecked(value: bool option -> unit) = prop.custom ("defaultChecked", value)
-        static member inline checked' = checked
-        static member inline onCheckedChange(value: bool option -> unit) = prop.custom ("onCheckedChange", value)
+        static member inline defaultChecked (value: bool option -> unit) = prop.custom ("defaultChecked", value)
+        static member inline checked' = checked'
+        static member inline onCheckedChange (value: bool option -> unit) = prop.custom ("onCheckedChange", value)
         static member inline disabled = prop.custom ("disabled", null)
         static member inline required = prop.custom ("required", null)
-        static member inline name(value: string) = prop.custom ("name", value)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline name (value: string) = prop.custom ("name", value)
+        static member inline value (value: string) = prop.custom ("value", value)
 
     type collapsible =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
         static member inline disabled = prop.custom ("disabled", null)
 
     type collapsibleTrigger =
@@ -185,7 +183,7 @@ module RadixUI =
 
     type contextMenu =
         static member inline dir = direction
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
         static member inline modal = prop.custom ("modal", null)
 
     type contextMenuTrigger =
@@ -194,35 +192,24 @@ module RadixUI =
 
     type contextMenuPortal =
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline container(value: HTMLElement) = prop.custom ("container", value)
+        static member inline container (value: HTMLElement) = prop.custom ("container", value)
 
     type contextMenuContent =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline loop = prop.custom ("loop", null)
-        static member inline onCloseAutoFocus(value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
-        static member inline onFocusOutside(value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-
-        static member inline onInteractOutside(value: Event -> unit) =
-            prop.custom ("onInteractOutside", value)
-
+        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
+        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
+        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline alignOffset(value: int) = prop.custom ("alignOffset", value)
+        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
         static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
+        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
 
-        static member inline collisionBoundary(value: HTMLElement) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionBoundary(value: HTMLElement array) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionPadding(all: int) = prop.custom ("collisionPadding", all)
-
-        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
             prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline sticky = sticky
@@ -231,8 +218,8 @@ module RadixUI =
     type contextMenuItem =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect(value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type contextMenuGroup =
         static member inline asChild = prop.custom ("asChild", null)
@@ -242,23 +229,23 @@ module RadixUI =
 
     type contextMenuCheckboxItem =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline checked' = checked
-        static member inline onCheckedChange(value: bool -> unit) = prop.custom ("onCheckedChange", value)
+        static member inline checked' = checked'
+        static member inline onCheckedChange (value: bool -> unit) = prop.custom ("onCheckedChange", value)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect(value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type contextMenuRadioGroup =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
-        static member inline onValueChange(value: string -> unit) = prop.custom ("onValueChange", value)
+        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
 
     type contextMenuRadioItem =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect(value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type contextMenuSeparator =
         static member inline asChild = prop.custom ("asChild", null)
@@ -266,50 +253,39 @@ module RadixUI =
     type contextMenuSub =
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
 
     type contextMenuSubTrigger =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type contextMenuSubContent =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline loop = prop.custom ("loop", null)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
-        static member inline onFocusOutside(value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-
-        static member inline onInteractOutside(value: Event -> unit) =
-            prop.custom ("onInteractOutside", value)
-
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
+        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
+        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline sideOffset(value: int) = prop.custom ("sideOffset", value)
-        static member inline alignOffset(value: int) = prop.custom ("alignOffset", value)
+        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
+        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
         static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
+        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
 
-        static member inline collisionBoundary(value: HTMLElement) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionBoundary(value: HTMLElement array) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionPadding(all: int) = prop.custom ("collisionPadding", all)
-
-        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
             prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding(value: int) = prop.custom ("arrowPadding", value)
+        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
         static member inline sticky = sticky
         static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
 
     type dialog =
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
         static member inline modal = prop.custom ("modal", null)
 
     type dialogTrigger =
@@ -317,7 +293,7 @@ module RadixUI =
 
     type dialogPortal =
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline container(value: HTMLElement) = prop.custom ("container", value)
+        static member inline container (value: HTMLElement) = prop.custom ("container", value)
 
     type dialogOverlay =
         static member inline asChild = prop.custom ("asChild", null)
@@ -326,15 +302,11 @@ module RadixUI =
     type dialogContent =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline onOpenAutoFocus(value: Event -> unit) = prop.custom ("onOpenAutoFocus", value)
-        static member inline onCloseAutoFocus(value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
-        static member inline onInteractOutside(value: Event -> unit) =
-            prop.custom ("onInteractOutside", value)
+        static member inline onOpenAutoFocus (value: Event -> unit) = prop.custom ("onOpenAutoFocus", value)
+        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
+        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
 
     type dialogClose =
         static member inline asChild = prop.custom ("asChild", null)
@@ -348,7 +320,7 @@ module RadixUI =
     type dropdownMenu =
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
         static member inline modal = prop.custom ("modal", null)
         static member inline dir = direction
 
@@ -357,49 +329,38 @@ module RadixUI =
 
     type dropdownMenuPortal =
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline container(value: HTMLElement) = prop.custom ("container", value)
+        static member inline container (value: HTMLElement) = prop.custom ("container", value)
 
     type dropdownMenuContent =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline loop = prop.custom ("loop", null)
-        static member inline onCloseAutoFocus(value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
-        static member inline onFocusOutside(value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-
-        static member inline onInteractOutside(value: Event -> unit) =
-            prop.custom ("onInteractOutside", value)
-
+        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
+        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
+        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
         static member inline forceMount = prop.custom ("forceMount", null)
         static member inline side = side
-        static member inline sideOffset(value: int) = prop.custom ("sideOffset", value)
+        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
         static member inline align = align
-        static member inline alignOffset(value: int) = prop.custom ("alignOffset", value)
+        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
         static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
+        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
 
-        static member inline collisionBoundary(value: HTMLElement) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionBoundary(value: HTMLElement array) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionPadding(all: int) = prop.custom ("collisionPadding", all)
-
-        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
             prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding(value: int) = prop.custom ("arrowPadding", value)
+        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
         static member inline sticky = sticky
         static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
 
     type dropdownMenuItem =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect(value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type dropdownMenuGroup =
         static member inline asChild = prop.custom ("asChild", null)
@@ -409,23 +370,23 @@ module RadixUI =
 
     type dropdownMenuCheckboxItem =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline checked' = checked
-        static member inline onCheckedChange(value: bool -> unit) = prop.custom ("onCheckedChange", value)
+        static member inline checked' = checked'
+        static member inline onCheckedChange (value: bool -> unit) = prop.custom ("onCheckedChange", value)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect(value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type dropdownMenuRadioGroup =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
-        static member inline onValueChange(value: string -> unit) = prop.custom ("onValueChange", value)
+        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
 
     type dropdownMenuRadioItem =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect(value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type dropdownMenuSeparator =
         static member inline asChild = prop.custom ("asChild", null)
@@ -433,58 +394,45 @@ module RadixUI =
     type dropdownMenuSub =
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
 
     type dropdownMenuSubTrigger =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type dropdownMenuSubContent =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline loop = prop.custom ("loop", null)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
-        static member inline onFocusOutside(value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-
-        static member inline onInteractOutside(value: Event -> unit) =
-            prop.custom ("onInteractOutside", value)
-
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
+        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
+        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline sideOffset(value: int) = prop.custom ("sideOffset", value)
-        static member inline alignOffset(value: int) = prop.custom ("alignOffset", value)
+        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
+        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
         static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
+        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
 
-        static member inline collisionBoundary(value: HTMLElement) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionBoundary(value: HTMLElement array) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionPadding(all: int) = prop.custom ("collisionPadding", all)
-
-        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
             prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding(value: int) = prop.custom ("arrowPadding", value)
+        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
         static member inline sticky = sticky
         static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
 
     type form =
         static member inline asChild = prop.custom ("asChild", null)
-
-        static member inline onClearServerErrors(value: unit -> unit) =
-            prop.custom ("onClearServerErrors", value)
+        static member inline onClearServerErrors (value: unit -> unit) = prop.custom ("onClearServerErrors", value)
 
     type hoverCard =
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
-        static member inline open'Delay(value: int) = prop.custom ("openDelay", value)
-        static member inline closeDelay(value: int) = prop.custom ("closeDelay", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline open'Delay (value: int) = prop.custom ("openDelay", value)
+        static member inline closeDelay (value: int) = prop.custom ("closeDelay", value)
 
     type hoverCardTrigger =
         static member inline asChild = prop.custom ("asChild", null)
@@ -493,90 +441,74 @@ module RadixUI =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline forceMount = prop.custom ("forceMount", null)
         static member inline side = side
-        static member inline sideOffset(value: int) = prop.custom ("sideOffset", value)
+        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
         static member inline align = align
-        static member inline alignOffset(value: int) = prop.custom ("alignOffset", value)
+        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
         static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
+        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
 
-        static member inline collisionBoundary(value: HTMLElement) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionBoundary(value: HTMLElement array) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionPadding(all: int) = prop.custom ("collisionPadding", all)
-
-        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
             prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding(value: int) = prop.custom ("arrowPadding", value)
+        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
         static member inline sticky = sticky
         static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
 
     type label =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline htmlFor(value: string) = prop.custom ("htmlFor", value)
+        static member inline htmlFor (value: string) = prop.custom ("htmlFor", value)
 
     type menubar =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultValue(value: string) = prop.custom ("defaultValue", value)
-        static member inline value(value: string) = prop.custom ("value", value)
-        static member inline onValueChange(value: int[] -> unit) = prop.custom ("onValueChange", value)
+        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
+        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline onValueChange (value: int [] -> unit) = prop.custom ("onValueChange", value)
         static member inline dir = direction
         static member inline loop = prop.custom ("loop", null)
 
     type menubarMenu =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
 
     type menubarTrigger =
         static member inline asChild = prop.custom ("asChild", null)
 
     type menubarPortal =
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline container(value: HTMLElement) = prop.custom ("container", value)
+        static member inline container (value: HTMLElement) = prop.custom ("container", value)
 
     type menubarContent =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline loop = prop.custom ("loop", null)
-        static member inline onCloseAutoFocus(value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
-        static member inline onFocusOutside(value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-
-        static member inline onInteractOutside(value: Event -> unit) =
-            prop.custom ("onInteractOutside", value)
-
+        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
+        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
+        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
         static member inline forceMount = prop.custom ("forceMount", null)
         static member inline side = side
-        static member inline sideOffset(value: int) = prop.custom ("sideOffset", value)
+        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
         static member inline align = align
-        static member inline alignOffset(value: int) = prop.custom ("alignOffset", value)
+        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
         static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
+        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
 
-        static member inline collisionBoundary(value: HTMLElement) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionBoundary(value: HTMLElement array) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionPadding(all: int) = prop.custom ("collisionPadding", all)
-
-        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
             prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding(value: int) = prop.custom ("arrowPadding", value)
+        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
         static member inline sticky = sticky
         static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
 
     type menubarItem =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect(value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type menubarGroup =
         static member inline asChild = prop.custom ("asChild", null)
@@ -586,23 +518,23 @@ module RadixUI =
 
     type menubarCheckboxItem =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline checked' = checked
-        static member inline onCheckedChange(value: bool -> unit) = prop.custom ("onCheckedChange", value)
+        static member inline checked' = checked'
+        static member inline onCheckedChange (value: bool -> unit) = prop.custom ("onCheckedChange", value)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect(value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type menubarRadioGroup =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
-        static member inline onValueChange(value: string -> unit) = prop.custom ("onValueChange", value)
+        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
 
     type menubarRadioItem =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect(value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type menubarSeparator =
         static member inline asChild = prop.custom ("asChild", null)
@@ -610,55 +542,41 @@ module RadixUI =
     type menubarSub =
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
 
     type menubarSubTrigger =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type menubarSubContent =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline loop = prop.custom ("loop", null)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
-        static member inline onFocusOutside(value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-
-        static member inline onInteractOutside(value: Event -> unit) =
-            prop.custom ("onInteractOutside", value)
-
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
+        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
+        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
         static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline sideOffset(value: int) = prop.custom ("sideOffset", value)
-        static member inline alignOffset(value: int) = prop.custom ("alignOffset", value)
+        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
+        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
         static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
+        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
 
-        static member inline collisionBoundary(value: HTMLElement) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionBoundary(value: HTMLElement array) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionPadding(all: int) = prop.custom ("collisionPadding", all)
-
-        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
             prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding(value: int) = prop.custom ("arrowPadding", value)
+        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
         static member inline sticky = sticky
         static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
 
     type navigationMenu =
-        static member inline defaultValue(value: string) = prop.custom ("defaultValue", value)
-        static member inline value(value: string) = prop.custom ("value", value)
-        static member inline onValueChange(value: int[] -> unit) = prop.custom ("onValueChange", value)
-        static member inline delayDuration(value: int) = prop.custom ("delayDuration", value)
-
-        static member inline skipDelayDuration(value: int) =
-            prop.custom ("skipDelayDuration", value)
-
+        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
+        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline onValueChange (value: int [] -> unit) = prop.custom ("onValueChange", value)
+        static member inline delayDuration (value: int) = prop.custom ("delayDuration", value)
+        static member inline skipDelayDuration (value: int) = prop.custom ("skipDelayDuration", value)
         static member inline dir = direction
         static member inline orientation = orientation
 
@@ -667,29 +585,23 @@ module RadixUI =
 
     type navigationMenuItem =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
 
     type navigationMenuTrigger =
         static member inline asChild = prop.custom ("asChild", null)
 
     type navigationMenuContent =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
-        static member inline onFocusOutside(value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-
-        static member inline onInteractOutside(value: Event -> unit) =
-            prop.custom ("onInteractOutside", value)
-
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
+        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
+        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
         static member inline forceMount = prop.custom ("forceMount", null)
 
     type navigationMenuLink =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline active = prop.custom ("active", null)
-        static member inline onSelect(value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
 
     type navigationMenuIndicator =
         static member inline asChild = prop.custom ("asChild", null)
@@ -702,7 +614,7 @@ module RadixUI =
     type popover =
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
         static member inline modal = prop.custom ("modal", null)
 
     type popoverTrigger =
@@ -713,53 +625,42 @@ module RadixUI =
 
     type popoverContent =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline onOpenAutoFocus(value: Event -> unit) = prop.custom ("onOpenAutoFocus", value)
-        static member inline onCloseAutoFocus(value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
-        static member inline onFocusOutside(value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-
-        static member inline onInteractOutside(value: Event -> unit) =
-            prop.custom ("onInteractOutside", value)
-
+        static member inline onOpenAutoFocus (value: Event -> unit) = prop.custom ("onOpenAutoFocus", value)
+        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
+        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
+        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
         static member inline forceMount = prop.custom ("forceMount", null)
         static member inline side = side
-        static member inline sideOffset(value: int) = prop.custom ("sideOffset", value)
+        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
         static member inline align = align
-        static member inline alignOffset(value: int) = prop.custom ("alignOffset", value)
+        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
         static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
+        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
 
-        static member inline collisionBoundary(value: HTMLElement) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionBoundary(value: HTMLElement array) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionPadding(all: int) = prop.custom ("collisionPadding", all)
-
-        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
             prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding(value: int) = prop.custom ("arrowPadding", value)
+        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
         static member inline sticky = sticky
         static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
 
     type progress =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: int option) = prop.custom ("value", value)
-        static member inline max(value: int) = prop.custom ("max", value)
-        static member inline getValueLabel(value: int -> int -> string) = prop.custom ("getValueLabel", value)
+        static member inline value (value: int option) = prop.custom ("value", value)
+        static member inline max (value: int) = prop.custom ("max", value)
+        static member inline getValueLabel (value: int -> int -> string) = prop.custom ("getValueLabel", value)
 
     type radioGroup =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultValue(value: string) = prop.custom ("defaultValue", value)
-        static member inline value(value: string) = prop.custom ("value", value)
-        static member inline onValueChange(value: int[] -> unit) = prop.custom ("onValueChange", value)
+        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
+        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline onValueChange (value: int [] -> unit) = prop.custom ("onValueChange", value)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline name(value: string) = prop.custom ("name", value)
+        static member inline name (value: string) = prop.custom ("name", value)
         static member inline required = prop.custom ("required", null)
         static member inline orientation = orientation
         static member inline dir = direction
@@ -767,7 +668,7 @@ module RadixUI =
 
     type radioGroupItem =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
         static member inline disabled = prop.custom ("disabled", null)
         static member inline required = prop.custom ("required", null)
 
@@ -785,19 +686,19 @@ module RadixUI =
     type scrollArea =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline type' = scrollArea.type'
-        static member inline scrollHideDelay(value: int) = prop.custom ("scrollHideDelay", value)
+        static member inline scrollHideDelay (value: int) = prop.custom ("scrollHideDelay", value)
         static member inline dir = direction
-        static member inline nonce(value: string) = prop.custom ("nonce", value)
+        static member inline nonce (value: string) = prop.custom ("nonce", value)
 
     type select =
-        static member inline defaultValue(value: string) = prop.custom ("defaultValue", value)
-        static member inline value(value: string) = prop.custom ("value", value)
-        static member inline onValueChange(value: string -> unit) = prop.custom ("onValueChange", value)
+        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
+        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
         static member inline dir = direction
-        static member inline name(value: string) = prop.custom ("name", value)
+        static member inline name (value: string) = prop.custom ("name", value)
         static member inline disabled = prop.custom ("disabled", null)
         static member inline required = prop.custom ("required", null)
 
@@ -806,7 +707,7 @@ module RadixUI =
 
     type selectValue =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline placeholder(value: ReactElement) = prop.custom ("placeholder", value)
+        static member inline placeholder (value: ReactElement) = prop.custom ("placeholder", value)
 
 
     [<EditorBrowsable(EditorBrowsableState.Never)>]
@@ -819,39 +720,31 @@ module RadixUI =
 
     type selectContent =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline onCloseAutoFocus(value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
+        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
         static member inline position = selectContent.position
         static member inline side = side
-        static member inline sideOffset(value: int) = prop.custom ("sideOffset", value)
+        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
         static member inline align = align
-        static member inline alignOffset(value: int) = prop.custom ("alignOffset", value)
+        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
         static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
+        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
 
-        static member inline collisionBoundary(value: HTMLElement) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionBoundary(value: HTMLElement array) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionPadding(all: int) = prop.custom ("collisionPadding", all)
-
-        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
             prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding(value: int) = prop.custom ("arrowPadding", value)
+        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
         static member inline sticky = sticky
         static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
 
     type selectItem =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
         static member inline disabled = prop.custom ("disabled", null)
-        static member inline textValue(value: string) = prop.custom ("textValue", value)
+        static member inline textValue (value: string) = prop.custom ("textValue", value)
 
     type selectScrollUpButton =
         static member inline asChild = prop.custom ("asChild", null)
@@ -875,33 +768,30 @@ module RadixUI =
 
     type slider =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultValue(value: int[]) = prop.custom ("defaultValue", value)
-        static member inline value(value: int[]) = prop.custom ("value", value)
-        static member inline onValueChange(value: int[] -> unit) = prop.custom ("onValueChange", value)
-        static member inline onValueCommit(value: int[] -> unit) = prop.custom ("onValueCommit", value)
-        static member inline name(value: string) = prop.custom ("name", value)
+        static member inline defaultValue (value: int[]) = prop.custom ("defaultValue", value)
+        static member inline value (value: int[]) = prop.custom ("value", value)
+        static member inline onValueChange (value: int [] -> unit) = prop.custom ("onValueChange", value)
+        static member inline onValueCommit (value: int [] -> unit) = prop.custom ("onValueCommit", value)
+        static member inline name (value: string) = prop.custom ("name", value)
         static member inline disabled = prop.custom ("disabled", null)
         static member inline orientation = orientation
         static member inline dir = direction
         static member inline inverted = prop.custom ("inverted", null)
-        static member inline min(value: int) = prop.custom ("min", value)
-        static member inline max(value: int) = prop.custom ("max", value)
-        static member inline step(value: int) = prop.custom ("step", value)
-
-        static member inline minStepsBetweenThumbs(value: int) =
-            prop.custom ("minStepsBetweenThumbs", value)
-
-        static member inline form(value: string) = prop.custom ("form", value)
+        static member inline min (value: int) = prop.custom ("min", value)
+        static member inline max (value: int) = prop.custom ("max", value)
+        static member inline step (value: int) = prop.custom ("step", value)
+        static member inline minStepsBetweenThumbs (value: int) = prop.custom ("minStepsBetweenThumbs", value)
+        static member inline form (value: string) = prop.custom ("form", value)
 
     type switch =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline defaultChecked = prop.custom ("defaultChecked", null)
         static member inline checked' = prop.custom ("checked", null)
-        static member inline onCheckedChange(value: bool -> unit) = prop.custom ("onCheckedChange", value)
+        static member inline onCheckedChange (value: bool -> unit) = prop.custom ("onCheckedChange", value)
         static member inline disabled = prop.custom ("disabled", null)
         static member inline required = prop.custom ("required", null)
-        static member inline name(value: string) = prop.custom ("name", value)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline name (value: string) = prop.custom ("name", value)
+        static member inline value (value: string) = prop.custom ("value", value)
 
 
     [<EditorBrowsable(EditorBrowsableState.Never)>]
@@ -914,9 +804,9 @@ module RadixUI =
 
     type tabs =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultValue(value: string) = prop.custom ("defaultValue", value)
-        static member inline value(value: string) = prop.custom ("value", value)
-        static member inline onValueChange(value: string -> unit) = prop.custom ("onValueChange", value)
+        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
+        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
         static member inline orientation = orientation
         static member inline dir = direction
         static member inline activationMode = tabs.activationMode
@@ -927,19 +817,19 @@ module RadixUI =
 
     type tabsTrigger =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
         static member inline disabled = prop.custom ("disabled", null)
 
     type tabsContent =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
         static member inline forceMount = prop.custom ("forceMount", null)
 
     type toggle =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline defaultPressed = prop.custom ("defaultPressed", null)
         static member inline pressed = prop.custom ("pressed", null)
-        static member inline onPressedChange(value: bool -> unit) = prop.custom ("onPressedChange", value)
+        static member inline onPressedChange (value: bool -> unit) = prop.custom ("onPressedChange", value)
         static member inline disabled = prop.custom ("disabled", null)
 
 
@@ -954,12 +844,12 @@ module RadixUI =
     type toggleGroup =
         static member inline asChild = prop.custom ("asChild", null)
         static member inline type' = toggleGroup.type'
-        static member inline value(value: string) = prop.custom ("value", value)
-        static member inline defaultValue(value: string) = prop.custom ("defaultValue", value)
-        static member inline onValueChange(value: string -> unit) = prop.custom ("onValueChange", value)
-        static member inline value(value: string seq) = prop.custom ("value", value)
-        static member inline defaultValue(value: string seq) = prop.custom ("defaultValue", value)
-        static member inline onValueChange(value: string[] -> unit) = prop.custom ("onValueChange", value)
+        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
+        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
+        static member inline value (value: string seq) = prop.custom ("value", value)
+        static member inline defaultValue (value: string seq) = prop.custom ("defaultValue", value)
+        static member inline onValueChange (value: string [] -> unit) = prop.custom ("onValueChange", value)
         static member inline disabled = prop.custom ("disabled", null)
         static member inline rovingFocus = prop.custom ("rovingFocus", null)
         static member inline orientation = orientation
@@ -968,22 +858,19 @@ module RadixUI =
 
     type toggleGroupItem =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline value(value: string) = prop.custom ("value", value)
+        static member inline value (value: string) = prop.custom ("value", value)
         static member inline disabled = prop.custom ("disabled", null)
 
     type tooltipProvider =
-        static member inline delayDuration(value: int) = prop.custom ("delayDuration", value)
-
-        static member inline skipDelayDuration(value: int) =
-            prop.custom ("skipDelayDuration", value)
-
+        static member inline delayDuration (value: int) = prop.custom ("delayDuration", value)
+        static member inline skipDelayDuration (value: int) = prop.custom ("skipDelayDuration", value)
         static member inline disableHoverableContent = prop.custom ("disableHoverableContent", null)
 
     type tooltip =
         static member inline defaultOpen = prop.custom ("defaultOpen", null)
         static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange(value: bool -> unit) = prop.custom ("onOpenChange", value)
-        static member inline delayDuration(value: int) = prop.custom ("delayDuration", value)
+        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline delayDuration (value: int) = prop.custom ("delayDuration", value)
         static member inline disableHoverableContent = prop.custom ("disableHoverableContent", null)
 
     type tooltipTrigger =
@@ -991,30 +878,22 @@ module RadixUI =
 
     type tooltipContent =
         static member inline asChild = prop.custom ("asChild", null)
-        static member inline arialabel(value: string) = prop.custom ("arialabel", value)
-        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-
-        static member inline onPointerDownOutside(value: PointerEvent -> unit) =
-            prop.custom ("onPointerDownOutside", value)
-
+        static member inline arialabel (value: string) = prop.custom ("arialabel", value)
+        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
         static member inline forceMount = prop.custom ("forceMount", null)
         static member inline side = side
-        static member inline sideOffset(value: int) = prop.custom ("sideOffset", value)
+        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
         static member inline align = align
-        static member inline alignOffset(value: int) = prop.custom ("alignOffset", value)
+        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
         static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
+        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
 
-        static member inline collisionBoundary(value: HTMLElement) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionBoundary(value: HTMLElement array) =
-            prop.custom ("collisionBoundary", value)
-
-        static member inline collisionPadding(all: int) = prop.custom ("collisionPadding", all)
-
-        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
             prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding(value: int) = prop.custom ("arrowPadding", value)
+        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
         static member inline sticky = sticky
         static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)

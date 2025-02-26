@@ -196,7 +196,7 @@ module RadixUI =
 
     [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let checked = {|
+    let checked' = {|
         boolean = prop.custom ("checkedState", "boolean")
         indeterminate = prop.custom ("checkedState", "indeterminate")
     |}
@@ -360,7 +360,7 @@ for path in paths do
                 | "align", "enum" -> enumFn "align"
                 | "sticky", "enum" -> enumFn "sticky"
                 | "value", "intnull" -> defaultFn "int option"
-                | "checked", "booleanindeterminate" -> enumFn "checked"
+                | "checked", "booleanindeterminate" -> enumFn "checked'"
                 | "onOpenChange", "function"
                 | "onCheckedChange", "function" -> defaultFn "bool -> unit"
                 | "onOpenAutoFocus", "function"
