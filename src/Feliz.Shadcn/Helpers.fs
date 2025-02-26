@@ -1,10 +1,12 @@
 namespace Feliz.Shadcn
 
+open System.ComponentModel
 open Fable.Core
 open Fable.Core.JsInterop
 open Feliz
 
-module internal Helpers =
+[<EditorBrowsable(EditorBrowsableState.Never)>]
+module Helpers =
     [<Emit("$0 === undefined")>]
     let private isUndefined x = jsNative
 

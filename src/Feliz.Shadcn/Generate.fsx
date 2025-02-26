@@ -1,10 +1,102 @@
 #r "nuget: SimpleExec"
+#r "nuget: FSharp.Data"
 
 open System
 open System.IO
+open System.Net
 open System.Text.RegularExpressions
 open SimpleExec
+open FSharp.Data
 
+let camelCase (s: string) =
+    s.Split('-')
+    |> Array.map (fun s -> $"%c{Char.ToUpperInvariant s[0]}%s{s[1..]}")
+    |> String.concat ""
+    |> fun s -> $"%c{Char.ToLowerInvariant s[0]}%s{s[1..]}"
+
+let getRadixProps name =
+    try
+        let results =
+            HtmlDocument.Load($"https://www.radix-ui.com/primitives/docs/components/%s{name}#api-reference")
+
+        let props, _, _, _ =
+            results.Descendants()
+            |> Seq.fold
+                (fun (res, isApiReference, pick, elementName) node ->
+                    if node.Name() = "h2" && node.HasAttribute("id", "api-reference") then
+                        (res, true, true, elementName)
+                    elif
+                        node.Name() = "h2" && node.HasAttribute("id", "examples")
+                        || node.Name() = "h3" && node.HasAttribute("id", "keyboard-interactions")
+                    then
+                        (res, false, false, elementName)
+                    else if pick && node.Name() = "h3" then
+                        (res,
+                         isApiReference,
+                         true,
+                         node.Descendants("a")
+                         |> Seq.tryHead
+                         |> Option.defaultWith (fun () -> failwith $"'a' not found. %A{node}")
+                         |> _.InnerText())
+                    else if pick && node.Name() = "table" && node.HasAttribute("class", "rt-TableRootTable") then
+                        let props =
+                            node.Descendants("tr")
+                            |> Seq.choose (fun row ->
+                                let codes = row.Descendants("code") |> Seq.toList
+
+                                if codes.Length > 1 then
+                                    let trim (s: string) =
+                                        s
+                                        |> Seq.map int
+                                        |> Seq.choose (fun c ->
+                                            if
+                                                c > 47 && c < 58
+                                                || c > 64 && c < 91
+                                                || c > 96 && c < 123
+                                                || c = 91
+                                                || c = 93
+                                            then
+                                                Some(char c)
+                                            else
+                                                None)
+                                        |> Seq.toArray
+                                        |> String
+
+                                    let name = trim (codes[0].InnerText())
+                                    let value = trim (codes[1].InnerText())
+                                    Some(name, value)
+                                else
+                                    None)
+                            |> Seq.choose (fun (name, value) ->
+                                if
+                                    name = "[datastate]"
+                                    || name = "[dataorientation]"
+                                    || name = "[dataside]"
+                                    || name = "[dataalign]"
+                                    || name = "[datamotion]"
+                                    || name.StartsWith("radix")
+                                then
+                                    None
+                                else
+                                    Some(name, value))
+
+                        if Seq.length props > 0 then
+                            ((camelCase $"""%s{name}%s{elementName.Replace("Root", "")}""", props) :: res,
+                             isApiReference,
+                             true,
+                             elementName)
+                        else
+                            (res, isApiReference, pick, elementName)
+                    else
+                        (res, isApiReference, pick, elementName))
+                ([], false, false, "")
+
+        props
+    with
+    | :? WebException as ex when ex.Status = WebExceptionStatus.ProtocolError -> []
+    | ex ->
+        printfn "Exception for %s: %s" name ex.Message
+        []
 
 // let appDir = Path.Combine(__SOURCE_DIRECTORY__, "my-app")
 
@@ -13,9 +105,6 @@ open SimpleExec
 //     Command.Run("npx", "shadcn@canary add --yes --overwrite --all", appDir)
 
 let componentsDir = Path.Combine(__SOURCE_DIRECTORY__, "components")
-
-let camelCase (s: string) =
-    Char.ToLowerInvariant(s[0]).ToString() + s[1..]
 
 let elements = File.CreateText(Path.Combine(__SOURCE_DIRECTORY__, "Shadcn.fs"))
 
@@ -35,27 +124,94 @@ module Elements =
     type Shadcn ="""
 )
 
-let props = File.CreateText(Path.Combine(__SOURCE_DIRECTORY__, "Props.fs"))
+let radixUi = File.CreateText(Path.Combine(__SOURCE_DIRECTORY__, "RadixUI.fs"))
 
-props.WriteLine(
+radixUi.WriteLine(
     """// This file is auto-generated by the Generate.fsx script
 
 namespace Feliz.Shadcn
 
 [<AutoOpen>]
-module Props =
+module RadixUI =
+    open System.ComponentModel
+    open Browser.Types
     open Fable.Core
     open Fable.Core.JsInterop
     open Feliz
-    open Feliz.Shadcn.Helpers
+
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    let collisionPaddingValue (top: int option) (right: int option) (bottom: int option) (left: int option) =
+        createObj [
+            match top with
+            | Some top -> "top", top
+            | None -> ()
+            match right with
+            | Some right -> "right", right
+            | None -> ()
+            match bottom with
+            | Some bottom -> "bottom", bottom
+            | None -> ()
+            match left with
+            | Some left -> "left", left
+            | None -> ()
+        ]
+
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    let direction = {|
+        ltr = prop.custom ("dir", "ltr")
+        rtl = prop.custom ("dir", "rtl")
+    |}
+
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    let orientation = {|
+        horizontal = prop.custom ("orientation", "horizontal")
+        vertical = prop.custom ("orientation", "vertical")
+    |}
+
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    let side = {|
+        top = prop.custom ("side", "top")
+        right = prop.custom ("side", "right")
+        bottom = prop.custom ("side", "bottom")
+        left = prop.custom ("side", "left")
+    |}
+
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    let align = {|
+        center = prop.custom ("align", "center")
+        start = prop.custom ("align", "start")
+        end' = prop.custom ("align", "end")
+    |}
+
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    let sticky = {|
+        always = prop.custom ("sticky", "always")
+        partial = prop.custom ("sticky", "partial")
+    |}
+
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    let checked = {|
+        boolean = prop.custom ("checkedState", "boolean")
+        indeterminate = prop.custom ("checkedState", "indeterminate")
+    |}
 """
 )
 
-for path in Directory.GetFiles(componentsDir, "*.tsx") do
+let paths =
+    Directory.GetFiles(componentsDir, "*.tsx")
+    |> Array.sortBy Path.GetFileNameWithoutExtension
+
+for path in paths do
     let contents = File.ReadAllText(path)
 
     if contents.Contains("variants: {") then
-        printfn $"%s{path} contains variants."
+        printfn $"%s{path} contains variants. Add them manually to Props.fs"
 
     let exports =
         Regex.Matches(contents, @"export\s*{([^}]+)}")
@@ -69,46 +225,225 @@ for path in Directory.GetFiles(componentsDir, "*.tsx") do
         exports |> List.skipWhile (fun x -> Char.IsLower x[0]) |> List.head
 
     elements.WriteLine(
-        $"""        static member %s{camelCase elementName} (props: IReactProperty seq) = createElement(import "%s{elementName}" "@/components/ui/%s{filename}") props"""
+        $"""        static member inline %s{camelCase elementName} (props: IReactProperty seq) = createElement(import "%s{elementName}" "@/components/ui/%s{filename}") props"""
     )
-    |> ignore
 
     elements.WriteLine(
-        $"""        static member %s{camelCase elementName} (children: #seq<ReactElement>) = createElement(import "%s{elementName}" "@/components/ui/%s{filename}") [ prop.children (children :> ReactElement seq) ]"""
+        $"""        static member inline %s{camelCase elementName} (children: #seq<ReactElement>) = createElement(import "%s{elementName}" "@/components/ui/%s{filename}") [ prop.children (children :> ReactElement seq) ]"""
     )
-    |> ignore
-
-    elements.Flush()
 
     let propList =
         exports
         |> List.takeWhile (fun x -> x.StartsWith elementName)
         |> List.filter (fun x -> x <> elementName)
-        |> List.map (fun x ->
-            let propName = x[elementName.Length ..]
-            camelCase propName, x)
 
     if propList.Length > 0 then
-        props.WriteLine("    [<Erase>]") |> ignore
-        props.WriteLine($"    type %s{camelCase elementName} =") |> ignore
-
-        for name, importName in propList do
-            props.WriteLine(
-                $"""        static member %s{name} (props: IReactProperty seq) = createElement(import "%s{importName}" "@/components/ui/%s{filename}") props"""
+        for name in propList do
+            elements.WriteLine(
+                $"""        static member inline %s{camelCase name} (props: IReactProperty seq) = createElement(import "%s{name}" "@/components/ui/%s{filename}") props"""
             )
             |> ignore
 
-            props.WriteLine(
-                $"""        static member %s{name} (children: #seq<ReactElement>) = createElement(import "%s{importName}" "@/components/ui/%s{filename}") [ prop.children (children :> ReactElement seq) ]"""
+            elements.WriteLine(
+                $"""        static member inline %s{camelCase name} (children: #seq<ReactElement>) = createElement(import "%s{name}" "@/components/ui/%s{filename}") [ prop.children (children :> ReactElement seq) ]"""
             )
             |> ignore
 
-            props.WriteLine(
-                $"""        static member %s{name} (text: string) = createElement(import "%s{importName}" "@/components/ui/%s{filename}") [ prop.text text ]"""
+            elements.WriteLine(
+                $"""        static member inline %s{camelCase name} (text: string) = createElement(import "%s{name}" "@/components/ui/%s{filename}") [ prop.text text ]"""
             )
             |> ignore
 
-        props.WriteLine("") |> ignore
+    elements.WriteLine("") |> ignore
+    elements.Flush()
 
-props.Close()
+    let allElementNames =
+        elementName :: propList |> List.map camelCase |> List.sortDescending
+
+    let radixProps =
+        getRadixProps filename
+        |> List.filter (fun (name, _) -> List.contains name allElementNames)
+
+    for name, props in List.rev radixProps do
+        match name with
+        | "accordion" ->
+            radixUi.WriteLine
+                """
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    module accordion =
+        let type' = {|
+            single = prop.custom ("type", "single")
+            multiple = prop.custom ("type", "multiple")
+        |}
+"""
+        | "scrollArea" ->
+            radixUi.WriteLine
+                """
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    module scrollArea =
+        let type' = {|
+            auto = prop.custom ("type", "auto")
+            always = prop.custom ("type", "always")
+            scroll = prop.custom ("type", "scroll")
+            hover = prop.custom ("type", "hover")
+        |}
+"""
+        | "tabs" ->
+            radixUi.WriteLine
+                """
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    module tabs =
+        let activationMode = {|
+            automatic = prop.custom ("activationMode", "automatic")
+            manual = prop.custom ("activationMode", "manual")
+        |}
+"""
+        | "toggleGroup" ->
+            radixUi.WriteLine
+                """
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    module toggleGroup =
+        let type' = {|
+            single = prop.custom ("activationMode", "single")
+            multiple = prop.custom ("activationMode", "multiple")
+        |}
+"""
+        | "selectContent" ->
+            radixUi.WriteLine
+                """
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    module selectContent =
+        let position = {|
+            itemAligned = prop.custom ("position", "item-aligned")
+            popper = prop.custom ("position", "popper")
+        |}
+"""
+        | _ -> ()
+
+        radixUi.WriteLine($"""    type %s{name} =""")
+
+        for propName, propType in props do
+            let safePropName =
+                propName
+                    .Trim()
+                    .Replace("root", elementName)
+                    .Replace("type", "type'")
+                    .Replace("open", "open'")
+                    .Replace("checked", "checked'")
+
+            let propType =
+                propType.Trim().Replace("number", "int").Replace("string[]", "string seq")
+
+            let defaultFn propType =
+                if propType = "boolean" then
+                    radixUi.WriteLine(
+                        $"""        static member inline %s{safePropName} = prop.custom ("%s{propName}", null)"""
+                    )
+                else
+                    radixUi.WriteLine(
+                        $"""        static member inline %s{safePropName} (value: %s{propType}) = prop.custom ("%s{propName}", value)"""
+                    )
+
+            let enumFn body =
+                radixUi.WriteLine($"""        static member inline %s{safePropName} = %s{body}""")
+
+            let commonProps propType =
+                match propName, propType with
+                | "dir", "enum" -> enumFn "direction"
+                | "orientation", "enum" -> enumFn "orientation"
+                | "side", "enum" -> enumFn "side"
+                | "align", "enum" -> enumFn "align"
+                | "sticky", "enum" -> enumFn "sticky"
+                | "value", "intnull" -> defaultFn "int option"
+                | "checked", "booleanindeterminate" -> enumFn "checked"
+                | "onOpenChange", "function"
+                | "onCheckedChange", "function" -> defaultFn "bool -> unit"
+                | "onOpenAutoFocus", "function"
+                | "onCloseAutoFocus", "function"
+                | "onInteractOutside", "function"
+                | "onSelect", "function" -> defaultFn "Event -> unit"
+                | "onEscapeKeyDown", "function" -> defaultFn "KeyboardEvent -> unit"
+                | "onPointerDownOutside", "function" -> defaultFn "PointerEvent -> unit"
+                | "onFocusOutside", "function" -> defaultFn "FocusEvent -> unit"
+                | "onValueChange", "function" -> defaultFn "string -> unit"
+                | "collisionBoundary", "Boundary" ->
+                    radixUi.WriteLine(
+                        """        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+"""
+                    )
+                | "collisionPadding", "intPadding" ->
+                    radixUi.WriteLine(
+                        """        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+"""
+                    )
+                | _, "ReactNode" -> defaultFn "ReactElement"
+                | _ -> defaultFn propType
+
+            match name with
+            | "accordion" ->
+                match safePropName with
+                | "type'" -> enumFn "accordion.type'"
+                | _ -> commonProps propType
+            | "avatarImage" ->
+                match safePropName with
+                | "onLoadingStatusChange" -> defaultFn "string -> unit"
+                | _ -> commonProps propType
+            | "menubar"
+            | "navigationMenu"
+            | "radioGroup"
+            | "slider" ->
+                match safePropName with
+                | "onValueChange" -> defaultFn "int [] -> unit"
+                | "onValueCommit" -> defaultFn "int [] -> unit"
+                | _ -> commonProps propType
+            | "checkbox" ->
+                match safePropName with
+                | "defaultChecked"
+                | "onCheckedChange" -> defaultFn "bool option -> unit"
+                | _ -> commonProps propType
+            | "form" ->
+                match safePropName with
+                | "onClearServerErrors" -> defaultFn "unit -> unit"
+                | _ -> commonProps propType
+            | "toggle" ->
+                match safePropName with
+                | "onPressedChange" -> defaultFn "bool -> unit"
+                | _ -> commonProps propType
+            | "switch" ->
+                match safePropName with
+                | "onCheckedChange" -> defaultFn "bool -> unit"
+                | _ -> commonProps propType
+            | "progress" ->
+                match safePropName with
+                | "getValueLabel" -> defaultFn "int -> int -> string"
+                | _ -> commonProps propType
+            | "scrollArea" ->
+                match safePropName with
+                | "type'" -> enumFn "scrollArea.type'"
+                | _ -> commonProps propType
+            | "tabs" ->
+                match safePropName with
+                | "activationMode" -> enumFn "tabs.activationMode"
+                | _ -> commonProps propType
+            | "toggleGroup" ->
+                match safePropName with
+                | "type'" -> enumFn "toggleGroup.type'"
+                | _ -> commonProps propType
+            | "selectContent" ->
+                match safePropName with
+                | "position" -> enumFn "selectContent.position"
+                | _ -> commonProps propType
+            | _ -> commonProps propType
+
+        radixUi.WriteLine("")
+
 elements.Close()
+radixUi.Close()
