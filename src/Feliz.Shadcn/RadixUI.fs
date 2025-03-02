@@ -2,898 +2,1205 @@
 
 namespace Feliz.Shadcn
 
+open System.ComponentModel
+
+[<EditorBrowsable(EditorBrowsableState.Never)>]
 [<AutoOpen>]
 module RadixUI =
-    open System.ComponentModel
     open Browser.Types
     open Fable.Core
     open Fable.Core.JsInterop
     open Feliz
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
-    let collisionPaddingValue (top: int option) (right: int option) (bottom: int option) (left: int option) =
+    let inline mkProperty (name: string, value: obj) : IReactProperty = unbox (name, value)
+
+    [<Erase>]
+    let inline internal collisionPaddingValue
+        (top: int option)
+        (right: int option)
+        (bottom: int option)
+        (left: int option)
+        =
         createObj [
-            match top with
-            | Some top -> "top", top
-            | None -> ()
-            match right with
-            | Some right -> "right", right
-            | None -> ()
-            match bottom with
-            | Some bottom -> "bottom", bottom
-            | None -> ()
-            match left with
-            | Some left -> "left", left
-            | None -> ()
+            "top" ==> Option.defaultValue 0 top
+            "right" ==> Option.defaultValue 0 right
+            "bottom" ==> Option.defaultValue 0 bottom
+            "left" ==> Option.defaultValue 0 left
         ]
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let direction = {|
-        ltr = prop.custom ("dir", "ltr")
-        rtl = prop.custom ("dir", "rtl")
+    let inline internal directionType () = {|
+        ltr = mkProperty ("dir", "ltr")
+        rtl = mkProperty ("dir", "rtl")
     |}
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let orientation = {|
-        horizontal = prop.custom ("orientation", "horizontal")
-        vertical = prop.custom ("orientation", "vertical")
+    let inline internal orientationType () = {|
+        horizontal = mkProperty ("orientation", "horizontal")
+        vertical = mkProperty ("orientation", "vertical")
     |}
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let side = {|
-        top = prop.custom ("side", "top")
-        right = prop.custom ("side", "right")
-        bottom = prop.custom ("side", "bottom")
-        left = prop.custom ("side", "left")
+    let inline internal sideType () = {|
+        top = mkProperty ("side", "top")
+        right = mkProperty ("side", "right")
+        bottom = mkProperty ("side", "bottom")
+        left = mkProperty ("side", "left")
     |}
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let align = {|
-        center = prop.custom ("align", "center")
-        start = prop.custom ("align", "start")
-        end' = prop.custom ("align", "end")
+    let inline internal alignType () = {|
+        center = mkProperty ("align", "center")
+        start = mkProperty ("align", "start")
+        end' = mkProperty ("align", "end")
     |}
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let sticky = {|
-        always = prop.custom ("sticky", "always")
-        partial = prop.custom ("sticky", "partial")
+    let inline internal stickyType () = {|
+        always = mkProperty ("sticky", "always")
+        partial = mkProperty ("sticky", "partial")
     |}
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let checked' = {|
-        boolean = prop.custom ("checkedState", "boolean")
-        indeterminate = prop.custom ("checkedState", "indeterminate")
+    let inline internal checkedType () = {|
+        boolean = mkProperty ("checkedState", "boolean")
+        indeterminate = mkProperty ("checkedState", "indeterminate")
     |}
 
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    module accordion =
-        let type' = {|
-            single = prop.custom ("type", "single")
-            multiple = prop.custom ("type", "multiple")
+    module internal accordionTypes =
+        let inline type' () = {|
+            single = mkProperty ("type", "single")
+            multiple = mkProperty ("type", "multiple")
         |}
 
+    [<RequireQualifiedAccess>]
     type accordion =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline type' = accordion.type'
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
-        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
-        static member inline value (value: string seq) = prop.custom ("value", value)
-        static member inline defaultValue (value: string seq) = prop.custom ("defaultValue", value)
-        static member inline onValueChange (value: string [] -> unit) = prop.custom ("onValueChange", value)
-        static member inline collapsible = prop.custom ("collapsible", null)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline dir = direction
-        static member inline orientation = orientation
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline type' = accordionTypes.type' ()
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline value(value: string seq) : IReactProperty = mkProperty ("value", value)
+        static member inline defaultValue(value: string seq) : IReactProperty = mkProperty ("defaultValue", value)
 
+        static member inline onValueChange(value: string[] -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline collapsible: IReactProperty = mkProperty ("collapsible", null)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline dir = directionType ()
+        static member inline orientation = orientationType ()
+
+    [<RequireQualifiedAccess>]
     type accordionItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
+    [<RequireQualifiedAccess>]
     type accordionTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type accordionContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline forceMount = prop.custom ("forceMount", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
+    [<RequireQualifiedAccess>]
     type alertDialog =
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
+    [<RequireQualifiedAccess>]
     type alertDialogTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type alertDialogPortal =
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline container (value: HTMLElement) = prop.custom ("container", value)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
+    [<RequireQualifiedAccess>]
     type alertDialogOverlay =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline forceMount = prop.custom ("forceMount", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
+    [<RequireQualifiedAccess>]
     type alertDialogContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline onOpenAutoFocus (value: Event -> unit) = prop.custom ("onOpenAutoFocus", value)
-        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
+        static member inline onOpenAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onOpenAutoFocus", value)
+
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
+
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+    [<RequireQualifiedAccess>]
     type alertDialogCancel =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type alertDialogAction =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type alertDialogTitle =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type alertDialogDescription =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type aspectRatio =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline ratio (value: int) = prop.custom ("ratio", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline ratio(value: int) : IReactProperty = mkProperty ("ratio", value)
 
+    [<RequireQualifiedAccess>]
     type avatar =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type avatarImage =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline onLoadingStatusChange (value: string -> unit) = prop.custom ("onLoadingStatusChange", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+        static member inline onLoadingStatusChange(value: string -> unit) : IReactProperty =
+            mkProperty ("onLoadingStatusChange", value)
+
+    [<RequireQualifiedAccess>]
     type avatarFallback =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline delayMs (value: int) = prop.custom ("delayMs", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline delayMs(value: int) : IReactProperty = mkProperty ("delayMs", value)
 
+    [<RequireQualifiedAccess>]
     type checkbox =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultChecked (value: bool option -> unit) = prop.custom ("defaultChecked", value)
-        static member inline checked' = checked'
-        static member inline onCheckedChange (value: bool option -> unit) = prop.custom ("onCheckedChange", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline required = prop.custom ("required", null)
-        static member inline name (value: string) = prop.custom ("name", value)
-        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+        static member inline defaultChecked(value: bool option -> unit) : IReactProperty =
+            mkProperty ("defaultChecked", value)
+
+        static member inline checked' = checkedType ()
+
+        static member inline onCheckedChange(value: bool option -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline required: IReactProperty = mkProperty ("required", null)
+        static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+
+    [<RequireQualifiedAccess>]
     type collapsible =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
-        static member inline disabled = prop.custom ("disabled", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
 
+    [<RequireQualifiedAccess>]
     type collapsibleTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type collapsibleContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline forceMount = prop.custom ("forceMount", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
+    [<RequireQualifiedAccess>]
     type contextMenu =
-        static member inline dir = direction
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
-        static member inline modal = prop.custom ("modal", null)
+        static member inline dir = directionType ()
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline modal: IReactProperty = mkProperty ("modal", null)
 
+    [<RequireQualifiedAccess>]
     type contextMenuTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline disabled = prop.custom ("disabled", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
 
+    [<RequireQualifiedAccess>]
     type contextMenuPortal =
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline container (value: HTMLElement) = prop.custom ("container", value)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
+    [<RequireQualifiedAccess>]
     type contextMenuContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline loop = prop.custom ("loop", null)
-        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
-        static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
-        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline loop: IReactProperty = mkProperty ("loop", null)
 
-        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
 
-        static member inline sticky = sticky
-        static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
 
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
+
+        static member inline sticky = stickyType ()
+        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+
+    [<RequireQualifiedAccess>]
     type contextMenuItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
+    [<RequireQualifiedAccess>]
     type contextMenuGroup =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type contextMenuLabel =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type contextMenuCheckboxItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline checked' = checked'
-        static member inline onCheckedChange (value: bool -> unit) = prop.custom ("onCheckedChange", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline checked' = checkedType ()
 
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+
+    [<RequireQualifiedAccess>]
     type contextMenuRadioGroup =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
 
+    [<RequireQualifiedAccess>]
     type contextMenuRadioItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
+    [<RequireQualifiedAccess>]
     type contextMenuSeparator =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type contextMenuSub =
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
+    [<RequireQualifiedAccess>]
     type contextMenuSubTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
+    [<RequireQualifiedAccess>]
     type contextMenuSubContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline loop = prop.custom ("loop", null)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
-        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
-        static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
-        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline loop: IReactProperty = mkProperty ("loop", null)
 
-        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
 
-        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
-        static member inline sticky = sticky
-        static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
 
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
+
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline sticky = stickyType ()
+        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+
+    [<RequireQualifiedAccess>]
     type dialog =
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
-        static member inline modal = prop.custom ("modal", null)
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline modal: IReactProperty = mkProperty ("modal", null)
 
+    [<RequireQualifiedAccess>]
     type dialogTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type dialogPortal =
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline container (value: HTMLElement) = prop.custom ("container", value)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
+    [<RequireQualifiedAccess>]
     type dialogOverlay =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline forceMount = prop.custom ("forceMount", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
+    [<RequireQualifiedAccess>]
     type dialogContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline onOpenAutoFocus (value: Event -> unit) = prop.custom ("onOpenAutoFocus", value)
-        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
+        static member inline onOpenAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onOpenAutoFocus", value)
+
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
+
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+    [<RequireQualifiedAccess>]
     type dialogClose =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type dialogTitle =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type dialogDescription =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenu =
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
-        static member inline modal = prop.custom ("modal", null)
-        static member inline dir = direction
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline modal: IReactProperty = mkProperty ("modal", null)
+        static member inline dir = directionType ()
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuPortal =
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline container (value: HTMLElement) = prop.custom ("container", value)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline loop = prop.custom ("loop", null)
-        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline side = side
-        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
-        static member inline align = align
-        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
-        static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
-        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline loop: IReactProperty = mkProperty ("loop", null)
 
-        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
 
-        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
-        static member inline sticky = sticky
-        static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
 
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline side = sideType ()
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline align = alignType ()
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
+
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline sticky = stickyType ()
+        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+
+    [<RequireQualifiedAccess>]
     type dropdownMenuItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuGroup =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuLabel =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuCheckboxItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline checked' = checked'
-        static member inline onCheckedChange (value: bool -> unit) = prop.custom ("onCheckedChange", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline checked' = checkedType ()
 
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+
+    [<RequireQualifiedAccess>]
     type dropdownMenuRadioGroup =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuRadioItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuSeparator =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuSub =
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuSubTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
+    [<RequireQualifiedAccess>]
     type dropdownMenuSubContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline loop = prop.custom ("loop", null)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
-        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
-        static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
-        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline loop: IReactProperty = mkProperty ("loop", null)
 
-        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
 
-        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
-        static member inline sticky = sticky
-        static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
 
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
+
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline sticky = stickyType ()
+        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+
+    [<RequireQualifiedAccess>]
     type form =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline onClearServerErrors (value: unit -> unit) = prop.custom ("onClearServerErrors", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+        static member inline onClearServerErrors(value: unit -> unit) : IReactProperty =
+            mkProperty ("onClearServerErrors", value)
+
+    [<RequireQualifiedAccess>]
     type hoverCard =
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
-        static member inline open'Delay (value: int) = prop.custom ("openDelay", value)
-        static member inline closeDelay (value: int) = prop.custom ("closeDelay", value)
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline open'Delay(value: int) : IReactProperty = mkProperty ("openDelay", value)
+        static member inline closeDelay(value: int) : IReactProperty = mkProperty ("closeDelay", value)
 
+    [<RequireQualifiedAccess>]
     type hoverCardTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type hoverCardContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline side = side
-        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
-        static member inline align = align
-        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
-        static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
-        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline side = sideType ()
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline align = alignType ()
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
 
-        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
 
-        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
-        static member inline sticky = sticky
-        static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
 
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
+
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline sticky = stickyType ()
+        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+
+    [<RequireQualifiedAccess>]
     type label =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline htmlFor (value: string) = prop.custom ("htmlFor", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline htmlFor(value: string) : IReactProperty = mkProperty ("htmlFor", value)
 
+    [<RequireQualifiedAccess>]
     type menubar =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline onValueChange (value: int [] -> unit) = prop.custom ("onValueChange", value)
-        static member inline dir = direction
-        static member inline loop = prop.custom ("loop", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: int[] -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline dir = directionType ()
+        static member inline loop: IReactProperty = mkProperty ("loop", null)
 
+    [<RequireQualifiedAccess>]
     type menubarMenu =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
+    [<RequireQualifiedAccess>]
     type menubarTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type menubarPortal =
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline container (value: HTMLElement) = prop.custom ("container", value)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
+    [<RequireQualifiedAccess>]
     type menubarContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline loop = prop.custom ("loop", null)
-        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline side = side
-        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
-        static member inline align = align
-        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
-        static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
-        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline loop: IReactProperty = mkProperty ("loop", null)
 
-        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
 
-        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
-        static member inline sticky = sticky
-        static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
 
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline side = sideType ()
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline align = alignType ()
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
+
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline sticky = stickyType ()
+        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+
+    [<RequireQualifiedAccess>]
     type menubarItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
+    [<RequireQualifiedAccess>]
     type menubarGroup =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type menubarLabel =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type menubarCheckboxItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline checked' = checked'
-        static member inline onCheckedChange (value: bool -> unit) = prop.custom ("onCheckedChange", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline checked' = checkedType ()
 
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+
+    [<RequireQualifiedAccess>]
     type menubarRadioGroup =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
 
+    [<RequireQualifiedAccess>]
     type menubarRadioItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
+    [<RequireQualifiedAccess>]
     type menubarSeparator =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type menubarSub =
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
+    [<RequireQualifiedAccess>]
     type menubarSubTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
+    [<RequireQualifiedAccess>]
     type menubarSubContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline loop = prop.custom ("loop", null)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
-        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
-        static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
-        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline loop: IReactProperty = mkProperty ("loop", null)
 
-        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
 
-        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
-        static member inline sticky = sticky
-        static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
 
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
+
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline sticky = stickyType ()
+        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+
+    [<RequireQualifiedAccess>]
     type navigationMenu =
-        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline onValueChange (value: int [] -> unit) = prop.custom ("onValueChange", value)
-        static member inline delayDuration (value: int) = prop.custom ("delayDuration", value)
-        static member inline skipDelayDuration (value: int) = prop.custom ("skipDelayDuration", value)
-        static member inline dir = direction
-        static member inline orientation = orientation
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: int[] -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline delayDuration(value: int) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline skipDelayDuration(value: int) : IReactProperty = mkProperty ("skipDelayDuration", value)
+        static member inline dir = directionType ()
+        static member inline orientation = orientationType ()
 
+    [<RequireQualifiedAccess>]
     type navigationMenuList =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type navigationMenuItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
+    [<RequireQualifiedAccess>]
     type navigationMenuTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type navigationMenuContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
-        static member inline forceMount = prop.custom ("forceMount", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+
+    [<RequireQualifiedAccess>]
     type navigationMenuLink =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline active = prop.custom ("active", null)
-        static member inline onSelect (value: Event -> unit) = prop.custom ("onSelect", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline active: IReactProperty = mkProperty ("active", null)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
 
+    [<RequireQualifiedAccess>]
     type navigationMenuIndicator =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline forceMount = prop.custom ("forceMount", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
+    [<RequireQualifiedAccess>]
     type navigationMenuViewport =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline forceMount = prop.custom ("forceMount", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
+    [<RequireQualifiedAccess>]
     type popover =
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
-        static member inline modal = prop.custom ("modal", null)
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline modal: IReactProperty = mkProperty ("modal", null)
 
+    [<RequireQualifiedAccess>]
     type popoverTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type popoverAnchor =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type popoverContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline onOpenAutoFocus (value: Event -> unit) = prop.custom ("onOpenAutoFocus", value)
-        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit) = prop.custom ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit) = prop.custom ("onInteractOutside", value)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline side = side
-        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
-        static member inline align = align
-        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
-        static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
-        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
-        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+        static member inline onOpenAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onOpenAutoFocus", value)
 
-        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
-        static member inline sticky = sticky
-        static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
 
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline side = sideType ()
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline align = alignType ()
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
+
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline sticky = stickyType ()
+        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+
+    [<RequireQualifiedAccess>]
     type progress =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: int option) = prop.custom ("value", value)
-        static member inline max (value: int) = prop.custom ("max", value)
-        static member inline getValueLabel (value: int -> int -> string) = prop.custom ("getValueLabel", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: int option) : IReactProperty = mkProperty ("value", value)
+        static member inline max(value: int) : IReactProperty = mkProperty ("max", value)
 
+        static member inline getValueLabel(value: int -> int -> string) : IReactProperty =
+            mkProperty ("getValueLabel", value)
+
+    [<RequireQualifiedAccess>]
     type radioGroup =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline onValueChange (value: int [] -> unit) = prop.custom ("onValueChange", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline name (value: string) = prop.custom ("name", value)
-        static member inline required = prop.custom ("required", null)
-        static member inline orientation = orientation
-        static member inline dir = direction
-        static member inline loop = prop.custom ("loop", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: int[] -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
+        static member inline required: IReactProperty = mkProperty ("required", null)
+        static member inline orientation = orientationType ()
+        static member inline dir = directionType ()
+        static member inline loop: IReactProperty = mkProperty ("loop", null)
 
+    [<RequireQualifiedAccess>]
     type radioGroupItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline required = prop.custom ("required", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline required: IReactProperty = mkProperty ("required", null)
 
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    module scrollArea =
-        let type' = {|
-            auto = prop.custom ("type", "auto")
-            always = prop.custom ("type", "always")
-            scroll = prop.custom ("type", "scroll")
-            hover = prop.custom ("type", "hover")
+    module internal scrollAreaTypes =
+        let inline type' () = {|
+            auto = mkProperty ("type", "auto")
+            always = mkProperty ("type", "always")
+            scroll = mkProperty ("type", "scroll")
+            hover = mkProperty ("type", "hover")
         |}
 
+    [<RequireQualifiedAccess>]
     type scrollArea =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline type' = scrollArea.type'
-        static member inline scrollHideDelay (value: int) = prop.custom ("scrollHideDelay", value)
-        static member inline dir = direction
-        static member inline nonce (value: string) = prop.custom ("nonce", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline type' = scrollAreaTypes.type' ()
+        static member inline scrollHideDelay(value: int) : IReactProperty = mkProperty ("scrollHideDelay", value)
+        static member inline dir = directionType ()
+        static member inline nonce(value: string) : IReactProperty = mkProperty ("nonce", value)
 
+    [<RequireQualifiedAccess>]
     type select =
-        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
-        static member inline dir = direction
-        static member inline name (value: string) = prop.custom ("name", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline required = prop.custom ("required", null)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline dir = directionType ()
+        static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline required: IReactProperty = mkProperty ("required", null)
 
+    [<RequireQualifiedAccess>]
     type selectTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type selectValue =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline placeholder (value: ReactElement) = prop.custom ("placeholder", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline placeholder(value: ReactElement) : IReactProperty = mkProperty ("placeholder", value)
 
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    module selectContent =
-        let position = {|
-            itemAligned = prop.custom ("position", "item-aligned")
-            popper = prop.custom ("position", "popper")
+    module internal selectContentTypes =
+        let inline position () = {|
+            itemAligned = mkProperty ("position", "item-aligned")
+            popper = mkProperty ("position", "popper")
         |}
 
+    [<RequireQualifiedAccess>]
     type selectContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline onCloseAutoFocus (value: Event -> unit) = prop.custom ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline position = selectContent.position
-        static member inline side = side
-        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
-        static member inline align = align
-        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
-        static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
-        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
-        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
 
-        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
-        static member inline sticky = sticky
-        static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
 
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline position = selectContentTypes.position ()
+        static member inline side = sideType ()
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline align = alignType ()
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
+
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline sticky = stickyType ()
+        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+
+    [<RequireQualifiedAccess>]
     type selectItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline textValue (value: string) = prop.custom ("textValue", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
+    [<RequireQualifiedAccess>]
     type selectScrollUpButton =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type selectScrollDownButton =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type selectGroup =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type selectLabel =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type selectSeparator =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type separator =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline orientation = orientation
-        static member inline decorative = prop.custom ("decorative", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline orientation = orientationType ()
+        static member inline decorative: IReactProperty = mkProperty ("decorative", null)
 
+    [<RequireQualifiedAccess>]
     type slider =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultValue (value: int[]) = prop.custom ("defaultValue", value)
-        static member inline value (value: int[]) = prop.custom ("value", value)
-        static member inline onValueChange (value: int [] -> unit) = prop.custom ("onValueChange", value)
-        static member inline onValueCommit (value: int [] -> unit) = prop.custom ("onValueCommit", value)
-        static member inline name (value: string) = prop.custom ("name", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline orientation = orientation
-        static member inline dir = direction
-        static member inline inverted = prop.custom ("inverted", null)
-        static member inline min (value: int) = prop.custom ("min", value)
-        static member inline max (value: int) = prop.custom ("max", value)
-        static member inline step (value: int) = prop.custom ("step", value)
-        static member inline minStepsBetweenThumbs (value: int) = prop.custom ("minStepsBetweenThumbs", value)
-        static member inline form (value: string) = prop.custom ("form", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline defaultValue(value: int[]) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: int[]) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: int[] -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline onValueCommit(value: int[] -> unit) : IReactProperty = mkProperty ("onValueCommit", value)
+        static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline orientation = orientationType ()
+        static member inline dir = directionType ()
+        static member inline inverted: IReactProperty = mkProperty ("inverted", null)
+        static member inline min(value: int) : IReactProperty = mkProperty ("min", value)
+        static member inline max(value: int) : IReactProperty = mkProperty ("max", value)
+        static member inline step(value: int) : IReactProperty = mkProperty ("step", value)
 
+        static member inline minStepsBetweenThumbs(value: int) : IReactProperty =
+            mkProperty ("minStepsBetweenThumbs", value)
+
+        static member inline form(value: string) : IReactProperty = mkProperty ("form", value)
+
+    [<RequireQualifiedAccess>]
     type switch =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultChecked = prop.custom ("defaultChecked", null)
-        static member inline checked' = prop.custom ("checked", null)
-        static member inline onCheckedChange (value: bool -> unit) = prop.custom ("onCheckedChange", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline required = prop.custom ("required", null)
-        static member inline name (value: string) = prop.custom ("name", value)
-        static member inline value (value: string) = prop.custom ("value", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline defaultChecked: IReactProperty = mkProperty ("defaultChecked", null)
+        static member inline checked': IReactProperty = mkProperty ("checked", null)
+
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline required: IReactProperty = mkProperty ("required", null)
+        static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    module tabs =
-        let activationMode = {|
-            automatic = prop.custom ("activationMode", "automatic")
-            manual = prop.custom ("activationMode", "manual")
+    module internal tabsTypes =
+        let inline activationMode () = {|
+            automatic = mkProperty ("activationMode", "automatic")
+            manual = mkProperty ("activationMode", "manual")
         |}
 
+    [<RequireQualifiedAccess>]
     type tabs =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
-        static member inline orientation = orientation
-        static member inline dir = direction
-        static member inline activationMode = tabs.activationMode
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline orientation = orientationType ()
+        static member inline dir = directionType ()
+        static member inline activationMode = tabsTypes.activationMode ()
 
+    [<RequireQualifiedAccess>]
     type tabsList =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline loop = prop.custom ("loop", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline loop: IReactProperty = mkProperty ("loop", null)
 
+    [<RequireQualifiedAccess>]
     type tabsTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline disabled = prop.custom ("disabled", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
 
+    [<RequireQualifiedAccess>]
     type tabsContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline forceMount = prop.custom ("forceMount", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
+    [<RequireQualifiedAccess>]
     type toggle =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline defaultPressed = prop.custom ("defaultPressed", null)
-        static member inline pressed = prop.custom ("pressed", null)
-        static member inline onPressedChange (value: bool -> unit) = prop.custom ("onPressedChange", value)
-        static member inline disabled = prop.custom ("disabled", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline defaultPressed: IReactProperty = mkProperty ("defaultPressed", null)
+        static member inline pressed: IReactProperty = mkProperty ("pressed", null)
+
+        static member inline onPressedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onPressedChange", value)
+
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
 
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    module toggleGroup =
-        let type' = {|
-            single = prop.custom ("activationMode", "single")
-            multiple = prop.custom ("activationMode", "multiple")
+    module internal toggleGroupTypes =
+        let inline type' () = {|
+            single = mkProperty ("activationMode", "single")
+            multiple = mkProperty ("activationMode", "multiple")
         |}
 
+    [<RequireQualifiedAccess>]
     type toggleGroup =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline type' = toggleGroup.type'
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline defaultValue (value: string) = prop.custom ("defaultValue", value)
-        static member inline onValueChange (value: string -> unit) = prop.custom ("onValueChange", value)
-        static member inline value (value: string seq) = prop.custom ("value", value)
-        static member inline defaultValue (value: string seq) = prop.custom ("defaultValue", value)
-        static member inline onValueChange (value: string [] -> unit) = prop.custom ("onValueChange", value)
-        static member inline disabled = prop.custom ("disabled", null)
-        static member inline rovingFocus = prop.custom ("rovingFocus", null)
-        static member inline orientation = orientation
-        static member inline dir = direction
-        static member inline loop = prop.custom ("loop", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline type' = toggleGroupTypes.type' ()
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline value(value: string seq) : IReactProperty = mkProperty ("value", value)
+        static member inline defaultValue(value: string seq) : IReactProperty = mkProperty ("defaultValue", value)
 
+        static member inline onValueChange(value: string[] -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline rovingFocus: IReactProperty = mkProperty ("rovingFocus", null)
+        static member inline orientation = orientationType ()
+        static member inline dir = directionType ()
+        static member inline loop: IReactProperty = mkProperty ("loop", null)
+
+    [<RequireQualifiedAccess>]
     type toggleGroupItem =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline value (value: string) = prop.custom ("value", value)
-        static member inline disabled = prop.custom ("disabled", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
 
+    [<RequireQualifiedAccess>]
     type tooltipProvider =
-        static member inline delayDuration (value: int) = prop.custom ("delayDuration", value)
-        static member inline skipDelayDuration (value: int) = prop.custom ("skipDelayDuration", value)
-        static member inline disableHoverableContent = prop.custom ("disableHoverableContent", null)
+        static member inline delayDuration(value: int) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline skipDelayDuration(value: int) : IReactProperty = mkProperty ("skipDelayDuration", value)
 
+        static member inline disableHoverableContent: IReactProperty =
+            mkProperty ("disableHoverableContent", null)
+
+    [<RequireQualifiedAccess>]
     type tooltip =
-        static member inline defaultOpen = prop.custom ("defaultOpen", null)
-        static member inline open' = prop.custom ("open", null)
-        static member inline onOpenChange (value: bool -> unit) = prop.custom ("onOpenChange", value)
-        static member inline delayDuration (value: int) = prop.custom ("delayDuration", value)
-        static member inline disableHoverableContent = prop.custom ("disableHoverableContent", null)
+        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
+        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline delayDuration(value: int) : IReactProperty = mkProperty ("delayDuration", value)
 
+        static member inline disableHoverableContent: IReactProperty =
+            mkProperty ("disableHoverableContent", null)
+
+    [<RequireQualifiedAccess>]
     type tooltipTrigger =
-        static member inline asChild = prop.custom ("asChild", null)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
+    [<RequireQualifiedAccess>]
     type tooltipContent =
-        static member inline asChild = prop.custom ("asChild", null)
-        static member inline arialabel (value: string) = prop.custom ("arialabel", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit) = prop.custom ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit) = prop.custom ("onPointerDownOutside", value)
-        static member inline forceMount = prop.custom ("forceMount", null)
-        static member inline side = side
-        static member inline sideOffset (value: int) = prop.custom ("sideOffset", value)
-        static member inline align = align
-        static member inline alignOffset (value: int) = prop.custom ("alignOffset", value)
-        static member inline avoidCollisions = prop.custom ("avoidCollisions", null)
-        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline arialabel(value: string) : IReactProperty = mkProperty ("arialabel", value)
 
-        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
 
-        static member inline arrowPadding (value: int) = prop.custom ("arrowPadding", value)
-        static member inline sticky = sticky
-        static member inline hideWhenDetached = prop.custom ("hideWhenDetached", null)
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline side = sideType ()
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline align = alignType ()
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
+
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline sticky = stickyType ()
+        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)

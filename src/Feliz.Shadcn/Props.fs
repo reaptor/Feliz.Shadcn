@@ -4,6 +4,7 @@ open System.ComponentModel
 open Fable.Core
 open Feliz
 
+[<AutoOpen>]
 module Props =
     [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]

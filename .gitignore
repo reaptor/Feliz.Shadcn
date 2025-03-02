@@ -6,3 +6,4 @@ node_modules
 *.fs.js
 src/Examples/.elmish-land
 *.DotSettings.user
+nuget

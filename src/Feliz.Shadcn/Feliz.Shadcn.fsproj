@@ -1,23 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <PackageId>Feliz.Shadcn</PackageId>
     <Description>Feliz typings for the Shadcn UI components</Description>
     <PackageTags>fsharp;fable;react;html;shadcn</PackageTags>
     <Authors>Kristofer Löfberg</Authors>
-    <Version>0.9.0</Version>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.9.1</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Reaptor 2025</Copyright>
+    <RepositoryUrl>https://github.com/reaptor/feliz.shadcn</RepositoryUrl>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <PackageTags>fable;fable-binding;fable-javascript;feliz;shadcn;ui</PackageTags>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Helpers.fs" />
     <Compile Include="Shadcn.fs" />
     <Compile Include="Props.fs" />
     <Compile Include="RadixUI.fs" />
     <None Include="Generate.fsx" />
-
     <Content Include="../../README.md" Pack="true" PackagePath="">
       <Link>README.md</Link>
     </Content>
@@ -27,7 +30,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Feliz" Version="2.9.0" />
+    <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Feliz" Version="2.8.0" />
   </ItemGroup>
 
 </Project>

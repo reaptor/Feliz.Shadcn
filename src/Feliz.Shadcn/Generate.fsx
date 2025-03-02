@@ -118,7 +118,6 @@ module Elements =
     open Fable.Core
     open Fable.Core.JsInterop
     open Feliz
-    open Feliz.Shadcn.Helpers
 
     [<Erase>]
     type Shadcn ="""
@@ -131,74 +130,64 @@ radixUi.WriteLine(
 
 namespace Feliz.Shadcn
 
+open System.ComponentModel
+
+[<EditorBrowsable(EditorBrowsableState.Never)>]
 [<AutoOpen>]
 module RadixUI =
-    open System.ComponentModel
     open Browser.Types
     open Fable.Core
     open Fable.Core.JsInterop
     open Feliz
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
-    let collisionPaddingValue (top: int option) (right: int option) (bottom: int option) (left: int option) =
+    let inline mkProperty (name: string, value: obj): IReactProperty = unbox (name, value)
+
+    [<Erase>]
+    let inline internal collisionPaddingValue (top: int option) (right: int option) (bottom: int option) (left: int option) =
         createObj [
-            match top with
-            | Some top -> "top", top
-            | None -> ()
-            match right with
-            | Some right -> "right", right
-            | None -> ()
-            match bottom with
-            | Some bottom -> "bottom", bottom
-            | None -> ()
-            match left with
-            | Some left -> "left", left
-            | None -> ()
+            "top" ==> Option.defaultValue 0 top
+            "right" ==> Option.defaultValue 0 right
+            "bottom" ==> Option.defaultValue 0 bottom
+            "left" ==> Option.defaultValue 0 left
         ]
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let direction = {|
-        ltr = prop.custom ("dir", "ltr")
-        rtl = prop.custom ("dir", "rtl")
+    let inline internal directionType () = {|
+        ltr = mkProperty ("dir", "ltr")
+        rtl = mkProperty ("dir", "rtl")
     |}
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let orientation = {|
-        horizontal = prop.custom ("orientation", "horizontal")
-        vertical = prop.custom ("orientation", "vertical")
+    let inline internal orientationType () = {|
+        horizontal = mkProperty ("orientation", "horizontal")
+        vertical = mkProperty ("orientation", "vertical")
     |}
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let side = {|
-        top = prop.custom ("side", "top")
-        right = prop.custom ("side", "right")
-        bottom = prop.custom ("side", "bottom")
-        left = prop.custom ("side", "left")
+    let inline internal sideType () = {|
+        top = mkProperty ("side", "top")
+        right = mkProperty ("side", "right")
+        bottom = mkProperty ("side", "bottom")
+        left = mkProperty ("side", "left")
     |}
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let align = {|
-        center = prop.custom ("align", "center")
-        start = prop.custom ("align", "start")
-        end' = prop.custom ("align", "end")
+    let inline internal alignType () = {|
+        center = mkProperty ("align", "center")
+        start = mkProperty ("align", "start")
+        end' = mkProperty ("align", "end")
     |}
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let sticky = {|
-        always = prop.custom ("sticky", "always")
-        partial = prop.custom ("sticky", "partial")
+    let inline internal stickyType () = {|
+        always = mkProperty ("sticky", "always")
+        partial = mkProperty ("sticky", "partial")
     |}
 
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    let checked' = {|
-        boolean = prop.custom ("checkedState", "boolean")
-        indeterminate = prop.custom ("checkedState", "indeterminate")
+    let inline internal checkedType () = {|
+        boolean = mkProperty ("checkedState", "boolean")
+        indeterminate = mkProperty ("checkedState", "indeterminate")
     |}
 """
 )
@@ -225,11 +214,11 @@ for path in paths do
         exports |> List.skipWhile (fun x -> Char.IsLower x[0]) |> List.head
 
     elements.WriteLine(
-        $"""        static member inline %s{camelCase elementName} (props: IReactProperty seq) = createElement(import "%s{elementName}" "@/components/ui/%s{filename}") props"""
+        $"""        static member inline %s{camelCase elementName} (props: list<IReactProperty>) = Interop.reactApi.createElement(import "%s{elementName}" "@/components/ui/%s{filename}", createObj !!props)"""
     )
 
     elements.WriteLine(
-        $"""        static member inline %s{camelCase elementName} (children: #seq<ReactElement>) = createElement(import "%s{elementName}" "@/components/ui/%s{filename}") [ prop.children (children :> ReactElement seq) ]"""
+        $"""        static member inline %s{camelCase elementName} (children: list<ReactElement>) = Interop.reactApi.createElement(import "%s{elementName}" "@/components/ui/%s{filename}", [ prop.children (children :> ReactElement seq) ])"""
     )
 
     let propList =
@@ -240,17 +229,17 @@ for path in paths do
     if propList.Length > 0 then
         for name in propList do
             elements.WriteLine(
-                $"""        static member inline %s{camelCase name} (props: IReactProperty seq) = createElement(import "%s{name}" "@/components/ui/%s{filename}") props"""
+                $"""        static member inline %s{camelCase name} (props: list<IReactProperty>) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj !!props)"""
             )
             |> ignore
 
             elements.WriteLine(
-                $"""        static member inline %s{camelCase name} (children: #seq<ReactElement>) = createElement(import "%s{name}" "@/components/ui/%s{filename}") [ prop.children (children :> ReactElement seq) ]"""
+                $"""        static member inline %s{camelCase name} (children: seq<ReactElement>) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", [ prop.children (children :> ReactElement seq) ])"""
             )
             |> ignore
 
             elements.WriteLine(
-                $"""        static member inline %s{camelCase name} (text: string) = createElement(import "%s{name}" "@/components/ui/%s{filename}") [ prop.text text ]"""
+                $"""        static member inline %s{camelCase name} (text: string) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj !![ prop.text text ])"""
             )
             |> ignore
 
@@ -269,63 +258,61 @@ for path in paths do
         | "accordion" ->
             radixUi.WriteLine
                 """
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    module accordion =
-        let type' = {|
-            single = prop.custom ("type", "single")
-            multiple = prop.custom ("type", "multiple")
+    module internal accordionTypes =
+        let inline type' () = {|
+            single = mkProperty ("type", "single")
+            multiple = mkProperty ("type", "multiple")
         |}
 """
         | "scrollArea" ->
             radixUi.WriteLine
                 """
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    module scrollArea =
-        let type' = {|
-            auto = prop.custom ("type", "auto")
-            always = prop.custom ("type", "always")
-            scroll = prop.custom ("type", "scroll")
-            hover = prop.custom ("type", "hover")
+    module internal scrollAreaTypes =
+        let inline type' () = {|
+            auto = mkProperty ("type", "auto")
+            always = mkProperty ("type", "always")
+            scroll = mkProperty ("type", "scroll")
+            hover = mkProperty ("type", "hover")
         |}
 """
         | "tabs" ->
             radixUi.WriteLine
                 """
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    module tabs =
-        let activationMode = {|
-            automatic = prop.custom ("activationMode", "automatic")
-            manual = prop.custom ("activationMode", "manual")
+    module internal tabsTypes =
+        let inline activationMode () = {|
+            automatic = mkProperty ("activationMode", "automatic")
+            manual = mkProperty ("activationMode", "manual")
         |}
 """
         | "toggleGroup" ->
             radixUi.WriteLine
                 """
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    module toggleGroup =
-        let type' = {|
-            single = prop.custom ("activationMode", "single")
-            multiple = prop.custom ("activationMode", "multiple")
+    module internal toggleGroupTypes =
+        let inline type' () = {|
+            single = mkProperty ("activationMode", "single")
+            multiple = mkProperty ("activationMode", "multiple")
         |}
 """
         | "selectContent" ->
             radixUi.WriteLine
                 """
-    [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]
-    module selectContent =
-        let position = {|
-            itemAligned = prop.custom ("position", "item-aligned")
-            popper = prop.custom ("position", "popper")
+    module internal selectContentTypes =
+        let inline position () = {|
+            itemAligned = mkProperty ("position", "item-aligned")
+            popper = mkProperty ("position", "popper")
         |}
 """
         | _ -> ()
 
-        radixUi.WriteLine($"""    type %s{name} =""")
+        radixUi.WriteLine(
+            $"""    [<RequireQualifiedAccess>]
+    type %s{name} ="""
+        )
 
         for propName, propType in props do
             let safePropName =
@@ -342,11 +329,11 @@ for path in paths do
             let defaultFn propType =
                 if propType = "boolean" then
                     radixUi.WriteLine(
-                        $"""        static member inline %s{safePropName} = prop.custom ("%s{propName}", null)"""
+                        $"""        static member inline %s{safePropName}: IReactProperty = mkProperty ("%s{propName}", null)"""
                     )
                 else
                     radixUi.WriteLine(
-                        $"""        static member inline %s{safePropName} (value: %s{propType}) = prop.custom ("%s{propName}", value)"""
+                        $"""        static member inline %s{safePropName} (value: %s{propType}): IReactProperty = mkProperty ("%s{propName}", value)"""
                     )
 
             let enumFn body =
@@ -354,13 +341,13 @@ for path in paths do
 
             let commonProps propType =
                 match propName, propType with
-                | "dir", "enum" -> enumFn "direction"
-                | "orientation", "enum" -> enumFn "orientation"
-                | "side", "enum" -> enumFn "side"
-                | "align", "enum" -> enumFn "align"
-                | "sticky", "enum" -> enumFn "sticky"
+                | "dir", "enum" -> enumFn "directionType ()"
+                | "orientation", "enum" -> enumFn "orientationType ()"
+                | "side", "enum" -> enumFn "sideType ()"
+                | "align", "enum" -> enumFn "alignType ()"
+                | "sticky", "enum" -> enumFn "stickyType ()"
                 | "value", "intnull" -> defaultFn "int option"
-                | "checked", "booleanindeterminate" -> enumFn "checked'"
+                | "checked", "booleanindeterminate" -> enumFn "checkedType ()"
                 | "onOpenChange", "function"
                 | "onCheckedChange", "function" -> defaultFn "bool -> unit"
                 | "onOpenAutoFocus", "function"
@@ -373,15 +360,15 @@ for path in paths do
                 | "onValueChange", "function" -> defaultFn "string -> unit"
                 | "collisionBoundary", "Boundary" ->
                     radixUi.WriteLine(
-                        """        static member inline collisionBoundary (value: HTMLElement) = prop.custom ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array) = prop.custom ("collisionBoundary", value)
+                        """        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
+        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
 """
                     )
                 | "collisionPadding", "intPadding" ->
                     radixUi.WriteLine(
-                        """        static member inline collisionPadding (all: int) = prop.custom ("collisionPadding", all)
+                        """        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
         static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
-            prop.custom ("collisionPadding", collisionPaddingValue top right bottom left)
+            mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 """
                     )
                 | _, "ReactNode" -> defaultFn "ReactElement"
@@ -390,7 +377,7 @@ for path in paths do
             match name with
             | "accordion" ->
                 match safePropName with
-                | "type'" -> enumFn "accordion.type'"
+                | "type'" -> enumFn "accordionTypes.type' ()"
                 | _ -> commonProps propType
             | "avatarImage" ->
                 match safePropName with
@@ -427,19 +414,19 @@ for path in paths do
                 | _ -> commonProps propType
             | "scrollArea" ->
                 match safePropName with
-                | "type'" -> enumFn "scrollArea.type'"
+                | "type'" -> enumFn "scrollAreaTypes.type' ()"
                 | _ -> commonProps propType
             | "tabs" ->
                 match safePropName with
-                | "activationMode" -> enumFn "tabs.activationMode"
+                | "activationMode" -> enumFn "tabsTypes.activationMode ()"
                 | _ -> commonProps propType
             | "toggleGroup" ->
                 match safePropName with
-                | "type'" -> enumFn "toggleGroup.type'"
+                | "type'" -> enumFn "toggleGroupTypes.type' ()"
                 | _ -> commonProps propType
             | "selectContent" ->
                 match safePropName with
-                | "position" -> enumFn "selectContent.position"
+                | "position" -> enumFn "selectContentTypes.position ()"
                 | _ -> commonProps propType
             | _ -> commonProps propType
 

@@ -6,7 +6,6 @@ open Feliz.Shadcn
 open ElmishLand
 open Examples.Shared
 open Examples.Pages
-open Feliz.Shadcn.Props
 
 type Model = unit
 
@@ -52,30 +51,17 @@ let AlertDialogDemo () =
                 Shadcn.alertDialogDescription
                     "This action cannot be undone. This will permanently delete your account and remove your data from our servers."
             ]
-            Shadcn.alertDialogFooter [
-                Shadcn.alertDialogCancel "Cancel"
-                Shadcn.alertDialogAction "Continue"
-            ]
+            Shadcn.alertDialogFooter [ Shadcn.alertDialogCancel "Cancel"; Shadcn.alertDialogAction "Continue" ]
         ]
     ]
 
 let button () =
     Html.div [
         Html.h2 "Button"
-        Html.div [
-            prop.children [
-                Shadcn.button [
-                    prop.text "Button"
-                ]
-            ]
-        ]
+        Html.div [ prop.children [ Shadcn.button [ prop.text "Button" ] ] ]
     ]
 
 let view (_model: Model) (_dispatch: Msg -> unit) =
-    Html.div [
-        AccordionDemo ()
-        AlertDialogDemo ()
-        button ()
-    ]
+    Html.div [ AccordionDemo(); AlertDialogDemo(); button () ]
 
 let page (_shared: SharedModel) (_route: HomeRoute) = Page.from init update view () LayoutMsg
