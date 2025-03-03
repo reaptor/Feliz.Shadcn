@@ -4,6 +4,27 @@ Fable/Feliz types for the Shadcn UI component library.
 
 Read [the Shadcn documentation](https://ui.shadcn.com) for more information.
 
+## TL;DR
+
+### 1. Install shadcn/ui
+https://ui.shadcn.com/docs/installation/vite
+
+### 2. Install Feliz.Shadcn
+```bash
+dotnet add package Feliz.Shadcn
+```
+
+### 3. Start using the components
+
+```fsharp
+open Feliz.Shadcn
+
+Shadcn.button [
+    prop.text "Click me"
+    prop.onClick (fun _ -> Browser.Dom.window.alert "Hello, shadcn/ui!")
+]
+```
+
 ## Setting Up Feliz.Shadcn with Elmish Land
 
 Integrating Feliz.Shadcn into your Elmish Land application is straightforward. The following example demonstrates how to set up a basic Elmish Land app
