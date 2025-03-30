@@ -81,13 +81,13 @@ module RadixUI =
         static member inline type' = accordionTypes.type' ()
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
         static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
-        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
-        static member inline value(value: string seq) : IReactProperty = mkProperty ("value", value)
-        static member inline defaultValue(value: string seq) : IReactProperty = mkProperty ("defaultValue", value)
 
-        static member inline onValueChange(value: string[] -> unit) : IReactProperty =
+        static member inline onValueChange(value: string list -> unit) : IReactProperty =
             mkProperty ("onValueChange", value)
 
+        static member inline value(value: string seq) : IReactProperty = mkProperty ("value", value)
+        static member inline defaultValue(value: string seq) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
         static member inline collapsible: IReactProperty = mkProperty ("collapsible", null)
         static member inline disabled: IReactProperty = mkProperty ("disabled", null)
         static member inline dir = directionType ()
@@ -1135,7 +1135,7 @@ module RadixUI =
         static member inline value(value: string seq) : IReactProperty = mkProperty ("value", value)
         static member inline defaultValue(value: string seq) : IReactProperty = mkProperty ("defaultValue", value)
 
-        static member inline onValueChange(value: string[] -> unit) : IReactProperty =
+        static member inline onValueChange(value: string list -> unit) : IReactProperty =
             mkProperty ("onValueChange", value)
 
         static member inline disabled: IReactProperty = mkProperty ("disabled", null)

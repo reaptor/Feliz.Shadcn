@@ -1,5 +1,6 @@
 namespace Feliz.Shadcn
 
+open System
 open System.ComponentModel
 open Fable.Core
 open Feliz
@@ -57,6 +58,42 @@ module Props =
         static member variant = buttonProps.variant
         static member size = buttonProps.size
 
+
+    [<EditorBrowsable(EditorBrowsableState.Never)>]
+    [<Erase>]
+    module calendarProps =
+        let mode = {|
+            single = prop.custom("mode", "single")
+            multiple = prop.custom("mode", "multiple")
+            range = prop.custom("mode", "range")
+        |}
+
+    type DateRange = {
+        from: DateTime option
+        to': DateTime option
+    }
+
+    [<Erase>]
+    type calendar =
+        static member mode = calendarProps.mode
+        static member selected (value: DateTime) = prop.custom("selected", value)
+        static member selected (value: DateTime option) = prop.custom("selected", value)
+        static member onSelect (f: DateTime -> unit) = prop.custom("onSelect", f)
+        static member onSelect (f: DateTime option -> unit) = prop.custom("onSelect", f)
+        static member required (value: bool) = prop.custom("required", value)
+
+        static member max (value: int) = prop.custom("max", value)
+        static member min (value: int) = prop.custom("min", value)
+        static member selected (value: #seq<DateTime>) = prop.custom("selected", Seq.toArray value)
+        static member onSelect (f: #seq<DateTime> -> unit) = prop.custom("onSelect", f)
+
+        static member disabled (value: bool) = prop.custom("disabled", value)
+        static member disabled (matcher: DateTime -> bool) = prop.custom("disabled", matcher)
+        static member disabled (date: DateTime) = prop.custom("disabled", date)
+        static member disabled (dates: DateTime seq) = prop.custom("disabled", dates)
+        static member excludeDisabled (value: bool) = prop.custom("excludeDisabled", value)
+        static member selected (value: DateRange) = prop.custom("selected", value)
+        static member onSelect (f: DateRange -> unit) = prop.custom("onSelect", f)
 
     [<EditorBrowsable(EditorBrowsableState.Never)>]
     [<Erase>]

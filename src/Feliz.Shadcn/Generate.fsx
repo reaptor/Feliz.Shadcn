@@ -104,7 +104,8 @@ let getRadixProps name =
 //     Command.Run("npx", "shadcn@canary init", __SOURCE_DIRECTORY__)
 //     Command.Run("npx", "shadcn@canary add --yes --overwrite --all", appDir)
 
-let componentsDir = Path.Combine(__SOURCE_DIRECTORY__, "components")
+let componentsDir =
+    Path.Combine(__SOURCE_DIRECTORY__, "Examples", "src", "components", "ui")
 
 let elements = File.CreateText(Path.Combine(__SOURCE_DIRECTORY__, "Shadcn.fs"))
 
@@ -206,6 +207,7 @@ for path in paths do
         Regex.Matches(contents, @"export\s*{([^}]+)}")
         |> Seq.filter (fun m -> m.Success && m.Groups.Count > 0)
         |> Seq.collect (fun m -> m.Groups[1].Value.Split(",") |> Array.map _.Trim())
+        |> Seq.choose (fun x -> if x.Contains " " || x = "" then None else Some x)
         |> List.ofSeq
 
     let filename = Path.GetFileNameWithoutExtension(path)
@@ -218,7 +220,7 @@ for path in paths do
     )
 
     elements.WriteLine(
-        $"""        static member inline %s{camelCase elementName} (children: list<ReactElement>) = Interop.reactApi.createElement(import "%s{elementName}" "@/components/ui/%s{filename}", [ prop.children (children :> ReactElement seq) ])"""
+        $"""        static member inline %s{camelCase elementName} (children: #seq<ReactElement>) = Interop.reactApi.createElement(import "%s{elementName}" "@/components/ui/%s{filename}", createObj [ "children" ==> Interop.reactApi.Children.toArray (Array.ofSeq children) ])"""
     )
 
     let propList =
@@ -234,7 +236,7 @@ for path in paths do
             |> ignore
 
             elements.WriteLine(
-                $"""        static member inline %s{camelCase name} (children: seq<ReactElement>) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", [ prop.children (children :> ReactElement seq) ])"""
+                $"""        static member inline %s{camelCase name} (children: #seq<ReactElement>) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj [ "children" ==> Interop.reactApi.Children.toArray (Array.ofSeq children) ])"""
             )
             |> ignore
 

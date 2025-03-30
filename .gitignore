@@ -4,6 +4,7 @@ obj
 node_modules
 .idea
 *.fs.js
-src/Examples/.elmish-land
+src/Docs/.elmish-land
 *.DotSettings.user
 nuget
+**/*.fable-temp.csproj

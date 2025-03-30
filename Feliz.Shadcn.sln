@@ -5,13 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Feliz.Shadcn", "src\Feliz.Shadcn\Feliz.Shadcn.fsproj", "{0DE8DF7E-3A85-4FD7-9756-7C99ACBFDE23}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feliz.Shadcn.Examples", "Feliz.Shadcn.Examples", "{0E5096B2-2252-4CFB-9497-1EDB8E6F7431}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feliz.Shadcn.Docs", "Feliz.Shadcn.Docs", "{0E5096B2-2252-4CFB-9497-1EDB8E6F7431}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ElmishLand.Examples.Base", "src\Examples\.elmish-land\Base\ElmishLand.Examples.Base.fsproj", "{6621754C-B265-4321-BFB1-6550B491B755}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ElmishLand.Docs.Base", "src\Docs\.elmish-land\Base\ElmishLand.Docs.Base.fsproj", "{6621754C-B265-4321-BFB1-6550B491B755}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Examples", "src\Examples\Examples.fsproj", "{0EFB5514-7071-499C-B433-CC84DD095A07}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Docs", "src\Docs\Docs.fsproj", "{0EFB5514-7071-499C-B433-CC84DD095A07}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ElmishLand.Examples.App", "src\Examples\.elmish-land\App\ElmishLand.Examples.App.fsproj", "{2BCAABCF-16FF-47E9-8AE5-BEDF5BBEA0B0}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ElmishLand.Docs.App", "src\Docs\.elmish-land\App\ElmishLand.Docs.App.fsproj", "{2BCAABCF-16FF-47E9-8AE5-BEDF5BBEA0B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <RootNamespace>Examples</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="src/Shared.fs"/>
+        <Compile Include="src\Pages\Components\Common.fs" />
+        <Compile Include="src\Pages\Components\AccordionDemo.fs" />
+        <Compile Include="src\Pages\Components\AlertDemo.fs" />
+        <Compile Include="src\Pages\Components\AlertDialogDemo.fs" />
+        <Compile Include="src\Pages\Components\AspectRatioDemo.fs" />
+        <Compile Include="src\Pages\Components\BadgeDemo.fs" />
+        <Compile Include="src\Pages\Components\BreadcrumbDemo.fs" />
+        <Compile Include="src\Pages\Components\ButtonDemo.fs" />
+        <Compile Include="src\Pages\Components\CalendarDemo.fs" />
+        <Compile Include="src\Pages\Components\CardDemo.fs" />
+        <Compile Include="src\Pages\Components\CarouselDemo.fs" />
+        <Compile Include="src/Pages/NotFound.fs"/>
+        <Compile Include="src/Pages/Layout.fs"/>
+        <Compile Include="src/Pages/Page.fs"/>
+        <Compile Include="src\Pages\_compName\Page.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Feliz.Shadcn\Feliz.Shadcn.fsproj" />
+      <ProjectReference Include=".elmish-land/Base/ElmishLand.Docs.Base.fsproj" />
+    </ItemGroup>
+</Project>
