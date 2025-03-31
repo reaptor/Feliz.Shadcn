@@ -1,17 +1,32 @@
 module Docs.Pages.Components.Common
 
+open Microsoft.FSharp.Core
 open Fable.Core
 open Fable.Core.JsInterop
 open Feliz
 open Feliz.Shadcn
-open Microsoft.FSharp.Core
 
-import "" "highlight.js/styles/atom-one-dark.css"
-let hljs: obj = importDefault "highlight.js/lib/core"
-let fsharp: obj = importDefault "highlight.js/lib/languages/fsharp"
-hljs?registerLanguage("fsharp", fsharp)
+[<AutoOpen>]
+module Interop =
+    import "" "highlight.js/styles/atom-one-dark.css"
+    let private hljs: obj = importDefault "highlight.js"
+    let highlight (code: string) (lang: string) = hljs?highlight(code, {| language = lang |})?value
 
-let marked: obj = importAll "marked"
+    let private markedHighlight: obj -> obj = import "markedHighlight" "marked-highlight"
+
+    [<Import("Marked", "marked")>]
+    type private Marked(o: obj) = class end
+
+    let private marked =
+        Marked(markedHighlight({|
+            emptyLangClass = "hljs"
+            langPrefix = "hljs language-"
+            highlight = fun code lang _ ->
+                let language = if hljs?getLanguage(lang) then lang else "plaintext"
+                highlight code language
+        |}))
+
+    let parseMarkdown (s: string) = marked?parse(s)
 
 type UI =
     static member Header1 (s: string) =
@@ -70,12 +85,10 @@ type UI =
             ]
         ]
 
-
     static member Markdown (s: string) =
-        Browser.Dom.console.log(marked?parse(s))
         Html.div [
             prop.className "markdown"
-            prop.dangerouslySetInnerHTML (marked?parse(s))
+            prop.dangerouslySetInnerHTML (parseMarkdown s)
         ]
 
     static member PreviewAndCode (name: string, preview: ReactElement, code: string, ?title: string) =
@@ -117,11 +130,11 @@ type UI =
                                         prop.children [
                                             Html.code [
                                                 let code = $"""open Feliz
-    open Feliz.Shadcn
+open Feliz.Shadcn
 
-    %s{code}
+%s{code}
                                                 """
-                                                prop.innerHtml (hljs?highlight(code, {| language = "fsharp" |})?value)
+                                                prop.dangerouslySetInnerHTML (highlight code "fsharp")
                                             ]
                                         ]
                                     ]

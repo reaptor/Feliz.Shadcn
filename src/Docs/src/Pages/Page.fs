@@ -33,7 +33,6 @@ let view (model: Model) (dispatch: Msg -> unit) =
     Html.article [
         prop.className "max-w-180 flex flex-col gap-4 m-1"
         prop.children [
-
             UI.Markdown """# Introduction
 
 Fable/Feliz types for the Shadcn UI component library.
@@ -94,27 +93,21 @@ Add the @tailwindcss/vite plugin and shadcn's component alias to your Vite confi
 
 ```javascript
 import { defineConfig } from 'vite'
-// highlight-start
 import path from "path"
 import tailwindcss from '@tailwindcss/vite'
-// highlight-end
 
 export default defineConfig({
-    // highlight-start
     plugins: [
         tailwindcss(),
     ],
-    // highlight-end
     build: {
         outDir: "dist"
     },
-    // highlight-start
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./src"),
         },
     },
-    // highlight-end
 })
 ```
 
@@ -137,9 +130,7 @@ Add a link to your `styles.css` in the `<head>` section of your `index.html`.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta charset="UTF-8">
-        // highlight-start
         <link href="/styles.css" rel="stylesheet">
-        // highlight-end
         <title>TailwindElmishLand</title>
     </head>
     <body>
@@ -198,9 +189,7 @@ open Feliz
 open ElmishLand
 open FelizShadcnIntro.Shared
 open FelizShadcnIntro.Pages
-// highlight-start
 open Feliz.Shadcn
-// highlight-end
 
 type Model = unit
 
@@ -216,14 +205,12 @@ let update (msg: Msg) (model: Model) =
     | LayoutMsg _ -> model, Command.none
 
 let view (_model: Model) (_dispatch: Msg -> unit) =
-    // highlight-start
     Html.div [
         Shadcn.button [
             prop.text "Click me"
             prop.onClick (fun _ -> Browser.Dom.window.alert "Hello, shadcn/ui!")
         ]
     ]
-    // highlight-end
 
 let page (_shared: SharedModel) (_route: HomeRoute) =
     Page.from init update view () LayoutMsg
