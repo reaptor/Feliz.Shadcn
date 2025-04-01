@@ -5,7 +5,6 @@ open Feliz.Shadcn
 open ElmishLand
 open Docs.Shared
 open Docs.Pages.Components
-open Docs.Pages.Components.Common
 
 type Component = {
     Title: string
@@ -63,12 +62,102 @@ let components =
             Description = "A date field component that allows users to enter and edit date."
             Constructor = Calendar.Calendar
         }
-        "card", { Title = "Card"; Description = "Displays a card with header, content, and footer."; Constructor = Card.Card }
+        "card",
+        {
+            Title = "Card"
+            Description = "Displays a card with header, content, and footer."
+            Constructor = Card.Card
+        }
         "carousel",
         {
             Title = "Carousel"
             Description = "A carousel with motion and swipe built using Embla."
             Constructor = Carousel.Carousel
+        }
+        "checkbox",
+        {
+            Title = "Checkbox"
+            Description = "A control that allows the user to toggle between checked and not checked."
+            Constructor = Checkbox.Checkbox
+        }
+        "collapsible",
+        {
+            Title = "Collapsible"
+            Description = "An interactive component which expands/collapses a panel."
+            Constructor = Collapsible.Collapsible
+        }
+        "combobox",
+        {
+            Title = "Combobox"
+            Description = "Autocomplete input and command palette with a list of suggestions."
+            Constructor = Combobox.Combobox
+        }
+        "command",
+        {
+            Title = "Command"
+            Description = "Fast, composable, unstyled command menu for React."
+            Constructor = Command.Command
+        }
+        "context-menu",
+        {
+            Title = "Context Menu"
+            Description = "Displays a menu to the user — such as a set of actions or functions — triggered by a button."
+            Constructor = ContextMenu.ContextMenu
+        }
+        "date-picker",
+        {
+            Title = "Date Picker"
+            Description = "A date picker component with range and presets."
+            Constructor = DatePicker.DatePicker
+        }
+        "dialog",
+        {
+            Title = "Dialog"
+            Description =
+                "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert."
+            Constructor = Dialog.Dialog
+        }
+        "drawer",
+        {
+            Title = "Drawer"
+            Description = "A drawer component for React."
+            Constructor = Drawer.Drawer
+        }
+        "dropdown-menu",
+        {
+            Title = "Dropdown Menu"
+            Description = "Displays a menu to the user — such as a set of actions or functions — triggered by a button."
+            Constructor = DropdownMenu.DropdownMenu
+        }
+        "hover-card",
+        {
+            Title = "Hover Card"
+            Description = "For sighted users to preview content available behind a link."
+            Constructor = HoverCard.HoverCard
+        }
+        "input",
+        {
+            Title = "Input"
+            Description = "Displays a form input field or a component that looks like an input field."
+            Constructor = Input.Input
+        }
+        "input-otp",
+        {
+            Title = "Input OTP"
+            Description = "Verify with a one-time password input."
+            Constructor = InputOTP.InputOTP
+        }
+        "label",
+        {
+            Title = "Label"
+            Description = "Renders an accessible label associated with controls."
+            Constructor = Label.Label
+        }
+        "menubar",
+        {
+            Title = "Menubar"
+            Description = "A visually persistent menu common in desktop applications."
+            Constructor = Menubar.Menubar
         }
     ]
 
@@ -81,8 +170,7 @@ type Props = { CurrentComponentName: string }
 
 type Model = { CurrentComponentName: string }
 
-type Msg =
-    | ChangeComponent of string
+type Msg = ChangeComponent of string
 
 let init (name: string) =
     { CurrentComponentName = name }, Command.none
@@ -113,9 +201,7 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                                     prop.className "flex md:hidden"
                                     prop.children [
                                         Shadcn.drawer [
-                                            Shadcn.drawerTrigger [
-                                                UI.HamburgerIcon()
-                                            ]
+                                            Shadcn.drawerTrigger [ Lucide.Menu [] ]
                                             Shadcn.drawerContent [
                                                 prop.className "overflow-auto"
                                                 prop.children [
@@ -130,7 +216,8 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                                                             prop.children [
                                                                 Html.div [
                                                                     prop.className "text-2xl"
-                                                                    prop.onClick (fun _ -> dispatch (ChangeComponent name'))
+                                                                    prop.onClick (fun _ ->
+                                                                        dispatch (ChangeComponent name'))
                                                                     prop.text title
                                                                     prop.className "cursor-pointer"
                                                                 ]
@@ -141,22 +228,15 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                                         ]
                                     ]
                                 ]
-                                Html.a [
-                                    prop.className "text-lg font-bold"
-                                    prop.href "/"
-                                    prop.text "Feliz.Shadcn"
-                                ]
+                                Html.a [ prop.className "text-lg font-bold"; prop.href "/"; prop.text "Feliz.Shadcn" ]
                             ]
                         ]
                         Html.a [
                             prop.className "flex items-center"
                             prop.href "https://github.com/reaptor/Feliz.Shadcn"
                             prop.children [
-                                Html.span [
-                                    prop.className "font-semibold mr-2"
-                                    prop.text "GitHub"
-                                ]
-                                UI.LinkIcon 4
+                                Html.span [ prop.className "font-semibold mr-2"; prop.text "GitHub" ]
+                                Lucide.SquareArrowOutUpRight [ svg.size 14 ]
                             ]
                         ]
                     ]
@@ -178,7 +258,10 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                                                 prop.children [
                                                     Shadcn.sidebarMenuButton [
                                                         mkProperty ("asChild", null)
-                                                        mkProperty ("isActive", System.String.IsNullOrWhiteSpace model.CurrentComponentName)
+                                                        mkProperty (
+                                                            "isActive",
+                                                            System.String.IsNullOrWhiteSpace model.CurrentComponentName
+                                                        )
                                                         prop.onClick (fun _ -> dispatch (ChangeComponent ""))
                                                         prop.text "Getting Started"
                                                         prop.className "cursor-pointer"
@@ -211,12 +294,7 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                             ]
                         ]
                     ]
-                    Shadcn.sidebarInset [
-                        prop.className "mt-20 md:mx-10 p-4"
-                        prop.children [
-                            content
-                        ]
-                    ]
+                    Shadcn.sidebarInset [ prop.className "mt-20 md:mx-10 p-4"; prop.children [ content ] ]
                 ]
             ]
         ]

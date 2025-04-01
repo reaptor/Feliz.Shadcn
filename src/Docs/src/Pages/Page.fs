@@ -10,8 +10,7 @@ type Model = { Dummy: unit }
 
 type Msg = LayoutMsg of Layout.Msg
 
-let init () =
-    { Dummy = () }, Command.none
+let init () = { Dummy = () }, Command.none
 
 let update (msg: Msg) (model: Model) =
     match msg with
@@ -27,13 +26,17 @@ let Bold (s: string) =
     Html.span [ prop.className "font-semibold"; prop.text s ]
 
 let InlineCode (s: string) =
-    Html.span [ prop.className "bg-slate-100 rounded py-1 px-2 font-mono text-sm"; prop.text s ]
+    Html.span [
+        prop.className "bg-slate-100 rounded py-1 px-2 font-mono text-sm"
+        prop.text s
+    ]
 
 let view (model: Model) (dispatch: Msg -> unit) =
     Html.article [
         prop.className "max-w-180 flex flex-col gap-4 m-1"
         prop.children [
-            UI.Markdown """# Introduction
+            UI.Markdown
+                """# Introduction
 
 Fable/Feliz types for the Shadcn UI component library.
 
@@ -228,4 +231,4 @@ to start your application.
     ]
 
 let page (_shared: SharedModel) (_route: HomeRoute) =
-    Page.from init update view { Layout.CurrentComponentName = ""} LayoutMsg
+    Page.from init update view { Layout.CurrentComponentName = "" } LayoutMsg

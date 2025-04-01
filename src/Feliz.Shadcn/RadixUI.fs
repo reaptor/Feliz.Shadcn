@@ -81,22 +81,27 @@ module RadixUI =
         static member inline type' = accordionTypes.type' ()
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
         static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline value(value: string seq) : IReactProperty = mkProperty ("value", value)
+        static member inline defaultValue(value: string seq) : IReactProperty = mkProperty ("defaultValue", value)
 
         static member inline onValueChange(value: string list -> unit) : IReactProperty =
             mkProperty ("onValueChange", value)
 
-        static member inline value(value: string seq) : IReactProperty = mkProperty ("value", value)
-        static member inline defaultValue(value: string seq) : IReactProperty = mkProperty ("defaultValue", value)
-        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
-        static member inline collapsible: IReactProperty = mkProperty ("collapsible", null)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline collapsible(value: bool) : IReactProperty = mkProperty ("collapsible", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
         static member inline dir = directionType ()
         static member inline orientation = orientationType ()
 
     [<RequireQualifiedAccess>]
+    type accordionContent =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+
+    [<RequireQualifiedAccess>]
     type accordionItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
     [<RequireQualifiedAccess>]
@@ -104,34 +109,35 @@ module RadixUI =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type accordionContent =
+    type alert =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+
+    [<RequireQualifiedAccess>]
+    type alertDescription =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type alertTitle =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type alertDialog =
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
         static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
     [<RequireQualifiedAccess>]
-    type alertDialogTrigger =
+    type alertDialogAction =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type alertDialogPortal =
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
-        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
-
-    [<RequireQualifiedAccess>]
-    type alertDialogOverlay =
+    type alertDialogCancel =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
     [<RequireQualifiedAccess>]
     type alertDialogContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
         static member inline onOpenAutoFocus(value: Event -> unit) : IReactProperty =
             mkProperty ("onOpenAutoFocus", value)
@@ -143,29 +149,50 @@ module RadixUI =
             mkProperty ("onEscapeKeyDown", value)
 
     [<RequireQualifiedAccess>]
-    type alertDialogCancel =
+    type alertDialogDescription =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type alertDialogAction =
+    type alertDialogFooter =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type alertDialogHeader =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type alertDialogOverlay =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+
+    [<RequireQualifiedAccess>]
+    type alertDialogPortal =
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
     [<RequireQualifiedAccess>]
     type alertDialogTitle =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type alertDialogDescription =
+    type alertDialogTrigger =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type aspectRatio =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline ratio(value: int) : IReactProperty = mkProperty ("ratio", value)
+        static member inline ratio(value: float) : IReactProperty = mkProperty ("ratio", value)
 
     [<RequireQualifiedAccess>]
     type avatar =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type avatarFallback =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline delayMs(value: int) : IReactProperty = mkProperty ("delayMs", value)
+        static member inline delayMs(value: float) : IReactProperty = mkProperty ("delayMs", value)
 
     [<RequireQualifiedAccess>]
     type avatarImage =
@@ -175,9 +202,96 @@ module RadixUI =
             mkProperty ("onLoadingStatusChange", value)
 
     [<RequireQualifiedAccess>]
-    type avatarFallback =
+    type badge =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline delayMs(value: int) : IReactProperty = mkProperty ("delayMs", value)
+
+    [<RequireQualifiedAccess>]
+    type breadcrumb =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type breadcrumbEllipsis =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type breadcrumbItem =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type breadcrumbLink =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type breadcrumbList =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type breadcrumbPage =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type breadcrumbSeparator =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type button =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type calendar =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type card =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type cardAction =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type cardContent =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type cardDescription =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type cardFooter =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type cardHeader =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type cardTitle =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type carousel =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type carouselContent =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type carouselItem =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type carouselNext =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type carouselPrevious =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type chartContainer =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type checkbox =
@@ -186,53 +300,91 @@ module RadixUI =
         static member inline defaultChecked(value: bool option -> unit) : IReactProperty =
             mkProperty ("defaultChecked", value)
 
-        static member inline checked' = checkedType ()
+        static member inline checked'(value: bool) : IReactProperty = mkProperty ("checked", value)
 
         static member inline onCheckedChange(value: bool option -> unit) : IReactProperty =
             mkProperty ("onCheckedChange", value)
 
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline required: IReactProperty = mkProperty ("required", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline required(value: bool) : IReactProperty = mkProperty ("required", value)
         static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
     [<RequireQualifiedAccess>]
     type collapsible =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
         static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+
+    [<RequireQualifiedAccess>]
+    type collapsibleContent =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
     [<RequireQualifiedAccess>]
     type collapsibleTrigger =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type collapsibleContent =
+    type command =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+
+    [<RequireQualifiedAccess>]
+    type commandDialog =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type commandEmpty =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type commandGroup =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type commandInput =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type commandItem =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type commandList =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type commandSeparator =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type commandShortcut =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type contextMenu =
         static member inline dir = directionType ()
         static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline modal: IReactProperty = mkProperty ("modal", null)
+        static member inline modal(value: bool) : IReactProperty = mkProperty ("modal", value)
 
     [<RequireQualifiedAccess>]
-    type contextMenuTrigger =
+    type contextMenuCheckboxItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline checked'(value: bool) : IReactProperty = mkProperty ("checked", value)
 
-    [<RequireQualifiedAccess>]
-    type contextMenuPortal =
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
-        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop: IReactProperty = mkProperty ("loop", null)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
         static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
             mkProperty ("onCloseAutoFocus", value)
@@ -249,9 +401,10 @@ module RadixUI =
         static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
             mkProperty ("onInteractOutside", value)
 
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
         static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
         static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
             mkProperty ("collisionBoundary", value)
@@ -265,34 +418,27 @@ module RadixUI =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
-
-    [<RequireQualifiedAccess>]
-    type contextMenuItem =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuGroup =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
+    type contextMenuItem =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+
+    [<RequireQualifiedAccess>]
     type contextMenuLabel =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type contextMenuCheckboxItem =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline checked' = checkedType ()
-
-        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
-            mkProperty ("onCheckedChange", value)
-
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+    type contextMenuPortal =
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuRadioGroup =
@@ -304,7 +450,7 @@ module RadixUI =
     type contextMenuRadioItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
         static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
         static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
@@ -313,21 +459,19 @@ module RadixUI =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type contextMenuSub =
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
-        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+    type contextMenuShortcut =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type contextMenuSubTrigger =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+    type contextMenuSub =
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuSubContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop: IReactProperty = mkProperty ("loop", null)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
         static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
             mkProperty ("onEscapeKeyDown", value)
@@ -341,10 +485,12 @@ module RadixUI =
         static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
             mkProperty ("onInteractOutside", value)
 
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
         static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
         static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
             mkProperty ("collisionBoundary", value)
@@ -358,34 +504,36 @@ module RadixUI =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
+
+    [<RequireQualifiedAccess>]
+    type contextMenuSubTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+
+    [<RequireQualifiedAccess>]
+    type contextMenuTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
 
     [<RequireQualifiedAccess>]
     type dialog =
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
         static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline modal: IReactProperty = mkProperty ("modal", null)
+        static member inline modal(value: bool) : IReactProperty = mkProperty ("modal", value)
 
     [<RequireQualifiedAccess>]
-    type dialogTrigger =
+    type dialogClose =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-
-    [<RequireQualifiedAccess>]
-    type dialogPortal =
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
-        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
-
-    [<RequireQualifiedAccess>]
-    type dialogOverlay =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
     [<RequireQualifiedAccess>]
     type dialogContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
         static member inline onOpenAutoFocus(value: Event -> unit) : IReactProperty =
             mkProperty ("onOpenAutoFocus", value)
@@ -403,38 +551,99 @@ module RadixUI =
             mkProperty ("onInteractOutside", value)
 
     [<RequireQualifiedAccess>]
-    type dialogClose =
+    type dialogDescription =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type dialogFooter =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type dialogHeader =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type dialogOverlay =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+
+    [<RequireQualifiedAccess>]
+    type dialogPortal =
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
     [<RequireQualifiedAccess>]
     type dialogTitle =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type dialogDescription =
+    type dialogTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type drawer =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type drawerClose =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type drawerContent =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type drawerDescription =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type drawerFooter =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type drawerHeader =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type drawerOverlay =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type drawerPortal =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type drawerTitle =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type drawerTrigger =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type dropdownMenu =
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
         static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline modal: IReactProperty = mkProperty ("modal", null)
+        static member inline modal(value: bool) : IReactProperty = mkProperty ("modal", value)
         static member inline dir = directionType ()
 
     [<RequireQualifiedAccess>]
-    type dropdownMenuTrigger =
+    type dropdownMenuCheckboxItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline checked'(value: bool) : IReactProperty = mkProperty ("checked", value)
 
-    [<RequireQualifiedAccess>]
-    type dropdownMenuPortal =
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
-        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop: IReactProperty = mkProperty ("loop", null)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
         static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
             mkProperty ("onCloseAutoFocus", value)
@@ -451,12 +660,14 @@ module RadixUI =
         static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
             mkProperty ("onInteractOutside", value)
 
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
         static member inline side = sideType ()
         static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline align = alignType ()
         static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
         static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
             mkProperty ("collisionBoundary", value)
@@ -470,35 +681,29 @@ module RadixUI =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
-
-    [<RequireQualifiedAccess>]
-    type dropdownMenuItem =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuGroup =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
+    type dropdownMenuItem =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+
+    [<RequireQualifiedAccess>]
     type dropdownMenuLabel =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type dropdownMenuCheckboxItem =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline checked' = checkedType ()
-
-        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
-            mkProperty ("onCheckedChange", value)
-
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+    type dropdownMenuPortal =
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuRadioGroup =
@@ -510,7 +715,7 @@ module RadixUI =
     type dropdownMenuRadioItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
         static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
         static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
@@ -519,21 +724,19 @@ module RadixUI =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type dropdownMenuSub =
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
-        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+    type dropdownMenuShortcut =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type dropdownMenuSubTrigger =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+    type dropdownMenuSub =
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuSubContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop: IReactProperty = mkProperty ("loop", null)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
         static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
             mkProperty ("onEscapeKeyDown", value)
@@ -547,10 +750,12 @@ module RadixUI =
         static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
             mkProperty ("onInteractOutside", value)
 
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
         static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
         static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
             mkProperty ("collisionBoundary", value)
@@ -564,8 +769,19 @@ module RadixUI =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
+
+    [<RequireQualifiedAccess>]
+    type dropdownMenuSubTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+
+    [<RequireQualifiedAccess>]
+    type dropdownMenuTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type form =
@@ -576,25 +792,25 @@ module RadixUI =
 
     [<RequireQualifiedAccess>]
     type hoverCard =
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
         static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
         static member inline open'Delay(value: int) : IReactProperty = mkProperty ("openDelay", value)
+        static member inline open'Delay(value: float) : IReactProperty = mkProperty ("openDelay", value)
         static member inline closeDelay(value: int) : IReactProperty = mkProperty ("closeDelay", value)
-
-    [<RequireQualifiedAccess>]
-    type hoverCardTrigger =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline closeDelay(value: float) : IReactProperty = mkProperty ("closeDelay", value)
 
     [<RequireQualifiedAccess>]
     type hoverCardContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
         static member inline side = sideType ()
         static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline align = alignType ()
         static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
         static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
             mkProperty ("collisionBoundary", value)
@@ -608,8 +824,33 @@ module RadixUI =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
+
+    [<RequireQualifiedAccess>]
+    type hoverCardTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type input =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type inputOTP =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type inputOTPGroup =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type inputOTPSeparator =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type inputOTPSlot =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type label =
@@ -621,28 +862,32 @@ module RadixUI =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange(value: int[] -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+
+        static member inline onValueChange(value: int list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline onValueChange(value: float list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
         static member inline dir = directionType ()
-        static member inline loop: IReactProperty = mkProperty ("loop", null)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
     [<RequireQualifiedAccess>]
-    type menubarMenu =
+    type menubarCheckboxItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline checked'(value: bool) : IReactProperty = mkProperty ("checked", value)
 
-    [<RequireQualifiedAccess>]
-    type menubarTrigger =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
 
-    [<RequireQualifiedAccess>]
-    type menubarPortal =
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
-        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type menubarContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop: IReactProperty = mkProperty ("loop", null)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
         static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
             mkProperty ("onCloseAutoFocus", value)
@@ -659,12 +904,14 @@ module RadixUI =
         static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
             mkProperty ("onInteractOutside", value)
 
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
         static member inline side = sideType ()
         static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline align = alignType ()
         static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
         static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
             mkProperty ("collisionBoundary", value)
@@ -678,35 +925,34 @@ module RadixUI =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
-
-    [<RequireQualifiedAccess>]
-    type menubarItem =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type menubarGroup =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
+    type menubarItem =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+
+    [<RequireQualifiedAccess>]
     type menubarLabel =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type menubarCheckboxItem =
+    type menubarMenu =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline checked' = checkedType ()
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
-        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
-            mkProperty ("onCheckedChange", value)
-
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+    [<RequireQualifiedAccess>]
+    type menubarPortal =
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
     [<RequireQualifiedAccess>]
     type menubarRadioGroup =
@@ -718,7 +964,7 @@ module RadixUI =
     type menubarRadioItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
         static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
         static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
@@ -727,21 +973,19 @@ module RadixUI =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type menubarSub =
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
-        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+    type menubarShortcut =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type menubarSubTrigger =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+    type menubarSub =
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
     [<RequireQualifiedAccess>]
     type menubarSubContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop: IReactProperty = mkProperty ("loop", null)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
         static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
             mkProperty ("onEscapeKeyDown", value)
@@ -755,10 +999,12 @@ module RadixUI =
         static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
             mkProperty ("onInteractOutside", value)
 
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
         static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
         static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
             mkProperty ("collisionBoundary", value)
@@ -772,31 +1018,37 @@ module RadixUI =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
+
+    [<RequireQualifiedAccess>]
+    type menubarSubTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
+
+    [<RequireQualifiedAccess>]
+    type menubarTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type navigationMenu =
         static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange(value: int[] -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+
+        static member inline onValueChange(value: int list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline onValueChange(value: float list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
         static member inline delayDuration(value: int) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline delayDuration(value: float) : IReactProperty = mkProperty ("delayDuration", value)
         static member inline skipDelayDuration(value: int) : IReactProperty = mkProperty ("skipDelayDuration", value)
+        static member inline skipDelayDuration(value: float) : IReactProperty = mkProperty ("skipDelayDuration", value)
         static member inline dir = directionType ()
         static member inline orientation = orientationType ()
-
-    [<RequireQualifiedAccess>]
-    type navigationMenuList =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-
-    [<RequireQualifiedAccess>]
-    type navigationMenuItem =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-
-    [<RequireQualifiedAccess>]
-    type navigationMenuTrigger =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type navigationMenuContent =
@@ -814,34 +1066,71 @@ module RadixUI =
         static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
             mkProperty ("onInteractOutside", value)
 
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
-
-    [<RequireQualifiedAccess>]
-    type navigationMenuLink =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline active: IReactProperty = mkProperty ("active", null)
-        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
     [<RequireQualifiedAccess>]
     type navigationMenuIndicator =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+
+    [<RequireQualifiedAccess>]
+    type navigationMenuItem =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+
+    [<RequireQualifiedAccess>]
+    type navigationMenuLink =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline active(value: bool) : IReactProperty = mkProperty ("active", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+
+    [<RequireQualifiedAccess>]
+    type navigationMenuList =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type navigationMenuTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type navigationMenuViewport =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+
+    [<RequireQualifiedAccess>]
+    type pagination =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type paginationContent =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type paginationEllipsis =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type paginationItem =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type paginationLink =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type paginationNext =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type paginationPrevious =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type popover =
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
         static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline modal: IReactProperty = mkProperty ("modal", null)
-
-    [<RequireQualifiedAccess>]
-    type popoverTrigger =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline modal(value: bool) : IReactProperty = mkProperty ("modal", value)
 
     [<RequireQualifiedAccess>]
     type popoverAnchor =
@@ -869,12 +1158,14 @@ module RadixUI =
         static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
             mkProperty ("onInteractOutside", value)
 
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
         static member inline side = sideType ()
         static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline align = alignType ()
         static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
         static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
             mkProperty ("collisionBoundary", value)
@@ -888,14 +1179,21 @@ module RadixUI =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
+
+    [<RequireQualifiedAccess>]
+    type popoverTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type progress =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline value(value: int option) : IReactProperty = mkProperty ("value", value)
+        static member inline value(value: float option) : IReactProperty = mkProperty ("value", value)
         static member inline max(value: int) : IReactProperty = mkProperty ("max", value)
+        static member inline max(value: float) : IReactProperty = mkProperty ("max", value)
 
         static member inline getValueLabel(value: int -> int -> string) : IReactProperty =
             mkProperty ("getValueLabel", value)
@@ -905,20 +1203,30 @@ module RadixUI =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange(value: int[] -> unit) : IReactProperty = mkProperty ("onValueChange", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+
+        static member inline onValueChange(value: int list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline onValueChange(value: float list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
         static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
-        static member inline required: IReactProperty = mkProperty ("required", null)
+        static member inline required(value: bool) : IReactProperty = mkProperty ("required", value)
         static member inline orientation = orientationType ()
         static member inline dir = directionType ()
-        static member inline loop: IReactProperty = mkProperty ("loop", null)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
     [<RequireQualifiedAccess>]
     type radioGroupItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline required: IReactProperty = mkProperty ("required", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline required(value: bool) : IReactProperty = mkProperty ("required", value)
+
+    [<RequireQualifiedAccess>]
+    type resizablePanelGroup =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
 
     [<Erase>]
@@ -935,6 +1243,7 @@ module RadixUI =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline type' = scrollAreaTypes.type' ()
         static member inline scrollHideDelay(value: int) : IReactProperty = mkProperty ("scrollHideDelay", value)
+        static member inline scrollHideDelay(value: float) : IReactProperty = mkProperty ("scrollHideDelay", value)
         static member inline dir = directionType ()
         static member inline nonce(value: string) : IReactProperty = mkProperty ("nonce", value)
 
@@ -943,22 +1252,13 @@ module RadixUI =
         static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
         static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
         static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
         static member inline dir = directionType ()
         static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline required: IReactProperty = mkProperty ("required", null)
-
-    [<RequireQualifiedAccess>]
-    type selectTrigger =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-
-    [<RequireQualifiedAccess>]
-    type selectValue =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline placeholder(value: ReactElement) : IReactProperty = mkProperty ("placeholder", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline required(value: bool) : IReactProperty = mkProperty ("required", value)
 
 
     [<Erase>]
@@ -984,9 +1284,11 @@ module RadixUI =
         static member inline position = selectContentTypes.position ()
         static member inline side = sideType ()
         static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline align = alignType ()
         static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
         static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
             mkProperty ("collisionBoundary", value)
@@ -1000,18 +1302,23 @@ module RadixUI =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
+
+    [<RequireQualifiedAccess>]
+    type selectGroup =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type selectItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
         static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
-    type selectScrollUpButton =
+    type selectLabel =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
@@ -1019,11 +1326,7 @@ module RadixUI =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
-    type selectGroup =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-
-    [<RequireQualifiedAccess>]
-    type selectLabel =
+    type selectScrollUpButton =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
@@ -1031,45 +1334,237 @@ module RadixUI =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
+    type selectTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type selectValue =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline placeholder(value: ReactElement) : IReactProperty = mkProperty ("placeholder", value)
+
+    [<RequireQualifiedAccess>]
     type separator =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline orientation = orientationType ()
-        static member inline decorative: IReactProperty = mkProperty ("decorative", null)
+        static member inline decorative(value: bool) : IReactProperty = mkProperty ("decorative", value)
+
+    [<RequireQualifiedAccess>]
+    type sheet =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sheetClose =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sheetContent =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sheetDescription =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sheetFooter =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sheetHeader =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sheetTitle =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sheetTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebar =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarContent =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarFooter =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarGroup =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarGroupAction =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarGroupContent =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarGroupLabel =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarHeader =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarInput =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarInset =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarMenu =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarMenuAction =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarMenuBadge =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarMenuButton =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarMenuItem =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarMenuSkeleton =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarMenuSub =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarMenuSubButton =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarMenuSubItem =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarProvider =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarRail =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarSeparator =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type sidebarTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type skeleton =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
     [<RequireQualifiedAccess>]
     type slider =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultValue(value: int[]) : IReactProperty = mkProperty ("defaultValue", value)
-        static member inline value(value: int[]) : IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange(value: int[] -> unit) : IReactProperty = mkProperty ("onValueChange", value)
-        static member inline onValueCommit(value: int[] -> unit) : IReactProperty = mkProperty ("onValueCommit", value)
+        static member inline defaultValue(value: int list) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline defaultValue(value: float list) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: int list) : IReactProperty = mkProperty ("value", value)
+        static member inline value(value: float list) : IReactProperty = mkProperty ("value", value)
+
+        static member inline onValueChange(value: int list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline onValueChange(value: float list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline onValueCommit(value: int list -> unit) : IReactProperty =
+            mkProperty ("onValueCommit", value)
+
+        static member inline onValueCommit(value: float list -> unit) : IReactProperty =
+            mkProperty ("onValueCommit", value)
+
         static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
         static member inline orientation = orientationType ()
         static member inline dir = directionType ()
-        static member inline inverted: IReactProperty = mkProperty ("inverted", null)
+        static member inline inverted(value: bool) : IReactProperty = mkProperty ("inverted", value)
         static member inline min(value: int) : IReactProperty = mkProperty ("min", value)
+        static member inline min(value: float) : IReactProperty = mkProperty ("min", value)
         static member inline max(value: int) : IReactProperty = mkProperty ("max", value)
+        static member inline max(value: float) : IReactProperty = mkProperty ("max", value)
         static member inline step(value: int) : IReactProperty = mkProperty ("step", value)
+        static member inline step(value: float) : IReactProperty = mkProperty ("step", value)
 
         static member inline minStepsBetweenThumbs(value: int) : IReactProperty =
+            mkProperty ("minStepsBetweenThumbs", value)
+
+        static member inline minStepsBetweenThumbs(value: float) : IReactProperty =
             mkProperty ("minStepsBetweenThumbs", value)
 
         static member inline form(value: string) : IReactProperty = mkProperty ("form", value)
 
     [<RequireQualifiedAccess>]
+    type toaster =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
     type switch =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultChecked: IReactProperty = mkProperty ("defaultChecked", null)
-        static member inline checked': IReactProperty = mkProperty ("checked", null)
+        static member inline defaultChecked(value: bool) : IReactProperty = mkProperty ("defaultChecked", value)
+        static member inline checked'(value: bool) : IReactProperty = mkProperty ("checked", value)
 
         static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
             mkProperty ("onCheckedChange", value)
 
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline required: IReactProperty = mkProperty ("required", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline required(value: bool) : IReactProperty = mkProperty ("required", value)
         static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+
+    [<RequireQualifiedAccess>]
+    type table =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type tableBody =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type tableCaption =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type tableCell =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type tableFooter =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type tableHead =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type tableHeader =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+
+    [<RequireQualifiedAccess>]
+    type tableRow =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
 
 
     [<Erase>]
@@ -1090,32 +1585,36 @@ module RadixUI =
         static member inline activationMode = tabsTypes.activationMode ()
 
     [<RequireQualifiedAccess>]
+    type tabsContent =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+
+    [<RequireQualifiedAccess>]
     type tabsList =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop: IReactProperty = mkProperty ("loop", null)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
     [<RequireQualifiedAccess>]
     type tabsTrigger =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
 
     [<RequireQualifiedAccess>]
-    type tabsContent =
+    type textarea =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
 
     [<RequireQualifiedAccess>]
     type toggle =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultPressed: IReactProperty = mkProperty ("defaultPressed", null)
-        static member inline pressed: IReactProperty = mkProperty ("pressed", null)
+        static member inline defaultPressed(value: bool) : IReactProperty = mkProperty ("defaultPressed", value)
+        static member inline pressed(value: bool) : IReactProperty = mkProperty ("pressed", value)
 
         static member inline onPressedChange(value: bool -> unit) : IReactProperty =
             mkProperty ("onPressedChange", value)
 
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
 
 
     [<Erase>]
@@ -1138,39 +1637,28 @@ module RadixUI =
         static member inline onValueChange(value: string list -> unit) : IReactProperty =
             mkProperty ("onValueChange", value)
 
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-        static member inline rovingFocus: IReactProperty = mkProperty ("rovingFocus", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline rovingFocus(value: bool) : IReactProperty = mkProperty ("rovingFocus", value)
         static member inline orientation = orientationType ()
         static member inline dir = directionType ()
-        static member inline loop: IReactProperty = mkProperty ("loop", null)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
     [<RequireQualifiedAccess>]
     type toggleGroupItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
-        static member inline disabled: IReactProperty = mkProperty ("disabled", null)
-
-    [<RequireQualifiedAccess>]
-    type tooltipProvider =
-        static member inline delayDuration(value: int) : IReactProperty = mkProperty ("delayDuration", value)
-        static member inline skipDelayDuration(value: int) : IReactProperty = mkProperty ("skipDelayDuration", value)
-
-        static member inline disableHoverableContent: IReactProperty =
-            mkProperty ("disableHoverableContent", null)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
 
     [<RequireQualifiedAccess>]
     type tooltip =
-        static member inline defaultOpen: IReactProperty = mkProperty ("defaultOpen", null)
-        static member inline open': IReactProperty = mkProperty ("open", null)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
         static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
         static member inline delayDuration(value: int) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline delayDuration(value: float) : IReactProperty = mkProperty ("delayDuration", value)
 
-        static member inline disableHoverableContent: IReactProperty =
-            mkProperty ("disableHoverableContent", null)
-
-    [<RequireQualifiedAccess>]
-    type tooltipTrigger =
-        static member inline asChild: IReactProperty = mkProperty ("asChild", null)
+        static member inline disableHoverableContent(value: bool) : IReactProperty =
+            mkProperty ("disableHoverableContent", value)
 
     [<RequireQualifiedAccess>]
     type tooltipContent =
@@ -1183,12 +1671,14 @@ module RadixUI =
         static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
             mkProperty ("onPointerDownOutside", value)
 
-        static member inline forceMount: IReactProperty = mkProperty ("forceMount", null)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
         static member inline side = sideType ()
         static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline align = alignType ()
         static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions: IReactProperty = mkProperty ("avoidCollisions", null)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
         static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
             mkProperty ("collisionBoundary", value)
@@ -1202,5 +1692,20 @@ module RadixUI =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached: IReactProperty = mkProperty ("hideWhenDetached", null)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
+
+    [<RequireQualifiedAccess>]
+    type tooltipProvider =
+        static member inline delayDuration(value: int) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline delayDuration(value: float) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline skipDelayDuration(value: int) : IReactProperty = mkProperty ("skipDelayDuration", value)
+        static member inline skipDelayDuration(value: float) : IReactProperty = mkProperty ("skipDelayDuration", value)
+
+        static member inline disableHoverableContent(value: bool) : IReactProperty =
+            mkProperty ("disableHoverableContent", value)
+
+    [<RequireQualifiedAccess>]
+    type tooltipTrigger =
+        static member inline asChild: IReactProperty = mkProperty ("asChild", null)

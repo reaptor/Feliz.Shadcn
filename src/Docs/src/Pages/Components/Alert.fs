@@ -5,7 +5,7 @@ open Feliz.Shadcn
 open Docs.Pages.Components.Common
 
 let rec Alert () =
-    UI.PreviewAndCode (
+    UI.PreviewAndCode(
         nameof Alert,
         Shadcn.alert [
             prop.className "flex flex-col"

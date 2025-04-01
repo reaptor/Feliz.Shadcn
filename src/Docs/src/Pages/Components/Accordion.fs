@@ -5,7 +5,7 @@ open Feliz.Shadcn
 open Docs.Pages.Components.Common
 
 let rec Accordion () =
-    UI.PreviewAndCode (
+    UI.PreviewAndCode(
         nameof Accordion,
         Shadcn.accordion [
             accordion.type'.single
@@ -49,4 +49,4 @@ let rec Accordion () =
     ]
 ]
 """
-        )
+    )

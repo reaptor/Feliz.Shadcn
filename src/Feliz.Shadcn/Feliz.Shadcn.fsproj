@@ -20,7 +20,11 @@
     <Compile Include="Shadcn.fs" />
     <Compile Include="Props.fs" />
     <Compile Include="RadixUI.fs" />
-    <None Include="Generate.fsx" />
+    <Compile Include="Lucide.fs" />
+    <None Include="Common.fsx" />
+    <None Include="Lucide.fsx" />
+    <None Include="Radix.fsx" />
+    <None Include="Shadcn.fsx" />
     <Content Include="../../README.md" Pack="true" PackagePath="">
       <Link>README.md</Link>
     </Content>

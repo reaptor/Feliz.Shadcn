@@ -5,7 +5,7 @@ open Feliz.Shadcn
 open Docs.Pages.Components.Common
 
 let rec Carousel () =
-    UI.PreviewAndCode (
+    UI.PreviewAndCode(
         nameof Carousel,
         Shadcn.carousel [
             prop.className "w-full max-w-xs"
@@ -39,7 +39,7 @@ let rec Carousel () =
                 Shadcn.carouselNext []
             ]
         ],
-            """Shadcn.carousel [
+        """Shadcn.carousel [
     prop.className "w-full max-w-xs"
     prop.children [
         Shadcn.carouselContent [
@@ -70,4 +70,5 @@ let rec Carousel () =
         Shadcn.carouselPrevious []
         Shadcn.carouselNext []
     ]
-]""")
+]"""
+    )

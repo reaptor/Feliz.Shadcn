@@ -1,9 +1,8 @@
 {
-  "name": "examples",
+  "name": "docs",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "postinstall": "shadcn init --silent && shadcn add --all --silent",
     "start": "dotnet elmish-land server",
     "build": "dotnet elmish-land build"
   },

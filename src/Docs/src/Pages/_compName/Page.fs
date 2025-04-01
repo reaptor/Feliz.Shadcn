@@ -10,11 +10,9 @@ open Docs.Pages.Components.Common
 
 type Model = { Dummy: unit }
 
-type Msg =
-    | LayoutMsg of Layout.Msg
+type Msg = LayoutMsg of Layout.Msg
 
-let init () =
-    { Dummy = () }, Command.none
+let init () = { Dummy = () }, Command.none
 
 let update (msg: Msg) (model: Model) =
     match msg with
@@ -32,14 +30,11 @@ let group (name: string) (comp: Component) =
                     Html.a [
                         prop.className "flex gap-2 items-center font-semibold"
                         prop.href $"https://ui.shadcn.com/docs/components/%s{name}"
-                        prop.children [
-                            Html.text "Original Docs"
-                            UI.LinkIcon ()
-                        ]
+                        prop.children [ Html.text "Original Docs"; Lucide.SquareArrowOutUpRight [ svg.size 14 ] ]
                     ]
                 ]
             ]
-            comp.Constructor ()
+            comp.Constructor()
         ]
     ]
 
@@ -52,10 +47,7 @@ let AllDemos (name: string, dispatch) =
                 Html.div [
                     prop.className "container flex h-16 items-center px-4 md:px-6"
                     prop.children [
-                        Html.span [
-                            prop.className "text-lg font-bold"
-                            prop.text "Feliz.Shadcn"
-                        ]
+                        Html.span [ prop.className "text-lg font-bold"; prop.text "Feliz.Shadcn" ]
                         Html.span [
                             prop.className "text-md ml-1"
                             prop.text "- shadncn/ui components for F#/Fable"
@@ -94,19 +86,20 @@ let AllDemos (name: string, dispatch) =
                             ]
                         ]
                     ]
-                    Shadcn.sidebarInset [
-                        prop.className "mt-16"
-                        prop.children [
-                            group name (getComponent name)
-                        ]
-                    ]
+                    Shadcn.sidebarInset [ prop.className "mt-16"; prop.children [ group name (getComponent name) ] ]
                 ]
             ]
         ]
     ]
 
-let view name (model: Model) (dispatch: Msg -> unit) =
-    group name (getComponent name)
+let view name (model: Model) (dispatch: Msg -> unit) = group name (getComponent name)
 
 let page (_shared: SharedModel) (route: CompNameRoute) =
-    Page.from init update (view route.CompName) { Layout.CurrentComponentName = route.CompName } LayoutMsg
+    Page.from
+        init
+        update
+        (view route.CompName)
+        {
+            Layout.CurrentComponentName = route.CompName
+        }
+        LayoutMsg

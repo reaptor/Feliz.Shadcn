@@ -5,7 +5,7 @@ open Feliz.Shadcn
 open Docs.Pages.Components.Common
 
 let rec AlertDialog () =
-    UI.PreviewAndCode (
+    UI.PreviewAndCode(
         nameof AlertDialog,
         Shadcn.alertDialog [
             Shadcn.alertDialogTrigger [
@@ -21,7 +21,7 @@ let rec AlertDialog () =
                 Shadcn.alertDialogFooter [ Shadcn.alertDialogCancel "Cancel"; Shadcn.alertDialogAction "Continue" ]
             ]
         ],
-            """Shadcn.alertDialog [
+        """Shadcn.alertDialog [
     Shadcn.alertDialogTrigger [
         alertDialogTrigger.asChild
         prop.children [
@@ -42,4 +42,5 @@ let rec AlertDialog () =
             Shadcn.alertDialogAction "Continue"
         ]
     ]
-]""")
+]"""
+    )

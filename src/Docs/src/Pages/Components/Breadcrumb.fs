@@ -5,7 +5,7 @@ open Feliz.Shadcn
 open Docs.Pages.Components.Common
 
 let rec Breadcrumb () =
-    UI.PreviewAndCode (
+    UI.PreviewAndCode(
         nameof Breadcrumb,
         Shadcn.breadcrumb [
             Shadcn.breadcrumbList [
@@ -35,16 +35,14 @@ let rec Breadcrumb () =
 
                 Shadcn.breadcrumbSeparator []
 
-                Shadcn.breadcrumbItem [
-                    Shadcn.breadcrumbLink [ prop.text "Components" ]
-                ]
+                Shadcn.breadcrumbItem [ Shadcn.breadcrumbLink [ prop.text "Components" ] ]
 
                 Shadcn.breadcrumbSeparator []
 
                 Shadcn.breadcrumbItem [ Shadcn.breadcrumbPage [ prop.text "Breadcrumb" ] ]
             ]
         ],
-            """Shadcn.breadcrumb [
+        """Shadcn.breadcrumb [
     Shadcn.breadcrumbList [
         Shadcn.breadcrumbItem [
             Shadcn.breadcrumbLink [ prop.href "/"; prop.text "Home" ]
@@ -82,4 +80,5 @@ let rec Breadcrumb () =
 
         Shadcn.breadcrumbItem [ Shadcn.breadcrumbPage [ prop.text "Breadcrumb" ] ]
     ]
-]""")
+]"""
+    )

@@ -5,9 +5,10 @@ open Feliz.Shadcn
 open Docs.Pages.Components.Common
 
 let rec Button () =
-    UI.PreviewAndCode (
+    UI.PreviewAndCode(
         nameof Button,
         Shadcn.button [ prop.text "Button" ],
-            """Shadcn.button [
+        """Shadcn.button [
     prop.text "Button" ]
-""")
+"""
+    )

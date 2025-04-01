@@ -5,7 +5,7 @@ open Feliz.Shadcn
 open Docs.Pages.Components.Common
 
 let rec Card () =
-    UI.PreviewAndCode (
+    UI.PreviewAndCode(
         nameof Card,
         Shadcn.card [
             prop.className "w-[350px]"
@@ -76,7 +76,7 @@ let rec Card () =
                 ]
             ]
         ],
-            """Shadcn.card [
+        """Shadcn.card [
     prop.className "w-[350px]"
     prop.children [
         Shadcn.cardHeader [
@@ -144,4 +144,5 @@ let rec Card () =
             ]
         ]
     ]
-]""")
+]"""
+    )

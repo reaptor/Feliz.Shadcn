@@ -7,21 +7,35 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="src/Shared.fs"/>
+        <Compile Include="src/Shared.fs" />
         <Compile Include="src\Pages\Components\Common.fs" />
-        <Compile Include="src\Pages\Components\AccordionDemo.fs" />
-        <Compile Include="src\Pages\Components\AlertDemo.fs" />
-        <Compile Include="src\Pages\Components\AlertDialogDemo.fs" />
-        <Compile Include="src\Pages\Components\AspectRatioDemo.fs" />
-        <Compile Include="src\Pages\Components\BadgeDemo.fs" />
-        <Compile Include="src\Pages\Components\BreadcrumbDemo.fs" />
-        <Compile Include="src\Pages\Components\ButtonDemo.fs" />
-        <Compile Include="src\Pages\Components\CalendarDemo.fs" />
-        <Compile Include="src\Pages\Components\CardDemo.fs" />
-        <Compile Include="src\Pages\Components\CarouselDemo.fs" />
-        <Compile Include="src/Pages/NotFound.fs"/>
-        <Compile Include="src/Pages/Layout.fs"/>
-        <Compile Include="src/Pages/Page.fs"/>
+        <Compile Include="src\Pages\Components\Accordion.fs" />
+        <Compile Include="src\Pages\Components\Alert.fs" />
+        <Compile Include="src\Pages\Components\AlertDialog.fs" />
+        <Compile Include="src\Pages\Components\AspectRatio.fs" />
+        <Compile Include="src\Pages\Components\Badge.fs" />
+        <Compile Include="src\Pages\Components\Breadcrumb.fs" />
+        <Compile Include="src\Pages\Components\Button.fs" />
+        <Compile Include="src\Pages\Components\Calendar.fs" />
+        <Compile Include="src\Pages\Components\Card.fs" />
+        <Compile Include="src\Pages\Components\Carousel.fs" />
+        <Compile Include="src\Pages\Components\Checkbox.fs" />
+        <Compile Include="src\Pages\Components\Collapsible.fs" />
+        <Compile Include="src\Pages\Components\Combobox.fs" />
+        <Compile Include="src\Pages\Components\Command.fs" />
+        <Compile Include="src\Pages\Components\ContextMenu.fs" />
+        <Compile Include="src\Pages\Components\DatePicker.fs" />
+        <Compile Include="src\Pages\Components\Dialog.fs" />
+        <Compile Include="src\Pages\Components\Drawer.fs" />
+        <Compile Include="src\Pages\Components\DropdownMenu.fs" />
+        <Compile Include="src\Pages\Components\HoverCard.fs" />
+        <Compile Include="src\Pages\Components\Input.fs" />
+        <Compile Include="src\Pages\Components\InputOTP.fs" />
+        <Compile Include="src\Pages\Components\Label.fs" />
+        <Compile Include="src\Pages\Components\Menubar.fs" />
+        <Compile Include="src/Pages/NotFound.fs" />
+        <Compile Include="src/Pages/Layout.fs" />
+        <Compile Include="src/Pages/Page.fs" />
         <Compile Include="src\Pages\_compName\Page.fs" />
     </ItemGroup>
 
@@ -29,4 +43,5 @@
       <ProjectReference Include="..\Feliz.Shadcn\Feliz.Shadcn.fsproj" />
       <ProjectReference Include=".elmish-land/Base/ElmishLand.Docs.Base.fsproj" />
     </ItemGroup>
+
 </Project>

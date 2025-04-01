@@ -5,10 +5,11 @@ open Feliz.Shadcn
 open Docs.Pages.Components.Common
 
 let rec Badge () =
-    UI.PreviewAndCode (
+    UI.PreviewAndCode(
         nameof Badge,
         Shadcn.badge [ prop.text "Badge" ],
-            """Shadcn.badge [
+        """Shadcn.badge [
     prop.text "Badge"
 ]
-""")
+"""
+    )
