@@ -10,106 +10,55 @@ let rec DropdownMenu () =
         Shadcn.dropdownMenu [
             Shadcn.dropdownMenuTrigger [
                 dropdownMenuTrigger.asChild
-                prop.children [
-                    Shadcn.button [
-                        button.variant.outline
-                        prop.text "Open"
-                    ]
-                ]
+                prop.children [ Shadcn.button [ button.variant.outline; prop.text "Open" ] ]
             ]
             Shadcn.dropdownMenuContent [
                 prop.className "w-56"
                 prop.children [
-                    Shadcn.dropdownMenuLabel [
-                        prop.text "My Account"
-                    ]
+                    Shadcn.dropdownMenuLabel [ prop.text "My Account" ]
                     Shadcn.dropdownMenuSeparator []
                     Shadcn.dropdownMenuGroup [
                         Shadcn.dropdownMenuItem [
-                            prop.children [
-                                Html.text "Profile"
-                                Shadcn.dropdownMenuShortcut [
-                                    prop.text "⇧⌘P"
-                                ]
-                            ]
+                            prop.children [ Html.text "Profile"; Shadcn.dropdownMenuShortcut [ prop.text "⇧⌘P" ] ]
                         ]
                         Shadcn.dropdownMenuItem [
-                            prop.children [
-                                Html.text "Billing"
-                                Shadcn.dropdownMenuShortcut [
-                                    prop.text "⌘B"
-                                ]
-                            ]
+                            prop.children [ Html.text "Billing"; Shadcn.dropdownMenuShortcut [ prop.text "⌘B" ] ]
                         ]
                         Shadcn.dropdownMenuItem [
-                            prop.children [
-                                Html.text "Settings"
-                                Shadcn.dropdownMenuShortcut [
-                                    prop.text "⌘S"
-                                ]
-                            ]
+                            prop.children [ Html.text "Settings"; Shadcn.dropdownMenuShortcut [ prop.text "⌘S" ] ]
                         ]
                         Shadcn.dropdownMenuItem [
                             prop.children [
                                 Html.text "Keyboard shortcuts"
-                                Shadcn.dropdownMenuShortcut [
-                                    prop.text "⌘K"
-                                ]
+                                Shadcn.dropdownMenuShortcut [ prop.text "⌘K" ]
                             ]
                         ]
                     ]
                     Shadcn.dropdownMenuSeparator []
                     Shadcn.dropdownMenuGroup [
-                        Shadcn.dropdownMenuItem [
-                            prop.text "Team"
-                        ]
+                        Shadcn.dropdownMenuItem [ prop.text "Team" ]
                         Shadcn.dropdownMenuSub [
-                            Shadcn.dropdownMenuSubTrigger [
-                                prop.text "Invite users"
-                            ]
+                            Shadcn.dropdownMenuSubTrigger [ prop.text "Invite users" ]
                             Shadcn.dropdownMenuPortal [
                                 Shadcn.dropdownMenuSubContent [
-                                    Shadcn.dropdownMenuItem [
-                                        prop.text "Email"
-                                    ]
-                                    Shadcn.dropdownMenuItem [
-                                        prop.text "Message"
-                                    ]
+                                    Shadcn.dropdownMenuItem [ prop.text "Email" ]
+                                    Shadcn.dropdownMenuItem [ prop.text "Message" ]
                                     Shadcn.dropdownMenuSeparator []
-                                    Shadcn.dropdownMenuItem [
-                                        prop.text "More..."
-                                    ]
+                                    Shadcn.dropdownMenuItem [ prop.text "More..." ]
                                 ]
                             ]
                         ]
                         Shadcn.dropdownMenuItem [
-                            prop.children [
-                                Html.text "New Team"
-                                Shadcn.dropdownMenuShortcut [
-                                    prop.text "⌘+T"
-                                ]
-                            ]
+                            prop.children [ Html.text "New Team"; Shadcn.dropdownMenuShortcut [ prop.text "⌘+T" ] ]
                         ]
                     ]
                     Shadcn.dropdownMenuSeparator []
-                    Shadcn.dropdownMenuItem [
-                        prop.text "GitHub"
-                    ]
-                    Shadcn.dropdownMenuItem [
-                        prop.text "Support"
-                    ]
-                    Shadcn.dropdownMenuItem [
-                        prop.disabled true
-                        prop.text "API"
-                    ]
+                    Shadcn.dropdownMenuItem [ prop.text "GitHub" ]
+                    Shadcn.dropdownMenuItem [ prop.text "Support" ]
+                    Shadcn.dropdownMenuItem [ prop.disabled true; prop.text "API" ]
                     Shadcn.dropdownMenuSeparator []
                     Shadcn.dropdownMenuItem [
-                        prop.children [
-                            Html.text "Log out"
-                            Shadcn.dropdownMenuShortcut [
-                                prop.text "⇧⌘Q"
-                            ]
-                        ]
+                        prop.children [ Html.text "Log out"; Shadcn.dropdownMenuShortcut [ prop.text "⇧⌘Q" ] ]
                     ]
                 ]
             ]

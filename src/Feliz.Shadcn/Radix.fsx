@@ -103,16 +103,17 @@ open System.ComponentModel
 
 [<EditorBrowsable(EditorBrowsableState.Never)>]
 [<AutoOpen>]
-module RadixUI =
+module Properties =
     open Browser.Types
     open Fable.Core
     open Fable.Core.JsInterop
     open Feliz
 
-    let inline mkProperty (name: string, value: obj): IReactProperty = unbox (name, value)
+    [<Erase>]
+    let inline private mkProperty (name: string, value: obj): IReactProperty = unbox (name, value)
 
     [<Erase>]
-    let inline internal collisionPaddingValue (top: int option) (right: int option) (bottom: int option) (left: int option) =
+    let inline private collisionPaddingValue (top: int option) (right: int option) (bottom: int option) (left: int option) =
         createObj [
             "top" ==> Option.defaultValue 0 top
             "right" ==> Option.defaultValue 0 right
@@ -121,19 +122,19 @@ module RadixUI =
         ]
 
     [<Erase>]
-    let inline internal directionType () = {|
+    let inline private directionType () = {|
         ltr = mkProperty ("dir", "ltr")
         rtl = mkProperty ("dir", "rtl")
     |}
 
     [<Erase>]
-    let inline internal orientationType () = {|
+    let inline private orientationType () = {|
         horizontal = mkProperty ("orientation", "horizontal")
         vertical = mkProperty ("orientation", "vertical")
     |}
 
     [<Erase>]
-    let inline internal sideType () = {|
+    let inline private sideType () = {|
         top = mkProperty ("side", "top")
         right = mkProperty ("side", "right")
         bottom = mkProperty ("side", "bottom")
@@ -141,20 +142,20 @@ module RadixUI =
     |}
 
     [<Erase>]
-    let inline internal alignType () = {|
+    let inline private alignType () = {|
         center = mkProperty ("align", "center")
         start = mkProperty ("align", "start")
         end' = mkProperty ("align", "end")
     |}
 
     [<Erase>]
-    let inline internal stickyType () = {|
+    let inline private stickyType () = {|
         always = mkProperty ("sticky", "always")
         partial = mkProperty ("sticky", "partial")
     |}
 
     [<Erase>]
-    let inline internal checkedType () = {|
+    let inline private checkedType () = {|
         boolean = mkProperty ("checkedState", "boolean")
         indeterminate = mkProperty ("checkedState", "indeterminate")
     |}
@@ -206,7 +207,7 @@ for path in componentPaths do
             radixUi.WriteLine
                 """
     [<Erase>]
-    module internal accordionTypes =
+    module private accordionTypes =
         let inline type' () = {|
             single = mkProperty ("type", "single")
             multiple = mkProperty ("type", "multiple")
@@ -216,7 +217,7 @@ for path in componentPaths do
             radixUi.WriteLine
                 """
     [<Erase>]
-    module internal scrollAreaTypes =
+    module private scrollAreaTypes =
         let inline type' () = {|
             auto = mkProperty ("type", "auto")
             always = mkProperty ("type", "always")
@@ -228,7 +229,7 @@ for path in componentPaths do
             radixUi.WriteLine
                 """
     [<Erase>]
-    module internal tabsTypes =
+    module private tabsTypes =
         let inline activationMode () = {|
             automatic = mkProperty ("activationMode", "automatic")
             manual = mkProperty ("activationMode", "manual")
@@ -238,7 +239,7 @@ for path in componentPaths do
             radixUi.WriteLine
                 """
     [<Erase>]
-    module internal toggleGroupTypes =
+    module private toggleGroupTypes =
         let inline type' () = {|
             single = mkProperty ("activationMode", "single")
             multiple = mkProperty ("activationMode", "multiple")
@@ -248,7 +249,7 @@ for path in componentPaths do
             radixUi.WriteLine
                 """
     [<Erase>]
-    module internal selectContentTypes =
+    module private selectContentTypes =
         let inline position () = {|
             itemAligned = mkProperty ("position", "item-aligned")
             popper = mkProperty ("position", "popper")

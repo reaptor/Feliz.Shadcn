@@ -30,7 +30,7 @@ let group (name: string) (comp: Component) =
                     Html.a [
                         prop.className "flex gap-2 items-center font-semibold"
                         prop.href $"https://ui.shadcn.com/docs/components/%s{name}"
-                        prop.children [ Html.text "Original Docs"; Lucide.SquareArrowOutUpRight [ svg.size 14 ] ]
+                        prop.children [ Html.text "Shadcn/ui Docs"; Lucide.SquareArrowOutUpRight [ svg.size 14 ] ]
                     ]
                 ]
             ]
@@ -72,8 +72,8 @@ let AllDemos (name: string, dispatch) =
                                                     prop.key name'
                                                     prop.children [
                                                         Shadcn.sidebarMenuButton [
-                                                            mkProperty ("asChild", null)
-                                                            mkProperty ("isActive", name' = name)
+                                                            sidebarMenuButton.asChild
+                                                            prop.custom ("isActive", (name' = name))
                                                             prop.onClick (fun _ -> dispatch (ChangeComponent name'))
                                                             prop.text title
                                                             prop.className "cursor-pointer"

@@ -12,11 +12,7 @@ module Interop =
 
     [<AllowNullLiteral>]
     [<Global>]
-    type HljsOptions
-        [<ParamObject; Emit("$0")>]
-        (
-            language: string
-        ) =
+    type HljsOptions [<ParamObject; Emit("$0")>] (language: string) =
         member val language = language
 
     [<Erase>]
@@ -34,11 +30,7 @@ module Interop =
     [<Global>]
     type MarkedOptions
         [<ParamObject; Emit("$0")>]
-        (
-            emptyLangClass: string,
-            langPrefix: string,
-            highlight: string -> string -> string
-        ) =
+        (emptyLangClass: string, langPrefix: string, highlight: string -> string -> string) =
         member val emptyLangClass = emptyLangClass
         member val langPrefix = langPrefix
         member val highlight = highlight
@@ -58,9 +50,13 @@ module Interop =
                     langPrefix = "hljs language-",
                     highlight =
                         (fun code lang ->
-                            let language = if (hljs.getLanguage(lang)).IsSome then lang else "plaintext"
-                            (hljs.highlight code (HljsOptions lang)).value
-                        )
+                            let language =
+                                if (hljs.getLanguage (lang)).IsSome then
+                                    lang
+                                else
+                                    "plaintext"
+
+                            (hljs.highlight code (HljsOptions lang)).value)
                 )
             )
         )
@@ -115,7 +111,9 @@ open Feliz.Shadcn
 
 %s{code}
                                                 """
-                                            prop.dangerouslySetInnerHTML (hljs.highlight code (HljsOptions "fsharp")).value
+
+                                            prop.dangerouslySetInnerHTML
+                                                (hljs.highlight code (HljsOptions "fsharp")).value
                                         ]
                                     ]
                                 ]

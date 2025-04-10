@@ -159,6 +159,92 @@ let components =
             Description = "A visually persistent menu common in desktop applications."
             Constructor = Menubar.Menubar
         }
+        "navigation-menu",
+        {
+            Title = "Navigation Menu"
+            Description = "A collection of links for navigating websites."
+            Constructor = NavigationMenu.NavigationMenu
+        }
+        "pagination",
+        {
+            Title = "Pagination"
+            Description = "Pagination with page navigation, next and previous links."
+            Constructor = Pagination.Pagination
+        }
+        "popover",
+        {
+            Title = "Popover"
+            Description = "Displays rich content in a portal, triggered by a button."
+            Constructor = Popover.Popover
+        }
+        "progress",
+        {
+            Title = "Progress"
+            Description = "Displays an indicator showing the completion progress of a task."
+            Constructor = Progress.Progress
+        }
+        "radio-group",
+        {
+            Title = "Radio Group"
+            Description =
+                "A set of checkable buttons—known as radio buttons—where no more than one can be checked at a time."
+            Constructor = RadioGroup.RadioGroup
+        }
+        "resizable",
+        {
+            Title = "Resizable"
+            Description = "Accessible resizable panels with keyboard support."
+            Constructor = Resizable.Resizable
+        }
+        "scroll-area",
+        {
+            Title = "Scroll Area"
+            Description = "Augments native scroll functionality for custom, cross-browser styling."
+            Constructor = ScrollArea.ScrollArea
+        }
+        "select",
+        {
+            Title = "Select"
+            Description = "Displays a list of options for the user to pick from—triggered by a button."
+            Constructor = Select.Select
+        }
+        "separator",
+        {
+            Title = "Separator"
+            Description = "Visually or semantically separates content."
+            Constructor = Separator.Separator
+        }
+        "sheet",
+        {
+            Title = "Sheet"
+            Description =
+                "Extends the Dialog component to display content that complements the main content of the screen."
+            Constructor = Sheet.Sheet
+        }
+        "sidebar",
+        {
+            Title = "Sidebar"
+            Description = "A responsive application sidebar with support for vertical and inline layouts."
+            Constructor = Sidebar.Sidebar
+        }
+        "skeleton",
+        {
+            Title = "Skeleton"
+            Description = "Used to show a placeholder while content is loading."
+            Constructor = Skeleton.Skeleton
+        }
+        "slider",
+        {
+            Title = "Slider"
+            Description = "An input slider that allows selecting a value from a range."
+            Constructor = Slider.Slider
+        }
+        "sonner",
+        {
+            Title = "Sonner"
+            Description = "Beautifully designed toast component built using Sonner."
+            Constructor = Sonner.Sonner
+        }
     ]
 
 let getComponent name =
@@ -257,8 +343,8 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                                                 prop.key "Getting Started"
                                                 prop.children [
                                                     Shadcn.sidebarMenuButton [
-                                                        mkProperty ("asChild", null)
-                                                        mkProperty (
+                                                        sidebarMenuButton.asChild
+                                                        prop.custom (
                                                             "isActive",
                                                             System.String.IsNullOrWhiteSpace model.CurrentComponentName
                                                         )
@@ -280,8 +366,8 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                                                     prop.key name'
                                                     prop.children [
                                                         Shadcn.sidebarMenuButton [
-                                                            mkProperty ("asChild", null)
-                                                            mkProperty ("isActive", name' = model.CurrentComponentName)
+                                                            sidebarMenuButton.asChild
+                                                            prop.custom ("isActive", (name' = model.CurrentComponentName))
                                                             prop.onClick (fun _ -> dispatch (ChangeComponent name'))
                                                             prop.text title
                                                             prop.className "cursor-pointer"

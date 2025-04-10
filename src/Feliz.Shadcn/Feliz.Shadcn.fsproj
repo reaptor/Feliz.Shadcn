@@ -18,9 +18,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Shadcn.fs" />
-    <Compile Include="Props.fs" />
     <Compile Include="RadixUI.fs" />
     <Compile Include="Lucide.fs" />
+    <Compile Include="Sonner.fs" />
+    <Compile Include="Props.fs" />
     <None Include="Common.fsx" />
     <None Include="Lucide.fsx" />
     <None Include="Radix.fsx" />
@@ -34,10 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="*.fsproj; *.fs; *.js;" Exclude="**\*.fs.js" PackagePath="fable\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Fable.Core" Version="3.7.1" />
     <PackageReference Include="Feliz" Version="2.8.0" />
   </ItemGroup>
 

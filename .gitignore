@@ -8,3 +8,4 @@ src/Docs/.elmish-land
 *.DotSettings.user
 nuget
 **/*.fable-temp.csproj
+.elmish-land

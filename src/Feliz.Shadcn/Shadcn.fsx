@@ -19,21 +19,21 @@ elements.WriteLine(
 
 namespace Feliz.Shadcn
 
-[<AutoOpen>]
-module Elements =
-    open Fable.Core
-    open Fable.Core.JsInterop
-    open Feliz
+open Fable.Core
+open Fable.Core.JsInterop
+open Feliz
 
-    [<Erase>]
-    type Shadcn ="""
+[<Erase>]
+type Shadcn ="""
 )
 
 for path in componentPaths do
+    let filename = Path.GetFileNameWithoutExtension(path)
+
     let contents = File.ReadAllText(path)
 
     if contents.Contains("variants: {") then
-        printfn $"%s{path} contains variants. Add them manually to Props.fs"
+        printfn $"%s{filename} contains variants. Add them manually to Props.fs"
 
     let exports =
         Regex.Matches(contents, @"export\s*{([^}]+)}")
@@ -42,40 +42,25 @@ for path in componentPaths do
         |> Seq.choose (fun x -> if x.Contains " " || x = "" then None else Some x)
         |> List.ofSeq
 
-    let filename = Path.GetFileNameWithoutExtension(path)
+    printfn "%A" exports
+    printfn ""
 
-    let elementName =
-        exports |> List.skipWhile (fun x -> Char.IsLower x[0]) |> List.head
+    if exports.Length > 0 then
+        for name in exports do
+            if name.StartsWith("use") || name.EndsWith "Variants" then
+                ()
+            else
+                elements.WriteLine(
+                    $"""    static member inline %s{camelCase name} (props: list<IReactProperty>) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj !!props)"""
+                )
 
-    elements.WriteLine(
-        $"""        static member inline %s{camelCase elementName} (props: list<IReactProperty>) = Interop.reactApi.createElement(import "%s{elementName}" "@/components/ui/%s{filename}", createObj !!props)"""
-    )
+                elements.WriteLine(
+                    $"""    static member inline %s{camelCase name} (children: #seq<ReactElement>) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj [ "children" ==> Interop.reactApi.Children.toArray (Array.ofSeq children) ])"""
+                )
 
-    elements.WriteLine(
-        $"""        static member inline %s{camelCase elementName} (children: #seq<ReactElement>) = Interop.reactApi.createElement(import "%s{elementName}" "@/components/ui/%s{filename}", createObj [ "children" ==> Interop.reactApi.Children.toArray (Array.ofSeq children) ])"""
-    )
-
-    let propList =
-        exports
-        |> List.takeWhile (fun x -> x.StartsWith elementName)
-        |> List.filter (fun x -> x <> elementName)
-
-    if propList.Length > 0 then
-        for name in propList do
-            elements.WriteLine(
-                $"""        static member inline %s{camelCase name} (props: list<IReactProperty>) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj !!props)"""
-            )
-            |> ignore
-
-            elements.WriteLine(
-                $"""        static member inline %s{camelCase name} (children: #seq<ReactElement>) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj [ "children" ==> Interop.reactApi.Children.toArray (Array.ofSeq children) ])"""
-            )
-            |> ignore
-
-            elements.WriteLine(
-                $"""        static member inline %s{camelCase name} (text: string) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj !![ prop.text text ])"""
-            )
-            |> ignore
+                elements.WriteLine(
+                    $"""    static member inline %s{camelCase name} (text: string) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj !![ prop.text text ])"""
+                )
 
     elements.WriteLine("") |> ignore
     elements.Flush()
