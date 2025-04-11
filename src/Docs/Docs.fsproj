@@ -37,6 +37,7 @@
         <Compile Include="src/Pages/Layout.fs" />
         <Compile Include="src/Pages/Page.fs" />
         <Compile Include="src\Pages\_compName\Page.fs" />
+        <Compile Include="src/Pages/ApiReference/Page.fs" />
     </ItemGroup>
 
     <ItemGroup>

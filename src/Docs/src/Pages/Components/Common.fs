@@ -12,11 +12,7 @@ module Interop =
 
     [<AllowNullLiteral>]
     [<Global>]
-    type HljsOptions
-        [<ParamObject; Emit("$0")>]
-        (
-            language: string
-        ) =
+    type HljsOptions [<ParamObject; Emit("$0")>] (language: string) =
         member val language = language
 
     [<Erase>]
@@ -34,11 +30,7 @@ module Interop =
     [<Global>]
     type MarkedOptions
         [<ParamObject; Emit("$0")>]
-        (
-            emptyLangClass: string,
-            langPrefix: string,
-            highlight: string -> string -> string
-        ) =
+        (emptyLangClass: string, langPrefix: string, highlight: string -> string -> string) =
         member val emptyLangClass = emptyLangClass
         member val langPrefix = langPrefix
         member val highlight = highlight
@@ -58,9 +50,13 @@ module Interop =
                     langPrefix = "hljs language-",
                     highlight =
                         (fun code lang ->
-                            let language = if (hljs.getLanguage(lang)).IsSome then lang else "plaintext"
-                            (hljs.highlight code (HljsOptions lang)).value
-                        )
+                            let language =
+                                if (hljs.getLanguage (lang)).IsSome then
+                                    lang
+                                else
+                                    "plaintext"
+
+                            (hljs.highlight code (HljsOptions lang)).value)
                 )
             )
         )
@@ -70,10 +66,13 @@ module Interop =
 [<Erase>]
 type UI =
     static member Header1(s: string) =
-        Html.h1 [ prop.className "text-3xl font-bold"; prop.text s ]
+        Html.h1 [ prop.className "text-4xl font-bold"; prop.text s ]
 
     static member Header2(s: string) =
-        Html.h3 [ prop.className "text-md font-semibold"; prop.text s ]
+        Html.h2 [ prop.className "text-2xl font-bold"; prop.text s ]
+
+    static member Header3(s: string) =
+        Html.h3 [ prop.className "text-xl font-bold"; prop.text s ]
 
     static member Markdown(s: string) =
         Html.div [ prop.className "markdown"; prop.dangerouslySetInnerHTML (parseMarkdown s) ]
@@ -98,7 +97,7 @@ type UI =
                         ]
                         Shadcn.tabsContent [
                             prop.value tabPreview
-                            prop.className "max-w-2xl border rounded p-30 flex justify-center items-center min-h-60"
+                            prop.className "max-w-4xl border rounded p-30 flex justify-center items-center min-h-60"
                             prop.children [ preview ]
                         ]
                         Shadcn.tabsContent [
@@ -115,7 +114,9 @@ open Feliz.Shadcn
 
 %s{code}
                                                 """
-                                            prop.dangerouslySetInnerHTML (hljs.highlight code (HljsOptions "fsharp")).value
+
+                                            prop.dangerouslySetInnerHTML
+                                                (hljs.highlight code (HljsOptions "fsharp")).value
                                         ]
                                     ]
                                 ]

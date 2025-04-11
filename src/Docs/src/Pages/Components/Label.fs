@@ -11,13 +11,8 @@ let rec Label () =
             Html.div [
                 prop.className "flex items-center space-x-2"
                 prop.children [
-                    Shadcn.checkbox [
-                        prop.id "terms"
-                    ]
-                    Shadcn.label [
-                        prop.htmlFor "terms"
-                        prop.text "Accept terms and conditions"
-                    ]
+                    Shadcn.checkbox [ prop.id "terms" ]
+                    Shadcn.label [ prop.htmlFor "terms"; prop.text "Accept terms and conditions" ]
                 ]
             ]
         ],

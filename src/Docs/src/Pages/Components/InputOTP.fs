@@ -11,27 +11,15 @@ let rec InputOTP () =
             prop.maxLength 6
             prop.children [
                 Shadcn.inputOTPGroup [
-                    Shadcn.inputOTPSlot [
-                        prop.custom ("index", 0)
-                    ]
-                    Shadcn.inputOTPSlot [
-                        prop.custom ("index", 1)
-                    ]
-                    Shadcn.inputOTPSlot [
-                        prop.custom ("index", 2)
-                    ]
+                    Shadcn.inputOTPSlot [ prop.custom ("index", 0) ]
+                    Shadcn.inputOTPSlot [ prop.custom ("index", 1) ]
+                    Shadcn.inputOTPSlot [ prop.custom ("index", 2) ]
                 ]
                 Shadcn.inputOTPSeparator []
                 Shadcn.inputOTPGroup [
-                    Shadcn.inputOTPSlot [
-                        prop.custom ("index", 3)
-                    ]
-                    Shadcn.inputOTPSlot [
-                        prop.custom ("index", 4)
-                    ]
-                    Shadcn.inputOTPSlot [
-                        prop.custom ("index", 5)
-                    ]
+                    Shadcn.inputOTPSlot [ prop.custom ("index", 3) ]
+                    Shadcn.inputOTPSlot [ prop.custom ("index", 4) ]
+                    Shadcn.inputOTPSlot [ prop.custom ("index", 5) ]
                 ]
             ]
         ],

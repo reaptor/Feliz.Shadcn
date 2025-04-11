@@ -231,4 +231,4 @@ to start your application.
     ]
 
 let page (_shared: SharedModel) (_route: HomeRoute) =
-    Page.from init update view { Layout.CurrentComponentName = "" } LayoutMsg
+    Page.from init update view { Layout.CurrentPage = "" } LayoutMsg

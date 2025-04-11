@@ -3,6 +3,7 @@
 
 open System
 open System.IO
+open System.Text
 open System.Text.RegularExpressions
 open Common
 
@@ -28,6 +29,14 @@ module Elements =
     [<Erase>]
     type Shadcn ="""
 )
+
+let docElems = StringBuilder()
+
+docElems.AppendLine(
+    """// apiReferences elements begin
+let apiReferencesElements: Map<string, string list> = Map ["""
+)
+|> ignore
 
 for path in componentPaths do
     let contents = File.ReadAllText(path)
@@ -55,6 +64,11 @@ for path in componentPaths do
         $"""        static member inline %s{camelCase elementName} (children: #seq<ReactElement>) = Interop.reactApi.createElement(import "%s{elementName}" "@/components/ui/%s{filename}", createObj [ "children" ==> Interop.reactApi.Children.toArray (Array.ofSeq children) ])"""
     )
 
+    docElems.AppendLine(
+        $"    \"%s{camelCase elementName}\", [ \"(children: #seq<ReactElement>): ReactElement\"; \"(props: list<IReactProperty>): ReactElement\" ]"
+    )
+    |> ignore
+
     let propList =
         exports
         |> List.takeWhile (fun x -> x.StartsWith elementName)
@@ -75,9 +89,31 @@ for path in componentPaths do
             elements.WriteLine(
                 $"""        static member inline %s{camelCase name} (text: string) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj !![ prop.text text ])"""
             )
+
+            docElems.AppendLine(
+                $"    \"%s{camelCase name}\", [ \"(children: #seq<ReactElement>): ReactElement\"; \"(props: list<IReactProperty>): ReactElement\"; \"(text: string): ReactElement\" ]"
+            )
             |> ignore
 
     elements.WriteLine("") |> ignore
     elements.Flush()
 
 elements.Close()
+
+docElems.AppendLine(
+    """]
+// apiReferences elements end"""
+)
+|> ignore
+
+let docsFile = __SOURCE_DIRECTORY__ + @"/../Docs/src/Pages/_compName/Page.fs"
+
+File.ReadAllText(docsFile)
+|> fun s ->
+    Regex.Replace(
+        s,
+        "// apiReferences elements begin(.*)// apiReferences elements end",
+        docElems.ToString(),
+        RegexOptions.Singleline
+    )
+|> fun s -> File.WriteAllText(docsFile, s)
