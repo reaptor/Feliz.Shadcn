@@ -3,6 +3,7 @@
 
 open System
 open System.IO
+open System.Text
 open System.Text.RegularExpressions
 open Common
 
@@ -27,6 +28,14 @@ open Feliz
 type Shadcn ="""
 )
 
+let docElems = StringBuilder()
+
+docElems.AppendLine(
+    """// apiReferences elements begin
+let apiReferencesElements: Map<string, string list> = Map ["""
+)
+|> ignore
+
 for path in componentPaths do
     let filename = Path.GetFileNameWithoutExtension(path)
 
@@ -41,9 +50,6 @@ for path in componentPaths do
         |> Seq.collect (fun m -> m.Groups[1].Value.Split(",") |> Array.map _.Trim())
         |> Seq.choose (fun x -> if x.Contains " " || x = "" then None else Some x)
         |> List.ofSeq
-
-    printfn "%A" exports
-    printfn ""
 
     if exports.Length > 0 then
         for name in exports do
@@ -62,7 +68,30 @@ for path in componentPaths do
                     $"""    static member inline %s{camelCase name} (text: string) = Interop.reactApi.createElement(import "%s{name}" "@/components/ui/%s{filename}", createObj !![ prop.text text ])"""
                 )
 
+                docElems.AppendLine(
+                    $"    \"%s{camelCase name}\", [ \"(children: #seq<ReactElement>): ReactElement\"; \"(props: list<IReactProperty>): ReactElement\"; \"(text: string): ReactElement\" ]"
+                )
+                |> ignore
+
     elements.WriteLine("") |> ignore
     elements.Flush()
 
 elements.Close()
+
+docElems.AppendLine(
+    """]
+// apiReferences elements end"""
+)
+|> ignore
+
+let docsFile = __SOURCE_DIRECTORY__ + @"/../Docs/src/Pages/_compName/Page.fs"
+
+File.ReadAllText(docsFile)
+|> fun s ->
+    Regex.Replace(
+        s,
+        "// apiReferences elements begin(.*)// apiReferences elements end",
+        docElems.ToString(),
+        RegexOptions.Singleline
+    )
+|> fun s -> File.WriteAllText(docsFile, s)

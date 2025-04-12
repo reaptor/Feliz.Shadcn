@@ -250,25 +250,20 @@ let components =
 let getComponent name =
     components
     |> Map.tryFind name
-    |> Option.defaultWith (fun () -> failwith $"Component '%s{name}' does not exist")
+    |> Option.defaultWith (fun () -> failwith $"Page '%s{name}' does not exist")
 
-type Props = { CurrentComponentName: string }
+type Props = { CurrentPage: string }
 
-type Model = { CurrentComponentName: string }
+type Model = { CurrentPage: string }
 
 type Msg = ChangeComponent of string
 
-let init (name: string) =
-    { CurrentComponentName = name }, Command.none
+let init (name: string) = { CurrentPage = name }, Command.none
 
 let update (msg: Msg) (model: Model) =
     match msg with
     | ChangeComponent compName ->
-        {
-            model with
-                CurrentComponentName = compName
-        },
-        Command.navigate (Route.CompName { CompName = compName })
+        { model with CurrentPage = compName }, Command.navigate (Route.CompName { CompName = compName })
 
 let routeChanged (model: Model) = model, Command.none
 
@@ -346,7 +341,7 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                                                         sidebarMenuButton.asChild
                                                         prop.custom (
                                                             "isActive",
-                                                            System.String.IsNullOrWhiteSpace model.CurrentComponentName
+                                                            System.String.IsNullOrWhiteSpace model.CurrentPage
                                                         )
                                                         prop.onClick (fun _ -> dispatch (ChangeComponent ""))
                                                         prop.text "Getting Started"
@@ -367,7 +362,7 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                                                     prop.children [
                                                         Shadcn.sidebarMenuButton [
                                                             sidebarMenuButton.asChild
-                                                            prop.custom ("isActive", (name' = model.CurrentComponentName))
+                                                            prop.custom ("isActive", (name' = model.CurrentPage))
                                                             prop.onClick (fun _ -> dispatch (ChangeComponent name'))
                                                             prop.text title
                                                             prop.className "cursor-pointer"
@@ -387,4 +382,4 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
     ]
 
 let layout (props: Props) (_route: Route) (_shared: SharedModel) =
-    Layout.from (fun () -> init props.CurrentComponentName) update routeChanged view
+    Layout.from (fun () -> init props.CurrentPage) update routeChanged view

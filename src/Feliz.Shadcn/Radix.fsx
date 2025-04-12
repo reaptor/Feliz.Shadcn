@@ -4,6 +4,7 @@
 open System
 open System.IO
 open System.Net
+open System.Text
 open System.Text.RegularExpressions
 open FSharp.Data
 open Common
@@ -162,6 +163,14 @@ module Properties =
 """
 )
 
+let docProps = StringBuilder()
+
+docProps.AppendLine(
+    """// apiReferences props begin
+let apiReferencesProps: Map<string, string list> = Map ["""
+)
+|> ignore
+
 for path in componentPaths do
     let contents = File.ReadAllText(path)
 
@@ -262,6 +271,8 @@ for path in componentPaths do
     type %s{name} ="""
         )
 
+        let docPropItems = ResizeArray()
+
         for propName, propType in props do
             let safePropName =
                 propName
@@ -280,47 +291,68 @@ for path in componentPaths do
 
             let defaultFn propType =
                 if propName = "asChild" then
+                    docPropItems.Add($"%s{safePropName}: IReactProperty")
+
                     radixUi.WriteLine(
                         $"""        static member inline %s{safePropName}: IReactProperty = mkProperty ("%s{propName}", null)"""
                     )
                 else if propType = "number" then
+                    docPropItems.Add($"%s{safePropName} (value: int): IReactProperty")
+
                     radixUi.WriteLine(
                         $"""        static member inline %s{safePropName} (value: int): IReactProperty = mkProperty ("%s{propName}", value)"""
                     )
+
+                    docPropItems.Add($"%s{safePropName} (value: float)")
 
                     radixUi.WriteLine(
                         $"""        static member inline %s{safePropName} (value: float): IReactProperty = mkProperty ("%s{propName}", value)"""
                     )
                 else if propType = "number option" then
+                    docPropItems.Add($"%s{safePropName} (value: int option): IReactProperty")
+
                     radixUi.WriteLine(
                         $"""        static member inline %s{safePropName} (value: int option): IReactProperty = mkProperty ("%s{propName}", value)"""
                     )
+
+                    docPropItems.Add($"%s{safePropName} (value: float option): IReactProperty")
 
                     radixUi.WriteLine(
                         $"""        static member inline %s{safePropName} (value: float option): IReactProperty = mkProperty ("%s{propName}", value)"""
                     )
                 else if propType = "number[]" then
+                    docPropItems.Add($"%s{safePropName} (value: int list): IReactProperty: IReactProperty")
+
                     radixUi.WriteLine(
                         $"""        static member inline %s{safePropName} (value: int list): IReactProperty = mkProperty ("%s{propName}", value)"""
                     )
+
+                    docPropItems.Add($"%s{safePropName} (value: float list): IReactProperty")
 
                     radixUi.WriteLine(
                         $"""        static member inline %s{safePropName} (value: float list): IReactProperty = mkProperty ("%s{propName}", value)"""
                     )
                 else if propType = "number [] -> unit" then
+                    docPropItems.Add($"%s{safePropName} (value: int list -> unit): IReactProperty")
+
                     radixUi.WriteLine(
                         $"""        static member inline %s{safePropName} (value: int list -> unit): IReactProperty = mkProperty ("%s{propName}", value)"""
                     )
+
+                    docPropItems.Add($"%s{safePropName} (value: float list -> unit): IReactProperty")
 
                     radixUi.WriteLine(
                         $"""        static member inline %s{safePropName} (value: float list -> unit): IReactProperty = mkProperty ("%s{propName}", value)"""
                     )
                 else
+                    docPropItems.Add($"%s{safePropName} (value: %s{propType}): IReactProperty")
+
                     radixUi.WriteLine(
                         $"""        static member inline %s{safePropName} (value: %s{propType}): IReactProperty = mkProperty ("%s{propName}", value)"""
                     )
 
             let enumFn body =
+                docPropItems.Add($"%s{safePropName}: %s{body}")
                 radixUi.WriteLine($"""        static member inline %s{safePropName} = %s{body}""")
 
             let commonProps propType =
@@ -343,12 +375,16 @@ for path in componentPaths do
                 | "onFocusOutside", "function" -> defaultFn "FocusEvent -> unit"
                 | "onValueChange", "function" -> defaultFn "string -> unit"
                 | "collisionBoundary", "Boundary" ->
+                    docPropItems.Add("collisionBoundary (value: HTMLElement): IReactProperty")
+
                     radixUi.WriteLine(
                         """        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
         static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
 """
                     )
                 | "collisionPadding", "numberPadding" ->
+                    docPropItems.Add("collisionPadding (all: int): IReactProperty")
+
                     radixUi.WriteLine(
                         """        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
         static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
@@ -416,4 +452,21 @@ for path in componentPaths do
 
         radixUi.WriteLine("")
 
+        let x = String.concat "\"; \"" docPropItems
+        docProps.AppendLine($"    \"%s{name}\", [ \"%s{x}\" ]") |> ignore
+
 radixUi.Close()
+
+docProps.AppendLine("]").Append("// apiReferences props end") |> ignore
+
+let docsFile = __SOURCE_DIRECTORY__ + @"/../Docs/src/Pages/_compName/Page.fs"
+
+File.ReadAllText(docsFile)
+|> fun s ->
+    Regex.Replace(
+        s,
+        "// apiReferences props begin(.*)// apiReferences props end",
+        docProps.ToString(),
+        RegexOptions.Singleline
+    )
+|> fun s -> File.WriteAllText(docsFile, s)

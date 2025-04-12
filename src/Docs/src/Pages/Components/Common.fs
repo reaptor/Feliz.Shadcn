@@ -66,10 +66,13 @@ module Interop =
 [<Erase>]
 type UI =
     static member Header1(s: string) =
-        Html.h1 [ prop.className "text-3xl font-bold"; prop.text s ]
+        Html.h1 [ prop.className "text-4xl font-bold"; prop.text s ]
 
     static member Header2(s: string) =
-        Html.h3 [ prop.className "text-md font-semibold"; prop.text s ]
+        Html.h2 [ prop.className "text-2xl font-bold"; prop.text s ]
+
+    static member Header3(s: string) =
+        Html.h3 [ prop.className "text-xl font-bold"; prop.text s ]
 
     static member Markdown(s: string) =
         Html.div [ prop.className "markdown"; prop.dangerouslySetInnerHTML (parseMarkdown s) ]
@@ -94,7 +97,7 @@ type UI =
                         ]
                         Shadcn.tabsContent [
                             prop.value tabPreview
-                            prop.className "max-w-2xl border rounded p-30 flex justify-center items-center min-h-60"
+                            prop.className "max-w-4xl border rounded p-30 flex justify-center items-center min-h-60"
                             prop.children [ preview ]
                         ]
                         Shadcn.tabsContent [

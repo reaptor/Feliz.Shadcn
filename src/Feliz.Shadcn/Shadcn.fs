@@ -770,3 +770,4 @@ type Shadcn =
     static member inline tooltipProvider (props: list<IReactProperty>) = Interop.reactApi.createElement(import "TooltipProvider" "@/components/ui/tooltip", createObj !!props)
     static member inline tooltipProvider (children: #seq<ReactElement>) = Interop.reactApi.createElement(import "TooltipProvider" "@/components/ui/tooltip", createObj [ "children" ==> Interop.reactApi.Children.toArray (Array.ofSeq children) ])
     static member inline tooltipProvider (text: string) = Interop.reactApi.createElement(import "TooltipProvider" "@/components/ui/tooltip", createObj !![ prop.text text ])
+
