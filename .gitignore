@@ -1,0 +1,13 @@
+src/Feliz.Shadcn/my-app
+bin
+obj
+node_modules
+.idea
+*.fs.js
+src/Docs/.elmish-land
+*.DotSettings.user
+nuget
+**/*.fable-temp.csproj
+.elmish-land
+src/Docs/dist/
+_site/
