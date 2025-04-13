@@ -47,6 +47,13 @@
         <Compile Include="src\Pages\Components\Skeleton.fs" />
         <Compile Include="src\Pages\Components\Slider.fs" />
         <Compile Include="src\Pages\Components\Sonner.fs" />
+        <Compile Include="src\Pages\Components\Switch.fs" />
+        <Compile Include="src\Pages\Components\Table.fs" />
+        <Compile Include="src\Pages\Components\Tabs.fs" />
+        <Compile Include="src\Pages\Components\Textarea.fs" />
+        <Compile Include="src\Pages\Components\Toggle.fs" />
+        <Compile Include="src\Pages\Components\ToggleGroup.fs" />
+        <Compile Include="src\Pages\Components\Tooltip.fs" />
         <Compile Include="src/Pages/NotFound.fs" />
         <Compile Include="src/Pages/Layout.fs" />
         <Compile Include="src/Pages/Page.fs" />

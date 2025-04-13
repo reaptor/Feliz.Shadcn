@@ -43,7 +43,7 @@ let rec Card () =
                                                     ]
                                                 ]
                                                 Shadcn.selectContent [
-                                                    prop.custom ("position", "popper")
+                                                    selectContent.position.popper
                                                     prop.children [
                                                         Shadcn.selectItem [
                                                             prop.value "elmish-land"
@@ -112,7 +112,7 @@ let rec Card () =
                                             ]
                                         ]
                                         Shadcn.selectContent [
-                                            prop.custom ("position", "popper")
+                                            selectContent.position.popper
                                             prop.children [
                                                 Shadcn.selectItem [
                                                     prop.value "elmish-land"

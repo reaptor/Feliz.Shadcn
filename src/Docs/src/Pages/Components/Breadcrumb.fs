@@ -23,7 +23,7 @@ let rec Breadcrumb () =
                             ]
                         ]
                         Shadcn.dropdownMenuContent [
-                            prop.custom ("align", "start")
+                            dropdownMenuContent.align.start
                             prop.children [
                                 Shadcn.dropdownMenuItem [ prop.text "Documentation" ]
                                 Shadcn.dropdownMenuItem [ prop.text "Themes" ]
@@ -60,7 +60,7 @@ let rec Breadcrumb () =
                     ]
                 ]
                 Shadcn.dropdownMenuContent [
-                    prop.custom ("align", "start")
+                    dropdownMenuContent.align.start
                     prop.children [
                         Shadcn.dropdownMenuItem [ prop.text "Documentation" ]
                         Shadcn.dropdownMenuItem [ prop.text "Themes" ]

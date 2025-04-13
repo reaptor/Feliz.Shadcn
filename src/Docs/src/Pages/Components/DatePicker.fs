@@ -39,10 +39,44 @@ let rec DatePicker () =
                         calendar.mode.single
                         calendar.selected date
                         calendar.onSelect setDate
-                        prop.custom ("initialFocus", true)
+                        calendar.autoFocus true
                     ]
                 ]
             ]
         ],
-        """"""
+        """let date, setDate = React.useState<DateTime option> (None)
+
+Shadcn.popover [
+    Shadcn.popoverTrigger [
+        popoverTrigger.asChild
+        prop.children [
+            Shadcn.button [
+                button.variant.outline
+                prop.classes [
+                    "w-[240px] justify-start text-left font-normal"
+                    if date.IsNone then
+                        "text-muted-foreground"
+                ]
+                prop.children [
+                    Html.span [ prop.className "lucide-calendar h-4 w-4" ]
+                    match date with
+                    | Some date -> Html.text (date.ToString("MMMM d, yyyy"))
+                    | None -> Html.span "Pick a date"
+                ]
+            ]
+        ]
+    ]
+    Shadcn.popoverContent [
+        prop.className "w-auto p-0"
+        popoverContent.align.start
+        prop.children [
+            Shadcn.calendar [
+                calendar.mode.single
+                calendar.selected date
+                calendar.onSelect setDate
+                calendar.autoFocus true
+            ]
+        ]
+    ]
+]"""
     )

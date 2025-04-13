@@ -97,12 +97,12 @@ type UI =
                         ]
                         Shadcn.tabsContent [
                             prop.value tabPreview
-                            prop.className "max-w-4xl border rounded p-30 flex justify-center items-center min-h-60"
+                            prop.className "max-w-3xl border rounded p-30 flex justify-center items-center min-h-60"
                             prop.children [ preview ]
                         ]
                         Shadcn.tabsContent [
                             prop.value tabCode
-                            prop.className "max-w-4xl border rounded-lg p-4 bg-[#282c34] text-[#abb2bf]"
+                            prop.className "max-w-3xl border rounded-lg p-4 bg-[#282c34] text-[#abb2bf]"
                             prop.children [
                                 Html.pre [
                                     prop.className "text-xs overflow-auto"

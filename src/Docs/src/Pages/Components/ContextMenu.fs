@@ -17,20 +17,20 @@ let rec ContextMenu () =
                 prop.className "w-64"
                 prop.children [
                     Shadcn.contextMenuItem [
-                        prop.custom ("inset", true)
+                        contextMenuItem.inset
                         prop.children [ Html.text "Back"; Shadcn.contextMenuShortcut "⌘[" ]
                     ]
                     Shadcn.contextMenuItem [
-                        prop.custom ("inset", true)
+                        contextMenuItem.inset
                         prop.disabled true
                         prop.children [ Html.text "Forward"; Shadcn.contextMenuShortcut "⌘]" ]
                     ]
                     Shadcn.contextMenuItem [
-                        prop.custom ("inset", true)
+                        contextMenuItem.inset
                         prop.children [ Html.text "Reload"; Shadcn.contextMenuShortcut "⌘R" ]
                     ]
                     Shadcn.contextMenuSub [
-                        Shadcn.contextMenuSubTrigger [ prop.custom ("inset", true); prop.text "More Tools" ]
+                        Shadcn.contextMenuSubTrigger [ contextMenuSubTrigger.inset; prop.text "More Tools" ]
                         Shadcn.contextMenuSubContent [
                             prop.className "w-48"
                             prop.children [
@@ -46,7 +46,7 @@ let rec ContextMenu () =
                     ]
                     Shadcn.contextMenuSeparator []
                     Shadcn.contextMenuCheckboxItem [
-                        prop.custom ("checked", true)
+                        contextMenuCheckboxItem.checked' true
                         prop.children [ Html.text "Show Bookmarks Bar"; Shadcn.contextMenuShortcut "⌘⇧B" ]
                     ]
                     Shadcn.contextMenuCheckboxItem "Show Full URLs"
@@ -54,7 +54,7 @@ let rec ContextMenu () =
                     Shadcn.contextMenuRadioGroup [
                         prop.value "pedro"
                         prop.children [
-                            Shadcn.contextMenuLabel [ prop.custom ("inset", true); prop.text "People" ]
+                            Shadcn.contextMenuLabel [ contextMenuLabel.inset; prop.text "People" ]
                             Shadcn.contextMenuSeparator []
                             Shadcn.contextMenuRadioItem [ prop.value "pedro"; prop.text "Pedro Duarte" ]
                             Shadcn.contextMenuRadioItem [ prop.value "colm"; prop.text "Colm Tuite" ]
@@ -65,47 +65,33 @@ let rec ContextMenu () =
         ],
         """Shadcn.contextMenu [
     Shadcn.contextMenuTrigger [
-        prop.className "flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm"
+        prop.className
+            "flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm"
         prop.text "Right click here"
     ]
     Shadcn.contextMenuContent [
         prop.className "w-64"
         prop.children [
             Shadcn.contextMenuItem [
-                prop.custom("inset", true)
-                prop.children [
-                    Html.text "Back"
-                    Shadcn.contextMenuShortcut "⌘["
-                ]
+                contextMenuItem.inset
+                prop.children [ Html.text "Back"; Shadcn.contextMenuShortcut "⌘[" ]
             ]
             Shadcn.contextMenuItem [
-                prop.custom("inset", true)
+                contextMenuItem.inset
                 prop.disabled true
-                prop.children [
-                    Html.text "Forward"
-                    Shadcn.contextMenuShortcut "⌘]"
-                ]
+                prop.children [ Html.text "Forward"; Shadcn.contextMenuShortcut "⌘]" ]
             ]
             Shadcn.contextMenuItem [
-                prop.custom("inset", true)
-                prop.children [
-                    Html.text "Reload"
-                    Shadcn.contextMenuShortcut "⌘R"
-                ]
+                contextMenuItem.inset
+                prop.children [ Html.text "Reload"; Shadcn.contextMenuShortcut "⌘R" ]
             ]
             Shadcn.contextMenuSub [
-                Shadcn.contextMenuSubTrigger [
-                    prop.custom("inset", true)
-                    prop.text "More Tools"
-                ]
+                Shadcn.contextMenuSubTrigger [ contextMenuSubTrigger.inset; prop.text "More Tools" ]
                 Shadcn.contextMenuSubContent [
                     prop.className "w-48"
                     prop.children [
                         Shadcn.contextMenuItem [
-                            prop.children [
-                                Html.text "Save Page As..."
-                                Shadcn.contextMenuShortcut "⇧⌘S"
-                            ]
+                            prop.children [ Html.text "Save Page As..."; Shadcn.contextMenuShortcut "⇧⌘S" ]
                         ]
                         Shadcn.contextMenuItem "Create Shortcut..."
                         Shadcn.contextMenuItem "Name Window..."
@@ -116,30 +102,18 @@ let rec ContextMenu () =
             ]
             Shadcn.contextMenuSeparator []
             Shadcn.contextMenuCheckboxItem [
-                prop.custom("checked", true)
-                prop.children [
-                    Html.text "Show Bookmarks Bar"
-                    Shadcn.contextMenuShortcut "⌘⇧B"
-                ]
+                contextMenuCheckboxItem.checked' true
+                prop.children [ Html.text "Show Bookmarks Bar"; Shadcn.contextMenuShortcut "⌘⇧B" ]
             ]
             Shadcn.contextMenuCheckboxItem "Show Full URLs"
             Shadcn.contextMenuSeparator []
             Shadcn.contextMenuRadioGroup [
                 prop.value "pedro"
                 prop.children [
-                    Shadcn.contextMenuLabel [
-                        prop.custom("inset", true)
-                        prop.text "People"
-                    ]
+                    Shadcn.contextMenuLabel [ contextMenuLabel.inset; prop.text "People" ]
                     Shadcn.contextMenuSeparator []
-                    Shadcn.contextMenuRadioItem [
-                        prop.value "pedro"
-                        prop.text "Pedro Duarte"
-                    ]
-                    Shadcn.contextMenuRadioItem [
-                        prop.value "colm"
-                        prop.text "Colm Tuite"
-                    ]
+                    Shadcn.contextMenuRadioItem [ prop.value "pedro"; prop.text "Pedro Duarte" ]
+                    Shadcn.contextMenuRadioItem [ prop.value "colm"; prop.text "Colm Tuite" ]
                 ]
             ]
         ]

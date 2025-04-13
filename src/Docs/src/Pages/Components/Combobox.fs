@@ -65,16 +65,13 @@ let rec Combobox () =
                                         Shadcn.commandItem [
                                             prop.key framework.value
                                             prop.value framework.value
-                                            prop.custom (
-                                                "onSelect",
-                                                (fun (currentValue: string) ->
-                                                    if currentValue = value then
-                                                        setValue ""
-                                                    else
-                                                        setValue currentValue
+                                            commandItem.onSelect (fun (currentValue: string) ->
+                                                if currentValue = value then
+                                                    setValue ""
+                                                else
+                                                    setValue currentValue
 
-                                                    setOpen false)
-                                            )
+                                                setOpen false)
                                             prop.children [
                                                 Html.text framework.label
                                                 Lucide.Check [
@@ -118,8 +115,8 @@ let selectedFrameworkLabel =
     | None -> "Select framework..."
 
 Shadcn.popover [
-    prop.custom("open", open')
-    prop.custom("onOpenChange", setOpen)
+    popover.open' open'
+    popover.onOpenChange setOpen
     prop.children [
         Shadcn.popoverTrigger [
             popoverTrigger.asChild
@@ -127,7 +124,7 @@ Shadcn.popover [
                 Shadcn.button [
                     button.variant.outline
                     prop.role "combobox"
-                    prop.custom("aria-expanded", open')
+                    prop.ariaExpanded open'
                     prop.className "w-[200px] justify-between"
                     prop.children [
                         Html.text selectedFrameworkLabel
@@ -152,11 +149,11 @@ Shadcn.popover [
                                 Shadcn.commandItem [
                                     prop.key framework.value
                                     prop.value framework.value
-                                    prop.custom("onSelect", (fun (currentValue: string) ->
+                                    commandItem.onSelect (fun (currentValue: string) ->
                                         if currentValue = value then setValue ""
                                         else setValue currentValue
                                         setOpen false
-                                    ))
+                                    )
                                     prop.children [
                                         Html.text framework.label
                                         UI.CheckIcon(className = cn [

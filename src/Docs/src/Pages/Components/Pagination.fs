@@ -14,7 +14,7 @@ let rec Pagination () =
                 Shadcn.paginationItem [
                     Shadcn.paginationLink [
                         prop.className "cursor-pointer"
-                        prop.custom ("isActive", true)
+                        paginationLink.isActive true
                         prop.text "2"
                     ]
                 ]
@@ -39,7 +39,7 @@ let rec Pagination () =
         Shadcn.paginationItem [
             Shadcn.paginationLink [
                 prop.href "#"
-                mkProperty ("isActive", true)
+                paginationLink.isActive true
                 prop.text "2"
             ]
         ]

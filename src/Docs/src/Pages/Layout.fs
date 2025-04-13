@@ -245,6 +245,49 @@ let components =
             Description = "Beautifully designed toast component built using Sonner."
             Constructor = Sonner.Sonner
         }
+        "switch",
+        {
+            Title = "Switch"
+            Description = "A control that allows the user to toggle between checked and not checked states."
+            Constructor = Switch.Switch
+        }
+        "table",
+        {
+            Title = "Table"
+            Description = "A responsive table component with formatting for various data types."
+            Constructor = Table.Table
+        }
+        "tabs",
+        {
+            Title = "Tabs"
+            Description = "A set of layered sections of content—known as tab panels—that are displayed one at a time."
+            Constructor = Tabs.Tabs
+        }
+        "textarea",
+        {
+            Title = "Textarea"
+            Description = "Displays a form textarea field or a component that looks like a textarea field."
+            Constructor = Textarea.Textarea
+        }
+        "toggle",
+        {
+            Title = "Toggle"
+            Description = "A two-state button that can be either on or off."
+            Constructor = Toggle.Toggle
+        }
+        "toggle-group",
+        {
+            Title = "Toggle Group"
+            Description = "A set of two-state buttons that can be toggled on or off."
+            Constructor = ToggleGroup.ToggleGroup
+        }
+        "tooltip",
+        {
+            Title = "Tooltip"
+            Description =
+                "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it."
+            Constructor = Tooltip.Tooltip
+        }
     ]
 
 let getComponent name =
@@ -339,8 +382,7 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                                                 prop.children [
                                                     Shadcn.sidebarMenuButton [
                                                         sidebarMenuButton.asChild
-                                                        prop.custom (
-                                                            "isActive",
+                                                        sidebarMenuButton.isActive (
                                                             System.String.IsNullOrWhiteSpace model.CurrentPage
                                                         )
                                                         prop.onClick (fun _ -> dispatch (ChangeComponent ""))
@@ -362,7 +404,7 @@ let view (model: Model) (content: ReactElement) (dispatch: Msg -> unit) =
                                                     prop.children [
                                                         Shadcn.sidebarMenuButton [
                                                             sidebarMenuButton.asChild
-                                                            prop.custom ("isActive", (name' = model.CurrentPage))
+                                                            sidebarMenuButton.isActive ((name' = model.CurrentPage))
                                                             prop.onClick (fun _ -> dispatch (ChangeComponent name'))
                                                             prop.text title
                                                             prop.className "cursor-pointer"

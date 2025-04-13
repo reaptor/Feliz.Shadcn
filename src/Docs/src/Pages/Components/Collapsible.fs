@@ -59,8 +59,8 @@ let rec Collapsible () =
         """let isOpen, setIsOpen = React.useState(false)
 
 Shadcn.collapsible [
-    prop.custom("open", isOpen)
-    prop.custom("onOpenChange", setIsOpen)
+    collapsible.open' isOpen
+    collapsible.onOpenChange setIsOpen
     prop.className "w-[350px] space-y-2"
     prop.children [
         Html.div [

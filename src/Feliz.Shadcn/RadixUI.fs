@@ -13,10 +13,15 @@ module Properties =
     open Feliz
 
     [<Erase>]
-    let inline private mkProperty (name: string, value: obj): IReactProperty = unbox (name, value)
+    let inline private mkProperty (name: string, value: obj) : IReactProperty = unbox (name, value)
 
     [<Erase>]
-    let inline private collisionPaddingValue (top: int option) (right: int option) (bottom: int option) (left: int option) =
+    let inline private collisionPaddingValue
+        (top: int option)
+        (right: int option)
+        (bottom: int option)
+        (left: int option)
+        =
         createObj [
             "top" ==> Option.defaultValue 0 top
             "right" ==> Option.defaultValue 0 right
@@ -75,27 +80,30 @@ module Properties =
     type accordion =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline type' = accordionTypes.type' ()
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline defaultValue (value: string): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline onValueChange (value: string -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline value (value: string seq): IReactProperty = mkProperty ("value", value)
-        static member inline defaultValue (value: string seq): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline onValueChange (value: string list -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline collapsible (value: bool): IReactProperty = mkProperty ("collapsible", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline value(value: string seq) : IReactProperty = mkProperty ("value", value)
+        static member inline defaultValue(value: string seq) : IReactProperty = mkProperty ("defaultValue", value)
+
+        static member inline onValueChange(value: string list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline collapsible(value: bool) : IReactProperty = mkProperty ("collapsible", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
         static member inline dir = directionType ()
         static member inline orientation = orientationType ()
 
     [<RequireQualifiedAccess>]
     type accordionContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
     [<RequireQualifiedAccess>]
     type accordionItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
     [<RequireQualifiedAccess>]
     type accordionTrigger =
@@ -115,9 +123,9 @@ module Properties =
 
     [<RequireQualifiedAccess>]
     type alertDialog =
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
     [<RequireQualifiedAccess>]
     type alertDialogAction =
@@ -130,10 +138,16 @@ module Properties =
     [<RequireQualifiedAccess>]
     type alertDialogContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline onOpenAutoFocus (value: Event -> unit): IReactProperty = mkProperty ("onOpenAutoFocus", value)
-        static member inline onCloseAutoFocus (value: Event -> unit): IReactProperty = mkProperty ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+
+        static member inline onOpenAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onOpenAutoFocus", value)
+
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
+
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
 
     [<RequireQualifiedAccess>]
     type alertDialogDescription =
@@ -150,12 +164,12 @@ module Properties =
     [<RequireQualifiedAccess>]
     type alertDialogOverlay =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
     [<RequireQualifiedAccess>]
     type alertDialogPortal =
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline container (value: HTMLElement): IReactProperty = mkProperty ("container", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
     [<RequireQualifiedAccess>]
     type alertDialogTitle =
@@ -168,8 +182,8 @@ module Properties =
     [<RequireQualifiedAccess>]
     type aspectRatio =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline ratio (value: int): IReactProperty = mkProperty ("ratio", value)
-        static member inline ratio (value: float): IReactProperty = mkProperty ("ratio", value)
+        static member inline ratio(value: int) : IReactProperty = mkProperty ("ratio", value)
+        static member inline ratio(value: float) : IReactProperty = mkProperty ("ratio", value)
 
     [<RequireQualifiedAccess>]
     type avatar =
@@ -178,13 +192,15 @@ module Properties =
     [<RequireQualifiedAccess>]
     type avatarFallback =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline delayMs (value: int): IReactProperty = mkProperty ("delayMs", value)
-        static member inline delayMs (value: float): IReactProperty = mkProperty ("delayMs", value)
+        static member inline delayMs(value: int) : IReactProperty = mkProperty ("delayMs", value)
+        static member inline delayMs(value: float) : IReactProperty = mkProperty ("delayMs", value)
 
     [<RequireQualifiedAccess>]
     type avatarImage =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline onLoadingStatusChange (value: string -> unit): IReactProperty = mkProperty ("onLoadingStatusChange", value)
+
+        static member inline onLoadingStatusChange(value: string -> unit) : IReactProperty =
+            mkProperty ("onLoadingStatusChange", value)
 
     [<RequireQualifiedAccess>]
     type badge =
@@ -281,26 +297,32 @@ module Properties =
     [<RequireQualifiedAccess>]
     type checkbox =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultChecked (value: bool option -> unit): IReactProperty = mkProperty ("defaultChecked", value)
-        static member inline checked' (value: bool): IReactProperty = mkProperty ("checked", value)
-        static member inline onCheckedChange (value: bool option -> unit): IReactProperty = mkProperty ("onCheckedChange", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline required (value: bool): IReactProperty = mkProperty ("required", value)
-        static member inline name (value: string): IReactProperty = mkProperty ("name", value)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
+
+        static member inline defaultChecked(value: bool option -> unit) : IReactProperty =
+            mkProperty ("defaultChecked", value)
+
+        static member inline checked'(value: bool) : IReactProperty = mkProperty ("checked", value)
+
+        static member inline onCheckedChange(value: bool option -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline required(value: bool) : IReactProperty = mkProperty ("required", value)
+        static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
     [<RequireQualifiedAccess>]
     type collapsible =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
 
     [<RequireQualifiedAccess>]
     type collapsibleContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
     [<RequireQualifiedAccess>]
     type collapsibleTrigger =
@@ -345,40 +367,59 @@ module Properties =
     [<RequireQualifiedAccess>]
     type contextMenu =
         static member inline dir = directionType ()
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline modal (value: bool): IReactProperty = mkProperty ("modal", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline modal(value: bool) : IReactProperty = mkProperty ("modal", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuCheckboxItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline checked' (value: bool): IReactProperty = mkProperty ("checked", value)
-        static member inline onCheckedChange (value: bool -> unit): IReactProperty = mkProperty ("onCheckedChange", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline onSelect (value: Event -> unit): IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline checked'(value: bool) : IReactProperty = mkProperty ("checked", value)
+
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop (value: bool): IReactProperty = mkProperty ("loop", value)
-        static member inline onCloseAutoFocus (value: Event -> unit): IReactProperty = mkProperty ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit): IReactProperty = mkProperty ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit): IReactProperty = mkProperty ("onInteractOutside", value)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline alignOffset (value: int): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline alignOffset (value: float): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions (value: bool): IReactProperty = mkProperty ("avoidCollisions", value)
-        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
-        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
+
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached (value: bool): IReactProperty = mkProperty ("hideWhenDetached", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuGroup =
@@ -387,9 +428,9 @@ module Properties =
     [<RequireQualifiedAccess>]
     type contextMenuItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline onSelect (value: Event -> unit): IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuLabel =
@@ -397,22 +438,22 @@ module Properties =
 
     [<RequireQualifiedAccess>]
     type contextMenuPortal =
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline container (value: HTMLElement): IReactProperty = mkProperty ("container", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuRadioGroup =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange (value: string -> unit): IReactProperty = mkProperty ("onValueChange", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuRadioItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline onSelect (value: Event -> unit): IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuSeparator =
@@ -424,53 +465,67 @@ module Properties =
 
     [<RequireQualifiedAccess>]
     type contextMenuSub =
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuSubContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop (value: bool): IReactProperty = mkProperty ("loop", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit): IReactProperty = mkProperty ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit): IReactProperty = mkProperty ("onInteractOutside", value)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline sideOffset (value: int): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline sideOffset (value: float): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline alignOffset (value: int): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline alignOffset (value: float): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions (value: bool): IReactProperty = mkProperty ("avoidCollisions", value)
-        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
-        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding (value: int): IReactProperty = mkProperty ("arrowPadding", value)
-        static member inline arrowPadding (value: float): IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached (value: bool): IReactProperty = mkProperty ("hideWhenDetached", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuSubTrigger =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type contextMenuTrigger =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
 
     [<RequireQualifiedAccess>]
     type dialog =
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline modal (value: bool): IReactProperty = mkProperty ("modal", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline modal(value: bool) : IReactProperty = mkProperty ("modal", value)
 
     [<RequireQualifiedAccess>]
     type dialogClose =
@@ -479,12 +534,22 @@ module Properties =
     [<RequireQualifiedAccess>]
     type dialogContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline onOpenAutoFocus (value: Event -> unit): IReactProperty = mkProperty ("onOpenAutoFocus", value)
-        static member inline onCloseAutoFocus (value: Event -> unit): IReactProperty = mkProperty ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
-        static member inline onInteractOutside (value: Event -> unit): IReactProperty = mkProperty ("onInteractOutside", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+
+        static member inline onOpenAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onOpenAutoFocus", value)
+
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
+
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
 
     [<RequireQualifiedAccess>]
     type dialogDescription =
@@ -501,12 +566,12 @@ module Properties =
     [<RequireQualifiedAccess>]
     type dialogOverlay =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
     [<RequireQualifiedAccess>]
     type dialogPortal =
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline container (value: HTMLElement): IReactProperty = mkProperty ("container", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
     [<RequireQualifiedAccess>]
     type dialogTitle =
@@ -558,49 +623,68 @@ module Properties =
 
     [<RequireQualifiedAccess>]
     type dropdownMenu =
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline modal (value: bool): IReactProperty = mkProperty ("modal", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline modal(value: bool) : IReactProperty = mkProperty ("modal", value)
         static member inline dir = directionType ()
 
     [<RequireQualifiedAccess>]
     type dropdownMenuCheckboxItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline checked' (value: bool): IReactProperty = mkProperty ("checked", value)
-        static member inline onCheckedChange (value: bool -> unit): IReactProperty = mkProperty ("onCheckedChange", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline onSelect (value: Event -> unit): IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline checked'(value: bool) : IReactProperty = mkProperty ("checked", value)
+
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop (value: bool): IReactProperty = mkProperty ("loop", value)
-        static member inline onCloseAutoFocus (value: Event -> unit): IReactProperty = mkProperty ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit): IReactProperty = mkProperty ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit): IReactProperty = mkProperty ("onInteractOutside", value)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline side = sideType ()
-        static member inline sideOffset (value: int): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline sideOffset (value: float): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline align = alignType ()
-        static member inline alignOffset (value: int): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline alignOffset (value: float): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions (value: bool): IReactProperty = mkProperty ("avoidCollisions", value)
-        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
-        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
+
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline side = sideType ()
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline align = alignType ()
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding (value: int): IReactProperty = mkProperty ("arrowPadding", value)
-        static member inline arrowPadding (value: float): IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached (value: bool): IReactProperty = mkProperty ("hideWhenDetached", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuGroup =
@@ -609,9 +693,9 @@ module Properties =
     [<RequireQualifiedAccess>]
     type dropdownMenuItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline onSelect (value: Event -> unit): IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuLabel =
@@ -619,22 +703,22 @@ module Properties =
 
     [<RequireQualifiedAccess>]
     type dropdownMenuPortal =
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline container (value: HTMLElement): IReactProperty = mkProperty ("container", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuRadioGroup =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange (value: string -> unit): IReactProperty = mkProperty ("onValueChange", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuRadioItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline onSelect (value: Event -> unit): IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuSeparator =
@@ -646,41 +730,55 @@ module Properties =
 
     [<RequireQualifiedAccess>]
     type dropdownMenuSub =
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuSubContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop (value: bool): IReactProperty = mkProperty ("loop", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit): IReactProperty = mkProperty ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit): IReactProperty = mkProperty ("onInteractOutside", value)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline sideOffset (value: int): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline sideOffset (value: float): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline alignOffset (value: int): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline alignOffset (value: float): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions (value: bool): IReactProperty = mkProperty ("avoidCollisions", value)
-        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
-        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding (value: int): IReactProperty = mkProperty ("arrowPadding", value)
-        static member inline arrowPadding (value: float): IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached (value: bool): IReactProperty = mkProperty ("hideWhenDetached", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuSubTrigger =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type dropdownMenuTrigger =
@@ -689,40 +787,47 @@ module Properties =
     [<RequireQualifiedAccess>]
     type form =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline onClearServerErrors (value: unit -> unit): IReactProperty = mkProperty ("onClearServerErrors", value)
+
+        static member inline onClearServerErrors(value: unit -> unit) : IReactProperty =
+            mkProperty ("onClearServerErrors", value)
 
     [<RequireQualifiedAccess>]
     type hoverCard =
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline open'Delay (value: int): IReactProperty = mkProperty ("openDelay", value)
-        static member inline open'Delay (value: float): IReactProperty = mkProperty ("openDelay", value)
-        static member inline closeDelay (value: int): IReactProperty = mkProperty ("closeDelay", value)
-        static member inline closeDelay (value: float): IReactProperty = mkProperty ("closeDelay", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline open'Delay(value: int) : IReactProperty = mkProperty ("openDelay", value)
+        static member inline open'Delay(value: float) : IReactProperty = mkProperty ("openDelay", value)
+        static member inline closeDelay(value: int) : IReactProperty = mkProperty ("closeDelay", value)
+        static member inline closeDelay(value: float) : IReactProperty = mkProperty ("closeDelay", value)
 
     [<RequireQualifiedAccess>]
     type hoverCardContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
         static member inline side = sideType ()
-        static member inline sideOffset (value: int): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline sideOffset (value: float): IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline align = alignType ()
-        static member inline alignOffset (value: int): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline alignOffset (value: float): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions (value: bool): IReactProperty = mkProperty ("avoidCollisions", value)
-        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
-        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding (value: int): IReactProperty = mkProperty ("arrowPadding", value)
-        static member inline arrowPadding (value: float): IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached (value: bool): IReactProperty = mkProperty ("hideWhenDetached", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type hoverCardTrigger =
@@ -751,55 +856,79 @@ module Properties =
     [<RequireQualifiedAccess>]
     type label =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline htmlFor (value: string): IReactProperty = mkProperty ("htmlFor", value)
+        static member inline htmlFor(value: string) : IReactProperty = mkProperty ("htmlFor", value)
 
     [<RequireQualifiedAccess>]
     type menubar =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultValue (value: string): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange (value: int list -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline onValueChange (value: float list -> unit): IReactProperty = mkProperty ("onValueChange", value)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+
+        static member inline onValueChange(value: int list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline onValueChange(value: float list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
         static member inline dir = directionType ()
-        static member inline loop (value: bool): IReactProperty = mkProperty ("loop", value)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
     [<RequireQualifiedAccess>]
     type menubarCheckboxItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline checked' (value: bool): IReactProperty = mkProperty ("checked", value)
-        static member inline onCheckedChange (value: bool -> unit): IReactProperty = mkProperty ("onCheckedChange", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline onSelect (value: Event -> unit): IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline checked'(value: bool) : IReactProperty = mkProperty ("checked", value)
+
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type menubarContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop (value: bool): IReactProperty = mkProperty ("loop", value)
-        static member inline onCloseAutoFocus (value: Event -> unit): IReactProperty = mkProperty ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit): IReactProperty = mkProperty ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit): IReactProperty = mkProperty ("onInteractOutside", value)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline side = sideType ()
-        static member inline sideOffset (value: int): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline sideOffset (value: float): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline align = alignType ()
-        static member inline alignOffset (value: int): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline alignOffset (value: float): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions (value: bool): IReactProperty = mkProperty ("avoidCollisions", value)
-        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
-        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
+
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline side = sideType ()
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline align = alignType ()
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding (value: int): IReactProperty = mkProperty ("arrowPadding", value)
-        static member inline arrowPadding (value: float): IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached (value: bool): IReactProperty = mkProperty ("hideWhenDetached", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type menubarGroup =
@@ -808,9 +937,9 @@ module Properties =
     [<RequireQualifiedAccess>]
     type menubarItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline onSelect (value: Event -> unit): IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type menubarLabel =
@@ -819,26 +948,26 @@ module Properties =
     [<RequireQualifiedAccess>]
     type menubarMenu =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
     [<RequireQualifiedAccess>]
     type menubarPortal =
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline container (value: HTMLElement): IReactProperty = mkProperty ("container", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline container(value: HTMLElement) : IReactProperty = mkProperty ("container", value)
 
     [<RequireQualifiedAccess>]
     type menubarRadioGroup =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange (value: string -> unit): IReactProperty = mkProperty ("onValueChange", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
 
     [<RequireQualifiedAccess>]
     type menubarRadioItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline onSelect (value: Event -> unit): IReactProperty = mkProperty ("onSelect", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type menubarSeparator =
@@ -850,41 +979,55 @@ module Properties =
 
     [<RequireQualifiedAccess>]
     type menubarSub =
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
 
     [<RequireQualifiedAccess>]
     type menubarSubContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop (value: bool): IReactProperty = mkProperty ("loop", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit): IReactProperty = mkProperty ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit): IReactProperty = mkProperty ("onInteractOutside", value)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline sideOffset (value: int): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline sideOffset (value: float): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline alignOffset (value: int): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline alignOffset (value: float): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions (value: bool): IReactProperty = mkProperty ("avoidCollisions", value)
-        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
-        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding (value: int): IReactProperty = mkProperty ("arrowPadding", value)
-        static member inline arrowPadding (value: float): IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached (value: bool): IReactProperty = mkProperty ("hideWhenDetached", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type menubarSubTrigger =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type menubarTrigger =
@@ -892,41 +1035,55 @@ module Properties =
 
     [<RequireQualifiedAccess>]
     type navigationMenu =
-        static member inline defaultValue (value: string): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange (value: int list -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline onValueChange (value: float list -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline delayDuration (value: int): IReactProperty = mkProperty ("delayDuration", value)
-        static member inline delayDuration (value: float): IReactProperty = mkProperty ("delayDuration", value)
-        static member inline skipDelayDuration (value: int): IReactProperty = mkProperty ("skipDelayDuration", value)
-        static member inline skipDelayDuration (value: float): IReactProperty = mkProperty ("skipDelayDuration", value)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+
+        static member inline onValueChange(value: int list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline onValueChange(value: float list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline delayDuration(value: int) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline delayDuration(value: float) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline skipDelayDuration(value: int) : IReactProperty = mkProperty ("skipDelayDuration", value)
+        static member inline skipDelayDuration(value: float) : IReactProperty = mkProperty ("skipDelayDuration", value)
         static member inline dir = directionType ()
         static member inline orientation = orientationType ()
 
     [<RequireQualifiedAccess>]
     type navigationMenuContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit): IReactProperty = mkProperty ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit): IReactProperty = mkProperty ("onInteractOutside", value)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
+
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
     [<RequireQualifiedAccess>]
     type navigationMenuIndicator =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
     [<RequireQualifiedAccess>]
     type navigationMenuItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
     [<RequireQualifiedAccess>]
     type navigationMenuLink =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline active (value: bool): IReactProperty = mkProperty ("active", value)
-        static member inline onSelect (value: Event -> unit): IReactProperty = mkProperty ("onSelect", value)
+        static member inline active(value: bool) : IReactProperty = mkProperty ("active", value)
+        static member inline onSelect(value: Event -> unit) : IReactProperty = mkProperty ("onSelect", value)
 
     [<RequireQualifiedAccess>]
     type navigationMenuList =
@@ -939,7 +1096,7 @@ module Properties =
     [<RequireQualifiedAccess>]
     type navigationMenuViewport =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
     [<RequireQualifiedAccess>]
     type pagination =
@@ -971,10 +1128,10 @@ module Properties =
 
     [<RequireQualifiedAccess>]
     type popover =
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline modal (value: bool): IReactProperty = mkProperty ("modal", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline modal(value: bool) : IReactProperty = mkProperty ("modal", value)
 
     [<RequireQualifiedAccess>]
     type popoverAnchor =
@@ -983,31 +1140,49 @@ module Properties =
     [<RequireQualifiedAccess>]
     type popoverContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline onOpenAutoFocus (value: Event -> unit): IReactProperty = mkProperty ("onOpenAutoFocus", value)
-        static member inline onCloseAutoFocus (value: Event -> unit): IReactProperty = mkProperty ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
-        static member inline onFocusOutside (value: FocusEvent -> unit): IReactProperty = mkProperty ("onFocusOutside", value)
-        static member inline onInteractOutside (value: Event -> unit): IReactProperty = mkProperty ("onInteractOutside", value)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline side = sideType ()
-        static member inline sideOffset (value: int): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline sideOffset (value: float): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline align = alignType ()
-        static member inline alignOffset (value: int): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline alignOffset (value: float): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions (value: bool): IReactProperty = mkProperty ("avoidCollisions", value)
-        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
 
-        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline onOpenAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onOpenAutoFocus", value)
+
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
+
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline onFocusOutside(value: FocusEvent -> unit) : IReactProperty =
+            mkProperty ("onFocusOutside", value)
+
+        static member inline onInteractOutside(value: Event -> unit) : IReactProperty =
+            mkProperty ("onInteractOutside", value)
+
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline side = sideType ()
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline align = alignType ()
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding (value: int): IReactProperty = mkProperty ("arrowPadding", value)
-        static member inline arrowPadding (value: float): IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached (value: bool): IReactProperty = mkProperty ("hideWhenDetached", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type popoverTrigger =
@@ -1016,32 +1191,39 @@ module Properties =
     [<RequireQualifiedAccess>]
     type progress =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: int option): IReactProperty = mkProperty ("value", value)
-        static member inline value (value: float option): IReactProperty = mkProperty ("value", value)
-        static member inline max (value: int): IReactProperty = mkProperty ("max", value)
-        static member inline max (value: float): IReactProperty = mkProperty ("max", value)
-        static member inline getValueLabel (value: int -> int -> string): IReactProperty = mkProperty ("getValueLabel", value)
+        static member inline value(value: int option) : IReactProperty = mkProperty ("value", value)
+        static member inline value(value: float option) : IReactProperty = mkProperty ("value", value)
+        static member inline max(value: int) : IReactProperty = mkProperty ("max", value)
+        static member inline max(value: float) : IReactProperty = mkProperty ("max", value)
+
+        static member inline getValueLabel(value: int -> int -> string) : IReactProperty =
+            mkProperty ("getValueLabel", value)
 
     [<RequireQualifiedAccess>]
     type radioGroup =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultValue (value: string): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange (value: int list -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline onValueChange (value: float list -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline name (value: string): IReactProperty = mkProperty ("name", value)
-        static member inline required (value: bool): IReactProperty = mkProperty ("required", value)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+
+        static member inline onValueChange(value: int list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline onValueChange(value: float list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
+        static member inline required(value: bool) : IReactProperty = mkProperty ("required", value)
         static member inline orientation = orientationType ()
         static member inline dir = directionType ()
-        static member inline loop (value: bool): IReactProperty = mkProperty ("loop", value)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
     [<RequireQualifiedAccess>]
     type radioGroupItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline required (value: bool): IReactProperty = mkProperty ("required", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline required(value: bool) : IReactProperty = mkProperty ("required", value)
 
     [<RequireQualifiedAccess>]
     type resizablePanelGroup =
@@ -1061,23 +1243,23 @@ module Properties =
     type scrollArea =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline type' = scrollAreaTypes.type' ()
-        static member inline scrollHideDelay (value: int): IReactProperty = mkProperty ("scrollHideDelay", value)
-        static member inline scrollHideDelay (value: float): IReactProperty = mkProperty ("scrollHideDelay", value)
+        static member inline scrollHideDelay(value: int) : IReactProperty = mkProperty ("scrollHideDelay", value)
+        static member inline scrollHideDelay(value: float) : IReactProperty = mkProperty ("scrollHideDelay", value)
         static member inline dir = directionType ()
-        static member inline nonce (value: string): IReactProperty = mkProperty ("nonce", value)
+        static member inline nonce(value: string) : IReactProperty = mkProperty ("nonce", value)
 
     [<RequireQualifiedAccess>]
     type select =
-        static member inline defaultValue (value: string): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange (value: string -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
         static member inline dir = directionType ()
-        static member inline name (value: string): IReactProperty = mkProperty ("name", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline required (value: bool): IReactProperty = mkProperty ("required", value)
+        static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline required(value: bool) : IReactProperty = mkProperty ("required", value)
 
 
     [<Erase>]
@@ -1090,28 +1272,40 @@ module Properties =
     [<RequireQualifiedAccess>]
     type selectContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline onCloseAutoFocus (value: Event -> unit): IReactProperty = mkProperty ("onCloseAutoFocus", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
+
+        static member inline onCloseAutoFocus(value: Event -> unit) : IReactProperty =
+            mkProperty ("onCloseAutoFocus", value)
+
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
         static member inline position = selectContentTypes.position ()
         static member inline side = sideType ()
-        static member inline sideOffset (value: int): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline sideOffset (value: float): IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
         static member inline align = alignType ()
-        static member inline alignOffset (value: int): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline alignOffset (value: float): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions (value: bool): IReactProperty = mkProperty ("avoidCollisions", value)
-        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
 
-        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding (value: int): IReactProperty = mkProperty ("arrowPadding", value)
-        static member inline arrowPadding (value: float): IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached (value: bool): IReactProperty = mkProperty ("hideWhenDetached", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type selectGroup =
@@ -1120,9 +1314,9 @@ module Properties =
     [<RequireQualifiedAccess>]
     type selectItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline textValue (value: string): IReactProperty = mkProperty ("textValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline textValue(value: string) : IReactProperty = mkProperty ("textValue", value)
 
     [<RequireQualifiedAccess>]
     type selectLabel =
@@ -1147,13 +1341,13 @@ module Properties =
     [<RequireQualifiedAccess>]
     type selectValue =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline placeholder (value: ReactElement): IReactProperty = mkProperty ("placeholder", value)
+        static member inline placeholder(value: ReactElement) : IReactProperty = mkProperty ("placeholder", value)
 
     [<RequireQualifiedAccess>]
     type separator =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline orientation = orientationType ()
-        static member inline decorative (value: bool): IReactProperty = mkProperty ("decorative", value)
+        static member inline decorative(value: bool) : IReactProperty = mkProperty ("decorative", value)
 
     [<RequireQualifiedAccess>]
     type sheet =
@@ -1286,28 +1480,42 @@ module Properties =
     [<RequireQualifiedAccess>]
     type slider =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultValue (value: int list): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline defaultValue (value: float list): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline value (value: int list): IReactProperty = mkProperty ("value", value)
-        static member inline value (value: float list): IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange (value: int list -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline onValueChange (value: float list -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline onValueCommit (value: int list -> unit): IReactProperty = mkProperty ("onValueCommit", value)
-        static member inline onValueCommit (value: float list -> unit): IReactProperty = mkProperty ("onValueCommit", value)
-        static member inline name (value: string): IReactProperty = mkProperty ("name", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
+        static member inline defaultValue(value: int list) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline defaultValue(value: float list) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: int list) : IReactProperty = mkProperty ("value", value)
+        static member inline value(value: float list) : IReactProperty = mkProperty ("value", value)
+
+        static member inline onValueChange(value: int list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline onValueChange(value: float list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline onValueCommit(value: int list -> unit) : IReactProperty =
+            mkProperty ("onValueCommit", value)
+
+        static member inline onValueCommit(value: float list -> unit) : IReactProperty =
+            mkProperty ("onValueCommit", value)
+
+        static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
         static member inline orientation = orientationType ()
         static member inline dir = directionType ()
-        static member inline inverted (value: bool): IReactProperty = mkProperty ("inverted", value)
-        static member inline min (value: int): IReactProperty = mkProperty ("min", value)
-        static member inline min (value: float): IReactProperty = mkProperty ("min", value)
-        static member inline max (value: int): IReactProperty = mkProperty ("max", value)
-        static member inline max (value: float): IReactProperty = mkProperty ("max", value)
-        static member inline step (value: int): IReactProperty = mkProperty ("step", value)
-        static member inline step (value: float): IReactProperty = mkProperty ("step", value)
-        static member inline minStepsBetweenThumbs (value: int): IReactProperty = mkProperty ("minStepsBetweenThumbs", value)
-        static member inline minStepsBetweenThumbs (value: float): IReactProperty = mkProperty ("minStepsBetweenThumbs", value)
-        static member inline form (value: string): IReactProperty = mkProperty ("form", value)
+        static member inline inverted(value: bool) : IReactProperty = mkProperty ("inverted", value)
+        static member inline min(value: int) : IReactProperty = mkProperty ("min", value)
+        static member inline min(value: float) : IReactProperty = mkProperty ("min", value)
+        static member inline max(value: int) : IReactProperty = mkProperty ("max", value)
+        static member inline max(value: float) : IReactProperty = mkProperty ("max", value)
+        static member inline step(value: int) : IReactProperty = mkProperty ("step", value)
+        static member inline step(value: float) : IReactProperty = mkProperty ("step", value)
+
+        static member inline minStepsBetweenThumbs(value: int) : IReactProperty =
+            mkProperty ("minStepsBetweenThumbs", value)
+
+        static member inline minStepsBetweenThumbs(value: float) : IReactProperty =
+            mkProperty ("minStepsBetweenThumbs", value)
+
+        static member inline form(value: string) : IReactProperty = mkProperty ("form", value)
 
     [<RequireQualifiedAccess>]
     type toaster =
@@ -1316,13 +1524,16 @@ module Properties =
     [<RequireQualifiedAccess>]
     type switch =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultChecked (value: bool): IReactProperty = mkProperty ("defaultChecked", value)
-        static member inline checked' (value: bool): IReactProperty = mkProperty ("checked", value)
-        static member inline onCheckedChange (value: bool -> unit): IReactProperty = mkProperty ("onCheckedChange", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline required (value: bool): IReactProperty = mkProperty ("required", value)
-        static member inline name (value: string): IReactProperty = mkProperty ("name", value)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
+        static member inline defaultChecked(value: bool) : IReactProperty = mkProperty ("defaultChecked", value)
+        static member inline checked'(value: bool) : IReactProperty = mkProperty ("checked", value)
+
+        static member inline onCheckedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onCheckedChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline required(value: bool) : IReactProperty = mkProperty ("required", value)
+        static member inline name(value: string) : IReactProperty = mkProperty ("name", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
 
     [<RequireQualifiedAccess>]
     type table =
@@ -1367,9 +1578,9 @@ module Properties =
     [<RequireQualifiedAccess>]
     type tabs =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultValue (value: string): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline onValueChange (value: string -> unit): IReactProperty = mkProperty ("onValueChange", value)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
         static member inline orientation = orientationType ()
         static member inline dir = directionType ()
         static member inline activationMode = tabsTypes.activationMode ()
@@ -1377,19 +1588,19 @@ module Properties =
     [<RequireQualifiedAccess>]
     type tabsContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
 
     [<RequireQualifiedAccess>]
     type tabsList =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline loop (value: bool): IReactProperty = mkProperty ("loop", value)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
     [<RequireQualifiedAccess>]
     type tabsTrigger =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
 
     [<RequireQualifiedAccess>]
     type textarea =
@@ -1398,10 +1609,13 @@ module Properties =
     [<RequireQualifiedAccess>]
     type toggle =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline defaultPressed (value: bool): IReactProperty = mkProperty ("defaultPressed", value)
-        static member inline pressed (value: bool): IReactProperty = mkProperty ("pressed", value)
-        static member inline onPressedChange (value: bool -> unit): IReactProperty = mkProperty ("onPressedChange", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
+        static member inline defaultPressed(value: bool) : IReactProperty = mkProperty ("defaultPressed", value)
+        static member inline pressed(value: bool) : IReactProperty = mkProperty ("pressed", value)
+
+        static member inline onPressedChange(value: bool -> unit) : IReactProperty =
+            mkProperty ("onPressedChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
 
 
     [<Erase>]
@@ -1415,66 +1629,83 @@ module Properties =
     type toggleGroup =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
         static member inline type' = toggleGroupTypes.type' ()
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline defaultValue (value: string): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline onValueChange (value: string -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline value (value: string seq): IReactProperty = mkProperty ("value", value)
-        static member inline defaultValue (value: string seq): IReactProperty = mkProperty ("defaultValue", value)
-        static member inline onValueChange (value: string list -> unit): IReactProperty = mkProperty ("onValueChange", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
-        static member inline rovingFocus (value: bool): IReactProperty = mkProperty ("rovingFocus", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline defaultValue(value: string) : IReactProperty = mkProperty ("defaultValue", value)
+        static member inline onValueChange(value: string -> unit) : IReactProperty = mkProperty ("onValueChange", value)
+        static member inline value(value: string seq) : IReactProperty = mkProperty ("value", value)
+        static member inline defaultValue(value: string seq) : IReactProperty = mkProperty ("defaultValue", value)
+
+        static member inline onValueChange(value: string list -> unit) : IReactProperty =
+            mkProperty ("onValueChange", value)
+
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
+        static member inline rovingFocus(value: bool) : IReactProperty = mkProperty ("rovingFocus", value)
         static member inline orientation = orientationType ()
         static member inline dir = directionType ()
-        static member inline loop (value: bool): IReactProperty = mkProperty ("loop", value)
+        static member inline loop(value: bool) : IReactProperty = mkProperty ("loop", value)
 
     [<RequireQualifiedAccess>]
     type toggleGroupItem =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline value (value: string): IReactProperty = mkProperty ("value", value)
-        static member inline disabled (value: bool): IReactProperty = mkProperty ("disabled", value)
+        static member inline value(value: string) : IReactProperty = mkProperty ("value", value)
+        static member inline disabled(value: bool) : IReactProperty = mkProperty ("disabled", value)
 
     [<RequireQualifiedAccess>]
     type tooltip =
-        static member inline defaultOpen (value: bool): IReactProperty = mkProperty ("defaultOpen", value)
-        static member inline open' (value: bool): IReactProperty = mkProperty ("open", value)
-        static member inline onOpenChange (value: bool -> unit): IReactProperty = mkProperty ("onOpenChange", value)
-        static member inline delayDuration (value: int): IReactProperty = mkProperty ("delayDuration", value)
-        static member inline delayDuration (value: float): IReactProperty = mkProperty ("delayDuration", value)
-        static member inline disableHoverableContent (value: bool): IReactProperty = mkProperty ("disableHoverableContent", value)
+        static member inline defaultOpen(value: bool) : IReactProperty = mkProperty ("defaultOpen", value)
+        static member inline open'(value: bool) : IReactProperty = mkProperty ("open", value)
+        static member inline onOpenChange(value: bool -> unit) : IReactProperty = mkProperty ("onOpenChange", value)
+        static member inline delayDuration(value: int) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline delayDuration(value: float) : IReactProperty = mkProperty ("delayDuration", value)
+
+        static member inline disableHoverableContent(value: bool) : IReactProperty =
+            mkProperty ("disableHoverableContent", value)
 
     [<RequireQualifiedAccess>]
     type tooltipContent =
         static member inline asChild: IReactProperty = mkProperty ("asChild", null)
-        static member inline arialabel (value: string): IReactProperty = mkProperty ("arialabel", value)
-        static member inline onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty = mkProperty ("onEscapeKeyDown", value)
-        static member inline onPointerDownOutside (value: PointerEvent -> unit): IReactProperty = mkProperty ("onPointerDownOutside", value)
-        static member inline forceMount (value: bool): IReactProperty = mkProperty ("forceMount", value)
-        static member inline side = sideType ()
-        static member inline sideOffset (value: int): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline sideOffset (value: float): IReactProperty = mkProperty ("sideOffset", value)
-        static member inline align = alignType ()
-        static member inline alignOffset (value: int): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline alignOffset (value: float): IReactProperty = mkProperty ("alignOffset", value)
-        static member inline avoidCollisions (value: bool): IReactProperty = mkProperty ("avoidCollisions", value)
-        static member inline collisionBoundary (value: HTMLElement): IReactProperty = mkProperty ("collisionBoundary", value)
-        static member inline collisionBoundary (value: HTMLElement array): IReactProperty = mkProperty ("collisionBoundary", value)
+        static member inline arialabel(value: string) : IReactProperty = mkProperty ("arialabel", value)
 
-        static member inline collisionPadding (all: int): IReactProperty = mkProperty ("collisionPadding", all)
-        static member inline collisionPadding (?top: int, ?right: int, ?bottom: int, ?left: int) =
+        static member inline onEscapeKeyDown(value: KeyboardEvent -> unit) : IReactProperty =
+            mkProperty ("onEscapeKeyDown", value)
+
+        static member inline onPointerDownOutside(value: PointerEvent -> unit) : IReactProperty =
+            mkProperty ("onPointerDownOutside", value)
+
+        static member inline forceMount(value: bool) : IReactProperty = mkProperty ("forceMount", value)
+        static member inline side = sideType ()
+        static member inline sideOffset(value: int) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline sideOffset(value: float) : IReactProperty = mkProperty ("sideOffset", value)
+        static member inline align = alignType ()
+        static member inline alignOffset(value: int) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline alignOffset(value: float) : IReactProperty = mkProperty ("alignOffset", value)
+        static member inline avoidCollisions(value: bool) : IReactProperty = mkProperty ("avoidCollisions", value)
+
+        static member inline collisionBoundary(value: HTMLElement) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionBoundary(value: HTMLElement array) : IReactProperty =
+            mkProperty ("collisionBoundary", value)
+
+        static member inline collisionPadding(all: int) : IReactProperty = mkProperty ("collisionPadding", all)
+
+        static member inline collisionPadding(?top: int, ?right: int, ?bottom: int, ?left: int) =
             mkProperty ("collisionPadding", collisionPaddingValue top right bottom left)
 
-        static member inline arrowPadding (value: int): IReactProperty = mkProperty ("arrowPadding", value)
-        static member inline arrowPadding (value: float): IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: int) : IReactProperty = mkProperty ("arrowPadding", value)
+        static member inline arrowPadding(value: float) : IReactProperty = mkProperty ("arrowPadding", value)
         static member inline sticky = stickyType ()
-        static member inline hideWhenDetached (value: bool): IReactProperty = mkProperty ("hideWhenDetached", value)
+        static member inline hideWhenDetached(value: bool) : IReactProperty = mkProperty ("hideWhenDetached", value)
 
     [<RequireQualifiedAccess>]
     type tooltipProvider =
-        static member inline delayDuration (value: int): IReactProperty = mkProperty ("delayDuration", value)
-        static member inline delayDuration (value: float): IReactProperty = mkProperty ("delayDuration", value)
-        static member inline skipDelayDuration (value: int): IReactProperty = mkProperty ("skipDelayDuration", value)
-        static member inline skipDelayDuration (value: float): IReactProperty = mkProperty ("skipDelayDuration", value)
-        static member inline disableHoverableContent (value: bool): IReactProperty = mkProperty ("disableHoverableContent", value)
+        static member inline delayDuration(value: int) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline delayDuration(value: float) : IReactProperty = mkProperty ("delayDuration", value)
+        static member inline skipDelayDuration(value: int) : IReactProperty = mkProperty ("skipDelayDuration", value)
+        static member inline skipDelayDuration(value: float) : IReactProperty = mkProperty ("skipDelayDuration", value)
+
+        static member inline disableHoverableContent(value: bool) : IReactProperty =
+            mkProperty ("disableHoverableContent", value)
 
     [<RequireQualifiedAccess>]
     type tooltipTrigger =

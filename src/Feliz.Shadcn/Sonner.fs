@@ -65,8 +65,7 @@ type Sonner =
     static member toastSuccess(text: string, ?options: ToastOptions) : unit =
         Interop.toastObj?success (text, options)
 
-    static member toastError(text: string, ?options: ToastOptions) : unit =
-        Interop.toastObj?error (text, options)
+    static member toastError(text: string, ?options: ToastOptions) : unit = Interop.toastObj?error (text, options)
 
     static member toastLoading(text: string, ?options: ToastOptions) : unit =
         Interop.toastObj?loading (text, options)

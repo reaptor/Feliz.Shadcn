@@ -14,7 +14,7 @@ let rec Command () =
                 Shadcn.commandList [
                     Shadcn.commandEmpty "No results found."
                     Shadcn.commandGroup [
-                        prop.custom ("heading", "Suggestions")
+                        commandGroup.heading "Suggestions"
                         prop.children [
                             Shadcn.commandItem [ prop.children [ Lucide.Calendar []; Html.span "Calendar" ] ]
                             Shadcn.commandItem [ prop.children [ Lucide.Smile []; Html.span "Search Emoji" ] ]
@@ -26,7 +26,7 @@ let rec Command () =
                     ]
                     Shadcn.commandSeparator []
                     Shadcn.commandGroup [
-                        prop.custom ("heading", "Settings")
+                        commandGroup.heading "Settings"
                         prop.children [
                             Shadcn.commandItem [
                                 prop.children [ Lucide.User []; Html.span "Profile"; Shadcn.commandShortcut "⌘P" ]
@@ -51,7 +51,7 @@ let rec Command () =
         Shadcn.commandList [
             Shadcn.commandEmpty "No results found."
             Shadcn.commandGroup [
-                prop.custom("heading", "Suggestions")
+                commandGroup.heading "Suggestions"
                 prop.children [
                     Shadcn.commandItem [
                         prop.children [
@@ -76,7 +76,7 @@ let rec Command () =
             ]
             Shadcn.commandSeparator []
             Shadcn.commandGroup [
-                prop.custom("heading", "Settings")
+                commandGroup.heading "Settings"
                 prop.children [
                     Shadcn.commandItem [
                         prop.children [
