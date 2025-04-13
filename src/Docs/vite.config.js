@@ -10,10 +10,7 @@ export default defineConfig({
     ],
     base: "/Feliz.Shadcn",
     build: {
-        outDir: "dist",
-        rollupOptions: {
-            external: ['sonner'],
-        },
+        outDir: "dist"
     },
     resolve: {
         alias: {

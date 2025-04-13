@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <CentralPackageVersionOverrideEnabled>false</CentralPackageVersionOverrideEnabled>
+    <CentralPackageVersionOverrideEnabled>true</CentralPackageVersionOverrideEnabled>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Elmish" Version="4.2.0" />
@@ -13,6 +13,6 @@
     <PackageVersion Include="Fable.Promise" Version="3.2.0" />
     <PackageVersion Include="Feliz" Version="2.8.0" />
     <PackageVersion Include="Feliz.Router" Version="4.0.0" />
-    <PackageVersion Include="Glutinum.Feliz.Lucide" Version="1.0.2" />
+    <PackageVersion Include="Feliz.Shadcn" Version="0.9.3" />
   </ItemGroup>
 </Project>

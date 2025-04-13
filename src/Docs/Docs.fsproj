@@ -62,8 +62,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Feliz.Shadcn\Feliz.Shadcn.fsproj" />
       <ProjectReference Include=".elmish-land/Base/ElmishLand.Docs.Base.fsproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Feliz.Shadcn" />
     </ItemGroup>
 
 </Project>
