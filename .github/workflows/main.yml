@@ -51,15 +51,15 @@ jobs:
     - name: Setup Pages
       uses: actions/configure-pages@v5
 
+    - name: Delete _site directory
+      run: rm -rf _site
+
     - name: Build documentation
       working-directory: ./src/Docs
       run: npm run build
 
     - name: Upload build artifacts
       uses: actions/upload-pages-artifact@v3
-      with:
-        name: Upload documentation
-        path: src/Docs/dist/
 
   deploy:
     environment:

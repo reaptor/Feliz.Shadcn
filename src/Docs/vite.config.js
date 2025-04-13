@@ -9,7 +9,7 @@ export default defineConfig({
         react()
     ],
     build: {
-        outDir: "dist",
+        outDir: "../../_site",
         rollupOptions: {
             external: ['sonner'],
         },
