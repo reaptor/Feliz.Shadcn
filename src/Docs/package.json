@@ -1,10 +1,14 @@
 {
   "name": "docs",
+  "homepage": "https://reaptor.github.io/Feliz.Shadcn/ ",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "start": "dotnet elmish-land server",
-    "build": "dotnet elmish-land build"
+    "build": "dotnet elmish-land build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist --nojekyll",
+    "gh-pages": "gh-pages"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
@@ -39,6 +43,7 @@
     "cmdk": "^1.1.1",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.6.0",
+    "gh-pages": "^6.3.0",
     "highlight.js": "^11.11.1",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.475.0",

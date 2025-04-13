@@ -8,9 +8,9 @@ export default defineConfig({
         tailwindcss(),
         react()
     ],
+    base: "/Feliz.Shadcn",
     build: {
-        outDir: "../../_site",
-        assetsDir: "",
+        outDir: "dist",
         rollupOptions: {
             external: ['sonner'],
         },
