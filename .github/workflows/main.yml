@@ -1,0 +1,47 @@
+name: Build Documentation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.0.x'
+        
+    - name: Restore .NET tools
+      run: dotnet tool restore
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'
+        cache: 'npm'
+        cache-dependency-path: 'src/Docs/package-lock.json'
+        
+    - name: Install npm dependencies
+      working-directory: ./src/Docs
+      run: npm install
+      
+    - name: Build documentation
+      working-directory: ./src/Docs
+      run: npm run build
+      
+    # Optional - add a step to upload artifacts if needed
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: documentation
+        path: src/Docs/dist/
