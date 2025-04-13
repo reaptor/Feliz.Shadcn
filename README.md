@@ -2,7 +2,7 @@
 
 Fable/Feliz types for the Shadcn UI component library.
 
-Read [the Shadcn documentation](https://ui.shadcn.com) for more information.
+Read [the documentation](https://reaptor.github.io/Feliz.Shadcn/) for more information.
 
 ## TL;DR
 
