@@ -10,3 +10,4 @@ nuget
 **/*.fable-temp.csproj
 .elmish-land
 src/Docs/dist/
+_site/

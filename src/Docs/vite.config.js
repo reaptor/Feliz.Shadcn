@@ -10,6 +10,7 @@ export default defineConfig({
     ],
     build: {
         outDir: "../../_site",
+        assetsDir: "",
         rollupOptions: {
             external: ['sonner'],
         },
