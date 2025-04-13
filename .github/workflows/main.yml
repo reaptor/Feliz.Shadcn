@@ -22,6 +22,7 @@ jobs:
         dotnet-version: '9.0.x'
 
     - name: Restore .NET tools
+      working-directory: ./src/Docs
       run: dotnet tool restore
 
     - name: Setup Node.js
