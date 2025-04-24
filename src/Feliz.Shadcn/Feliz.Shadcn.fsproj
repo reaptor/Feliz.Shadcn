@@ -7,7 +7,7 @@
     <Description>Feliz typings for the Shadcn UI components</Description>
     <PackageTags>fsharp;fable;react;html;shadcn</PackageTags>
     <Authors>Kristofer Löfberg</Authors>
-    <Version>0.9.3</Version>
+    <Version>0.9.4</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Reaptor 2025</Copyright>

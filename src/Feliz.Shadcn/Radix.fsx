@@ -250,8 +250,8 @@ for path in componentPaths do
     [<Erase>]
     module private toggleGroupTypes =
         let inline type' () = {|
-            single = mkProperty ("activationMode", "single")
-            multiple = mkProperty ("activationMode", "multiple")
+            single = mkProperty ("type", "single")
+            multiple = mkProperty ("type", "multiple")
         |}
 """
         | "selectContent" ->

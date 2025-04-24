@@ -1461,864 +1461,232 @@ let apiReferencesElements: Map<string, string list> =
 // apiReferences elements end
 
 // apiReferences props begin
-let apiReferencesProps: Map<string, string list> =
-    Map [
-        "accordion",
-        [
-            "asChild: IReactProperty"
-            "type': accordionTypes.type' ()"
-            "value (value: string): IReactProperty"
-            "defaultValue (value: string): IReactProperty"
-            "onValueChange (value: string -> unit): IReactProperty"
-            "value (value: string seq): IReactProperty"
-            "defaultValue (value: string seq): IReactProperty"
-            "onValueChange (value: string -> unit): IReactProperty"
-            "collapsible (value: bool): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "dir: directionType ()"
-            "orientation: orientationType ()"
-        ]
-        "accordionContent", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
-        "accordionItem",
-        [
-            "asChild: IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "value (value: string): IReactProperty"
-        ]
-        "accordionTrigger", [ "asChild: IReactProperty" ]
-        "alert", [ "asChild: IReactProperty" ]
-        "alertDescription", [ "asChild: IReactProperty" ]
-        "alertTitle", [ "asChild: IReactProperty" ]
-        "alertDialog",
-        [
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-        ]
-        "alertDialogAction", [ "asChild: IReactProperty" ]
-        "alertDialogCancel", [ "asChild: IReactProperty" ]
-        "alertDialogContent",
-        [
-            "asChild: IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "onOpenAutoFocus (value: Event -> unit): IReactProperty"
-            "onCloseAutoFocus (value: Event -> unit): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-        ]
-        "alertDialogDescription", [ "asChild: IReactProperty" ]
-        "alertDialogFooter", [ "asChild: IReactProperty" ]
-        "alertDialogHeader", [ "asChild: IReactProperty" ]
-        "alertDialogOverlay", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
-        "alertDialogPortal",
-        [
-            "forceMount (value: bool): IReactProperty"
-            "container (value: HTMLElement): IReactProperty"
-        ]
-        "alertDialogTitle", [ "asChild: IReactProperty" ]
-        "alertDialogTrigger", [ "asChild: IReactProperty" ]
-        "aspectRatio",
-        [
-            "asChild: IReactProperty"
-            "ratio (value: int): IReactProperty"
-            "ratio (value: float)"
-        ]
-        "avatar", [ "asChild: IReactProperty" ]
-        "avatarFallback",
-        [
-            "asChild: IReactProperty"
-            "delayMs (value: int): IReactProperty"
-            "delayMs (value: float)"
-        ]
-        "avatarImage",
-        [
-            "asChild: IReactProperty"
-            "onLoadingStatusChange (value: string -> unit): IReactProperty"
-        ]
-        "badge", [ "asChild: IReactProperty" ]
-        "breadcrumb", [ "asChild: IReactProperty" ]
-        "breadcrumbEllipsis", [ "asChild: IReactProperty" ]
-        "breadcrumbItem", [ "asChild: IReactProperty" ]
-        "breadcrumbLink", [ "asChild: IReactProperty" ]
-        "breadcrumbList", [ "asChild: IReactProperty" ]
-        "breadcrumbPage", [ "asChild: IReactProperty" ]
-        "breadcrumbSeparator", [ "asChild: IReactProperty" ]
-        "button", [ "asChild: IReactProperty" ]
-        "calendar", [ "asChild: IReactProperty" ]
-        "card", [ "asChild: IReactProperty" ]
-        "cardAction", [ "asChild: IReactProperty" ]
-        "cardContent", [ "asChild: IReactProperty" ]
-        "cardDescription", [ "asChild: IReactProperty" ]
-        "cardFooter", [ "asChild: IReactProperty" ]
-        "cardHeader", [ "asChild: IReactProperty" ]
-        "cardTitle", [ "asChild: IReactProperty" ]
-        "carousel", [ "asChild: IReactProperty" ]
-        "carouselContent", [ "asChild: IReactProperty" ]
-        "carouselItem", [ "asChild: IReactProperty" ]
-        "carouselNext", [ "asChild: IReactProperty" ]
-        "carouselPrevious", [ "asChild: IReactProperty" ]
-        "chartContainer", [ "asChild: IReactProperty" ]
-        "checkbox",
-        [
-            "asChild: IReactProperty"
-            "defaultChecked (value: bool option -> unit): IReactProperty"
-            "checked' (value: bool): IReactProperty"
-            "onCheckedChange (value: bool option -> unit): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "required (value: bool): IReactProperty"
-            "name (value: string): IReactProperty"
-            "value (value: string): IReactProperty"
-        ]
-        "collapsible",
-        [
-            "asChild: IReactProperty"
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-        ]
-        "collapsibleContent", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
-        "collapsibleTrigger", [ "asChild: IReactProperty" ]
-        "command", [ "asChild: IReactProperty" ]
-        "commandDialog", [ "asChild: IReactProperty" ]
-        "commandEmpty", [ "asChild: IReactProperty" ]
-        "commandGroup", [ "asChild: IReactProperty" ]
-        "commandInput", [ "asChild: IReactProperty" ]
-        "commandItem", [ "asChild: IReactProperty" ]
-        "commandList", [ "asChild: IReactProperty" ]
-        "commandSeparator", [ "asChild: IReactProperty" ]
-        "commandShortcut", [ "asChild: IReactProperty" ]
-        "contextMenu",
-        [
-            "dir: directionType ()"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-            "modal (value: bool): IReactProperty"
-        ]
-        "contextMenuCheckboxItem",
-        [
-            "asChild: IReactProperty"
-            "checked' (value: bool): IReactProperty"
-            "onCheckedChange (value: bool -> unit): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "onSelect (value: Event -> unit): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "contextMenuContent",
-        [
-            "asChild: IReactProperty"
-            "loop (value: bool): IReactProperty"
-            "onCloseAutoFocus (value: Event -> unit): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "onFocusOutside (value: FocusEvent -> unit): IReactProperty"
-            "onInteractOutside (value: Event -> unit): IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "alignOffset (value: int): IReactProperty"
-            "alignOffset (value: float)"
-            "avoidCollisions (value: bool): IReactProperty"
-            "collisionBoundary (value: HTMLElement): IReactProperty"
-            "collisionPadding (all: int): IReactProperty"
-            "sticky: stickyType ()"
-            "hideWhenDetached (value: bool): IReactProperty"
-        ]
-        "contextMenuGroup", [ "asChild: IReactProperty" ]
-        "contextMenuItem",
-        [
-            "asChild: IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "onSelect (value: Event -> unit): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "contextMenuLabel", [ "asChild: IReactProperty" ]
-        "contextMenuPortal",
-        [
-            "forceMount (value: bool): IReactProperty"
-            "container (value: HTMLElement): IReactProperty"
-        ]
-        "contextMenuRadioGroup",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "onValueChange (value: string -> unit): IReactProperty"
-        ]
-        "contextMenuRadioItem",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "onSelect (value: Event -> unit): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "contextMenuSeparator", [ "asChild: IReactProperty" ]
-        "contextMenuShortcut", [ "asChild: IReactProperty" ]
-        "contextMenuSub",
-        [
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-        ]
-        "contextMenuSubContent",
-        [
-            "asChild: IReactProperty"
-            "loop (value: bool): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "onFocusOutside (value: FocusEvent -> unit): IReactProperty"
-            "onInteractOutside (value: Event -> unit): IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "sideOffset (value: int): IReactProperty"
-            "sideOffset (value: float)"
-            "alignOffset (value: int): IReactProperty"
-            "alignOffset (value: float)"
-            "avoidCollisions (value: bool): IReactProperty"
-            "collisionBoundary (value: HTMLElement): IReactProperty"
-            "collisionPadding (all: int): IReactProperty"
-            "arrowPadding (value: int): IReactProperty"
-            "arrowPadding (value: float)"
-            "sticky: stickyType ()"
-            "hideWhenDetached (value: bool): IReactProperty"
-        ]
-        "contextMenuSubTrigger",
-        [
-            "asChild: IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "contextMenuTrigger", [ "asChild: IReactProperty"; "disabled (value: bool): IReactProperty" ]
-        "dialog",
-        [
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-            "modal (value: bool): IReactProperty"
-        ]
-        "dialogClose", [ "asChild: IReactProperty" ]
-        "dialogContent",
-        [
-            "asChild: IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "onOpenAutoFocus (value: Event -> unit): IReactProperty"
-            "onCloseAutoFocus (value: Event -> unit): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "onInteractOutside (value: Event -> unit): IReactProperty"
-        ]
-        "dialogDescription", [ "asChild: IReactProperty" ]
-        "dialogFooter", [ "asChild: IReactProperty" ]
-        "dialogHeader", [ "asChild: IReactProperty" ]
-        "dialogOverlay", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
-        "dialogPortal",
-        [
-            "forceMount (value: bool): IReactProperty"
-            "container (value: HTMLElement): IReactProperty"
-        ]
-        "dialogTitle", [ "asChild: IReactProperty" ]
-        "dialogTrigger", [ "asChild: IReactProperty" ]
-        "drawer", [ "asChild: IReactProperty" ]
-        "drawerClose", [ "asChild: IReactProperty" ]
-        "drawerContent", [ "asChild: IReactProperty" ]
-        "drawerDescription", [ "asChild: IReactProperty" ]
-        "drawerFooter", [ "asChild: IReactProperty" ]
-        "drawerHeader", [ "asChild: IReactProperty" ]
-        "drawerOverlay", [ "asChild: IReactProperty" ]
-        "drawerPortal", [ "asChild: IReactProperty" ]
-        "drawerTitle", [ "asChild: IReactProperty" ]
-        "drawerTrigger", [ "asChild: IReactProperty" ]
-        "dropdownMenu",
-        [
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-            "modal (value: bool): IReactProperty"
-            "dir: directionType ()"
-        ]
-        "dropdownMenuCheckboxItem",
-        [
-            "asChild: IReactProperty"
-            "checked' (value: bool): IReactProperty"
-            "onCheckedChange (value: bool -> unit): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "onSelect (value: Event -> unit): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "dropdownMenuContent",
-        [
-            "asChild: IReactProperty"
-            "loop (value: bool): IReactProperty"
-            "onCloseAutoFocus (value: Event -> unit): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "onFocusOutside (value: FocusEvent -> unit): IReactProperty"
-            "onInteractOutside (value: Event -> unit): IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "side: sideType ()"
-            "sideOffset (value: int): IReactProperty"
-            "sideOffset (value: float)"
-            "align: alignType ()"
-            "alignOffset (value: int): IReactProperty"
-            "alignOffset (value: float)"
-            "avoidCollisions (value: bool): IReactProperty"
-            "collisionBoundary (value: HTMLElement): IReactProperty"
-            "collisionPadding (all: int): IReactProperty"
-            "arrowPadding (value: int): IReactProperty"
-            "arrowPadding (value: float)"
-            "sticky: stickyType ()"
-            "hideWhenDetached (value: bool): IReactProperty"
-        ]
-        "dropdownMenuGroup", [ "asChild: IReactProperty" ]
-        "dropdownMenuItem",
-        [
-            "asChild: IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "onSelect (value: Event -> unit): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "dropdownMenuLabel", [ "asChild: IReactProperty" ]
-        "dropdownMenuPortal",
-        [
-            "forceMount (value: bool): IReactProperty"
-            "container (value: HTMLElement): IReactProperty"
-        ]
-        "dropdownMenuRadioGroup",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "onValueChange (value: string -> unit): IReactProperty"
-        ]
-        "dropdownMenuRadioItem",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "onSelect (value: Event -> unit): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "dropdownMenuSeparator", [ "asChild: IReactProperty" ]
-        "dropdownMenuShortcut", [ "asChild: IReactProperty" ]
-        "dropdownMenuSub",
-        [
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-        ]
-        "dropdownMenuSubContent",
-        [
-            "asChild: IReactProperty"
-            "loop (value: bool): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "onFocusOutside (value: FocusEvent -> unit): IReactProperty"
-            "onInteractOutside (value: Event -> unit): IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "sideOffset (value: int): IReactProperty"
-            "sideOffset (value: float)"
-            "alignOffset (value: int): IReactProperty"
-            "alignOffset (value: float)"
-            "avoidCollisions (value: bool): IReactProperty"
-            "collisionBoundary (value: HTMLElement): IReactProperty"
-            "collisionPadding (all: int): IReactProperty"
-            "arrowPadding (value: int): IReactProperty"
-            "arrowPadding (value: float)"
-            "sticky: stickyType ()"
-            "hideWhenDetached (value: bool): IReactProperty"
-        ]
-        "dropdownMenuSubTrigger",
-        [
-            "asChild: IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "dropdownMenuTrigger", [ "asChild: IReactProperty" ]
-        "form",
-        [
-            "asChild: IReactProperty"
-            "onClearServerErrors (value: unit -> unit): IReactProperty"
-        ]
-        "hoverCard",
-        [
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-            "open'Delay (value: int): IReactProperty"
-            "open'Delay (value: float)"
-            "closeDelay (value: int): IReactProperty"
-            "closeDelay (value: float)"
-        ]
-        "hoverCardContent",
-        [
-            "asChild: IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "side: sideType ()"
-            "sideOffset (value: int): IReactProperty"
-            "sideOffset (value: float)"
-            "align: alignType ()"
-            "alignOffset (value: int): IReactProperty"
-            "alignOffset (value: float)"
-            "avoidCollisions (value: bool): IReactProperty"
-            "collisionBoundary (value: HTMLElement): IReactProperty"
-            "collisionPadding (all: int): IReactProperty"
-            "arrowPadding (value: int): IReactProperty"
-            "arrowPadding (value: float)"
-            "sticky: stickyType ()"
-            "hideWhenDetached (value: bool): IReactProperty"
-        ]
-        "hoverCardTrigger", [ "asChild: IReactProperty" ]
-        "input", [ "asChild: IReactProperty" ]
-        "inputOTP", [ "asChild: IReactProperty" ]
-        "inputOTPGroup", [ "asChild: IReactProperty" ]
-        "inputOTPSeparator", [ "asChild: IReactProperty" ]
-        "inputOTPSlot", [ "asChild: IReactProperty" ]
-        "label", [ "asChild: IReactProperty"; "htmlFor (value: string): IReactProperty" ]
-        "menubar",
-        [
-            "asChild: IReactProperty"
-            "defaultValue (value: string): IReactProperty"
-            "value (value: string): IReactProperty"
-            "onValueChange (value: int list -> unit): IReactProperty"
-            "onValueChange (value: float list -> unit): IReactProperty"
-            "dir: directionType ()"
-            "loop (value: bool): IReactProperty"
-        ]
-        "menubarCheckboxItem",
-        [
-            "asChild: IReactProperty"
-            "checked' (value: bool): IReactProperty"
-            "onCheckedChange (value: bool -> unit): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "onSelect (value: Event -> unit): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "menubarContent",
-        [
-            "asChild: IReactProperty"
-            "loop (value: bool): IReactProperty"
-            "onCloseAutoFocus (value: Event -> unit): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "onFocusOutside (value: FocusEvent -> unit): IReactProperty"
-            "onInteractOutside (value: Event -> unit): IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "side: sideType ()"
-            "sideOffset (value: int): IReactProperty"
-            "sideOffset (value: float)"
-            "align: alignType ()"
-            "alignOffset (value: int): IReactProperty"
-            "alignOffset (value: float)"
-            "avoidCollisions (value: bool): IReactProperty"
-            "collisionBoundary (value: HTMLElement): IReactProperty"
-            "collisionPadding (all: int): IReactProperty"
-            "arrowPadding (value: int): IReactProperty"
-            "arrowPadding (value: float)"
-            "sticky: stickyType ()"
-            "hideWhenDetached (value: bool): IReactProperty"
-        ]
-        "menubarGroup", [ "asChild: IReactProperty" ]
-        "menubarItem",
-        [
-            "asChild: IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "onSelect (value: Event -> unit): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "menubarLabel", [ "asChild: IReactProperty" ]
-        "menubarMenu", [ "asChild: IReactProperty"; "value (value: string): IReactProperty" ]
-        "menubarPortal",
-        [
-            "forceMount (value: bool): IReactProperty"
-            "container (value: HTMLElement): IReactProperty"
-        ]
-        "menubarRadioGroup",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "onValueChange (value: string -> unit): IReactProperty"
-        ]
-        "menubarRadioItem",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "onSelect (value: Event -> unit): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "menubarSeparator", [ "asChild: IReactProperty" ]
-        "menubarShortcut", [ "asChild: IReactProperty" ]
-        "menubarSub",
-        [
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-        ]
-        "menubarSubContent",
-        [
-            "asChild: IReactProperty"
-            "loop (value: bool): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "onFocusOutside (value: FocusEvent -> unit): IReactProperty"
-            "onInteractOutside (value: Event -> unit): IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "sideOffset (value: int): IReactProperty"
-            "sideOffset (value: float)"
-            "alignOffset (value: int): IReactProperty"
-            "alignOffset (value: float)"
-            "avoidCollisions (value: bool): IReactProperty"
-            "collisionBoundary (value: HTMLElement): IReactProperty"
-            "collisionPadding (all: int): IReactProperty"
-            "arrowPadding (value: int): IReactProperty"
-            "arrowPadding (value: float)"
-            "sticky: stickyType ()"
-            "hideWhenDetached (value: bool): IReactProperty"
-        ]
-        "menubarSubTrigger",
-        [
-            "asChild: IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "menubarTrigger", [ "asChild: IReactProperty" ]
-        "navigationMenu",
-        [
-            "defaultValue (value: string): IReactProperty"
-            "value (value: string): IReactProperty"
-            "onValueChange (value: int list -> unit): IReactProperty"
-            "onValueChange (value: float list -> unit): IReactProperty"
-            "delayDuration (value: int): IReactProperty"
-            "delayDuration (value: float)"
-            "skipDelayDuration (value: int): IReactProperty"
-            "skipDelayDuration (value: float)"
-            "dir: directionType ()"
-            "orientation: orientationType ()"
-        ]
-        "navigationMenuContent",
-        [
-            "asChild: IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "onFocusOutside (value: FocusEvent -> unit): IReactProperty"
-            "onInteractOutside (value: Event -> unit): IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-        ]
-        "navigationMenuIndicator", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
-        "navigationMenuItem", [ "asChild: IReactProperty"; "value (value: string): IReactProperty" ]
-        "navigationMenuLink",
-        [
-            "asChild: IReactProperty"
-            "active (value: bool): IReactProperty"
-            "onSelect (value: Event -> unit): IReactProperty"
-        ]
-        "navigationMenuList", [ "asChild: IReactProperty" ]
-        "navigationMenuTrigger", [ "asChild: IReactProperty" ]
-        "navigationMenuViewport", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
-        "pagination", [ "asChild: IReactProperty" ]
-        "paginationContent", [ "asChild: IReactProperty" ]
-        "paginationEllipsis", [ "asChild: IReactProperty" ]
-        "paginationItem", [ "asChild: IReactProperty" ]
-        "paginationLink", [ "asChild: IReactProperty" ]
-        "paginationNext", [ "asChild: IReactProperty" ]
-        "paginationPrevious", [ "asChild: IReactProperty" ]
-        "popover",
-        [
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-            "modal (value: bool): IReactProperty"
-        ]
-        "popoverAnchor", [ "asChild: IReactProperty" ]
-        "popoverContent",
-        [
-            "asChild: IReactProperty"
-            "onOpenAutoFocus (value: Event -> unit): IReactProperty"
-            "onCloseAutoFocus (value: Event -> unit): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "onFocusOutside (value: FocusEvent -> unit): IReactProperty"
-            "onInteractOutside (value: Event -> unit): IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "side: sideType ()"
-            "sideOffset (value: int): IReactProperty"
-            "sideOffset (value: float)"
-            "align: alignType ()"
-            "alignOffset (value: int): IReactProperty"
-            "alignOffset (value: float)"
-            "avoidCollisions (value: bool): IReactProperty"
-            "collisionBoundary (value: HTMLElement): IReactProperty"
-            "collisionPadding (all: int): IReactProperty"
-            "arrowPadding (value: int): IReactProperty"
-            "arrowPadding (value: float)"
-            "sticky: stickyType ()"
-            "hideWhenDetached (value: bool): IReactProperty"
-        ]
-        "popoverTrigger", [ "asChild: IReactProperty" ]
-        "progress",
-        [
-            "asChild: IReactProperty"
-            "value (value: int option): IReactProperty"
-            "value (value: float option): IReactProperty"
-            "max (value: int): IReactProperty"
-            "max (value: float)"
-            "getValueLabel (value: int -> int -> string): IReactProperty"
-        ]
-        "radioGroup",
-        [
-            "asChild: IReactProperty"
-            "defaultValue (value: string): IReactProperty"
-            "value (value: string): IReactProperty"
-            "onValueChange (value: int list -> unit): IReactProperty"
-            "onValueChange (value: float list -> unit): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "name (value: string): IReactProperty"
-            "required (value: bool): IReactProperty"
-            "orientation: orientationType ()"
-            "dir: directionType ()"
-            "loop (value: bool): IReactProperty"
-        ]
-        "radioGroupItem",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "required (value: bool): IReactProperty"
-        ]
-        "resizablePanelGroup", [ "asChild: IReactProperty" ]
-        "scrollArea",
-        [
-            "asChild: IReactProperty"
-            "type': scrollAreaTypes.type' ()"
-            "scrollHideDelay (value: int): IReactProperty"
-            "scrollHideDelay (value: float)"
-            "dir: directionType ()"
-            "nonce (value: string): IReactProperty"
-        ]
-        "select",
-        [
-            "defaultValue (value: string): IReactProperty"
-            "value (value: string): IReactProperty"
-            "onValueChange (value: string -> unit): IReactProperty"
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-            "dir: directionType ()"
-            "name (value: string): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "required (value: bool): IReactProperty"
-        ]
-        "selectContent",
-        [
-            "asChild: IReactProperty"
-            "onCloseAutoFocus (value: Event -> unit): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "position: selectContentTypes.position ()"
-            "side: sideType ()"
-            "sideOffset (value: int): IReactProperty"
-            "sideOffset (value: float)"
-            "align: alignType ()"
-            "alignOffset (value: int): IReactProperty"
-            "alignOffset (value: float)"
-            "avoidCollisions (value: bool): IReactProperty"
-            "collisionBoundary (value: HTMLElement): IReactProperty"
-            "collisionPadding (all: int): IReactProperty"
-            "arrowPadding (value: int): IReactProperty"
-            "arrowPadding (value: float)"
-            "sticky: stickyType ()"
-            "hideWhenDetached (value: bool): IReactProperty"
-        ]
-        "selectGroup", [ "asChild: IReactProperty" ]
-        "selectItem",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "textValue (value: string): IReactProperty"
-        ]
-        "selectLabel", [ "asChild: IReactProperty" ]
-        "selectScrollDownButton", [ "asChild: IReactProperty" ]
-        "selectScrollUpButton", [ "asChild: IReactProperty" ]
-        "selectSeparator", [ "asChild: IReactProperty" ]
-        "selectTrigger", [ "asChild: IReactProperty" ]
-        "selectValue",
-        [
-            "asChild: IReactProperty"
-            "placeholder (value: ReactElement): IReactProperty"
-        ]
-        "separator",
-        [
-            "asChild: IReactProperty"
-            "orientation: orientationType ()"
-            "decorative (value: bool): IReactProperty"
-        ]
-        "sheet", [ "asChild: IReactProperty" ]
-        "sheetClose", [ "asChild: IReactProperty" ]
-        "sheetContent", [ "asChild: IReactProperty" ]
-        "sheetDescription", [ "asChild: IReactProperty" ]
-        "sheetFooter", [ "asChild: IReactProperty" ]
-        "sheetHeader", [ "asChild: IReactProperty" ]
-        "sheetTitle", [ "asChild: IReactProperty" ]
-        "sheetTrigger", [ "asChild: IReactProperty" ]
-        "sidebar", [ "asChild: IReactProperty" ]
-        "sidebarContent", [ "asChild: IReactProperty" ]
-        "sidebarFooter", [ "asChild: IReactProperty" ]
-        "sidebarGroup", [ "asChild: IReactProperty" ]
-        "sidebarGroupAction", [ "asChild: IReactProperty" ]
-        "sidebarGroupContent", [ "asChild: IReactProperty" ]
-        "sidebarGroupLabel", [ "asChild: IReactProperty" ]
-        "sidebarHeader", [ "asChild: IReactProperty" ]
-        "sidebarInput", [ "asChild: IReactProperty" ]
-        "sidebarInset", [ "asChild: IReactProperty" ]
-        "sidebarMenu", [ "asChild: IReactProperty" ]
-        "sidebarMenuAction", [ "asChild: IReactProperty" ]
-        "sidebarMenuBadge", [ "asChild: IReactProperty" ]
-        "sidebarMenuButton", [ "asChild: IReactProperty" ]
-        "sidebarMenuItem", [ "asChild: IReactProperty" ]
-        "sidebarMenuSkeleton", [ "asChild: IReactProperty" ]
-        "sidebarMenuSub", [ "asChild: IReactProperty" ]
-        "sidebarMenuSubButton", [ "asChild: IReactProperty" ]
-        "sidebarMenuSubItem", [ "asChild: IReactProperty" ]
-        "sidebarProvider", [ "asChild: IReactProperty" ]
-        "sidebarRail", [ "asChild: IReactProperty" ]
-        "sidebarSeparator", [ "asChild: IReactProperty" ]
-        "sidebarTrigger", [ "asChild: IReactProperty" ]
-        "skeleton", [ "asChild: IReactProperty" ]
-        "slider",
-        [
-            "asChild: IReactProperty"
-            "defaultValue (value: int list): IReactProperty: IReactProperty"
-            "defaultValue (value: float list): IReactProperty"
-            "value (value: int list): IReactProperty: IReactProperty"
-            "value (value: float list): IReactProperty"
-            "onValueChange (value: int list -> unit): IReactProperty"
-            "onValueChange (value: float list -> unit): IReactProperty"
-            "onValueCommit (value: int list -> unit): IReactProperty"
-            "onValueCommit (value: float list -> unit): IReactProperty"
-            "name (value: string): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "orientation: orientationType ()"
-            "dir: directionType ()"
-            "inverted (value: bool): IReactProperty"
-            "min (value: int): IReactProperty"
-            "min (value: float)"
-            "max (value: int): IReactProperty"
-            "max (value: float)"
-            "step (value: int): IReactProperty"
-            "step (value: float)"
-            "minStepsBetweenThumbs (value: int): IReactProperty"
-            "minStepsBetweenThumbs (value: float)"
-            "form (value: string): IReactProperty"
-        ]
-        "toaster", [ "asChild: IReactProperty" ]
-        "switch",
-        [
-            "asChild: IReactProperty"
-            "defaultChecked (value: bool): IReactProperty"
-            "checked' (value: bool): IReactProperty"
-            "onCheckedChange (value: bool -> unit): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "required (value: bool): IReactProperty"
-            "name (value: string): IReactProperty"
-            "value (value: string): IReactProperty"
-        ]
-        "table", [ "asChild: IReactProperty" ]
-        "tableBody", [ "asChild: IReactProperty" ]
-        "tableCaption", [ "asChild: IReactProperty" ]
-        "tableCell", [ "asChild: IReactProperty" ]
-        "tableFooter", [ "asChild: IReactProperty" ]
-        "tableHead", [ "asChild: IReactProperty" ]
-        "tableHeader", [ "asChild: IReactProperty" ]
-        "tableRow", [ "asChild: IReactProperty" ]
-        "tabs",
-        [
-            "asChild: IReactProperty"
-            "defaultValue (value: string): IReactProperty"
-            "value (value: string): IReactProperty"
-            "onValueChange (value: string -> unit): IReactProperty"
-            "orientation: orientationType ()"
-            "dir: directionType ()"
-            "activationMode: tabsTypes.activationMode ()"
-        ]
-        "tabsContent",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-        ]
-        "tabsList", [ "asChild: IReactProperty"; "loop (value: bool): IReactProperty" ]
-        "tabsTrigger",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-        ]
-        "textarea", [ "asChild: IReactProperty" ]
-        "toggle",
-        [
-            "asChild: IReactProperty"
-            "defaultPressed (value: bool): IReactProperty"
-            "pressed (value: bool): IReactProperty"
-            "onPressedChange (value: bool -> unit): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-        ]
-        "toggleGroup",
-        [
-            "asChild: IReactProperty"
-            "type': toggleGroupTypes.type' ()"
-            "value (value: string): IReactProperty"
-            "defaultValue (value: string): IReactProperty"
-            "onValueChange (value: string -> unit): IReactProperty"
-            "value (value: string seq): IReactProperty"
-            "defaultValue (value: string seq): IReactProperty"
-            "onValueChange (value: string -> unit): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-            "rovingFocus (value: bool): IReactProperty"
-            "orientation: orientationType ()"
-            "dir: directionType ()"
-            "loop (value: bool): IReactProperty"
-        ]
-        "toggleGroupItem",
-        [
-            "asChild: IReactProperty"
-            "value (value: string): IReactProperty"
-            "disabled (value: bool): IReactProperty"
-        ]
-        "tooltip",
-        [
-            "defaultOpen (value: bool): IReactProperty"
-            "open' (value: bool): IReactProperty"
-            "onOpenChange (value: bool -> unit): IReactProperty"
-            "delayDuration (value: int): IReactProperty"
-            "delayDuration (value: float)"
-            "disableHoverableContent (value: bool): IReactProperty"
-        ]
-        "tooltipContent",
-        [
-            "asChild: IReactProperty"
-            "arialabel (value: string): IReactProperty"
-            "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"
-            "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"
-            "forceMount (value: bool): IReactProperty"
-            "side: sideType ()"
-            "sideOffset (value: int): IReactProperty"
-            "sideOffset (value: float)"
-            "align: alignType ()"
-            "alignOffset (value: int): IReactProperty"
-            "alignOffset (value: float)"
-            "avoidCollisions (value: bool): IReactProperty"
-            "collisionBoundary (value: HTMLElement): IReactProperty"
-            "collisionPadding (all: int): IReactProperty"
-            "arrowPadding (value: int): IReactProperty"
-            "arrowPadding (value: float)"
-            "sticky: stickyType ()"
-            "hideWhenDetached (value: bool): IReactProperty"
-        ]
-        "tooltipProvider",
-        [
-            "delayDuration (value: int): IReactProperty"
-            "delayDuration (value: float)"
-            "skipDelayDuration (value: int): IReactProperty"
-            "skipDelayDuration (value: float)"
-            "disableHoverableContent (value: bool): IReactProperty"
-        ]
-        "tooltipTrigger", [ "asChild: IReactProperty" ]
-    ]
+let apiReferencesProps: Map<string, string list> = Map [
+    "accordion", [ "asChild: IReactProperty"; "type': accordionTypes.type' ()"; "value (value: string): IReactProperty"; "defaultValue (value: string): IReactProperty"; "onValueChange (value: string -> unit): IReactProperty"; "value (value: string seq): IReactProperty"; "defaultValue (value: string seq): IReactProperty"; "onValueChange (value: string -> unit): IReactProperty"; "collapsible (value: bool): IReactProperty"; "disabled (value: bool): IReactProperty"; "dir: directionType ()"; "orientation: orientationType ()" ]
+    "accordionContent", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
+    "accordionItem", [ "asChild: IReactProperty"; "disabled (value: bool): IReactProperty"; "value (value: string): IReactProperty" ]
+    "accordionTrigger", [ "asChild: IReactProperty" ]
+    "alert", [ "asChild: IReactProperty" ]
+    "alertDescription", [ "asChild: IReactProperty" ]
+    "alertTitle", [ "asChild: IReactProperty" ]
+    "alertDialog", [ "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty" ]
+    "alertDialogAction", [ "asChild: IReactProperty" ]
+    "alertDialogCancel", [ "asChild: IReactProperty" ]
+    "alertDialogContent", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty"; "onOpenAutoFocus (value: Event -> unit): IReactProperty"; "onCloseAutoFocus (value: Event -> unit): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty" ]
+    "alertDialogDescription", [ "asChild: IReactProperty" ]
+    "alertDialogFooter", [ "asChild: IReactProperty" ]
+    "alertDialogHeader", [ "asChild: IReactProperty" ]
+    "alertDialogOverlay", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
+    "alertDialogPortal", [ "forceMount (value: bool): IReactProperty"; "container (value: HTMLElement): IReactProperty" ]
+    "alertDialogTitle", [ "asChild: IReactProperty" ]
+    "alertDialogTrigger", [ "asChild: IReactProperty" ]
+    "aspectRatio", [ "asChild: IReactProperty"; "ratio (value: int): IReactProperty"; "ratio (value: float)" ]
+    "avatar", [ "asChild: IReactProperty" ]
+    "avatarFallback", [ "asChild: IReactProperty"; "delayMs (value: int): IReactProperty"; "delayMs (value: float)" ]
+    "avatarImage", [ "asChild: IReactProperty"; "onLoadingStatusChange (value: string -> unit): IReactProperty" ]
+    "badge", [ "asChild: IReactProperty" ]
+    "breadcrumb", [ "asChild: IReactProperty" ]
+    "breadcrumbEllipsis", [ "asChild: IReactProperty" ]
+    "breadcrumbItem", [ "asChild: IReactProperty" ]
+    "breadcrumbLink", [ "asChild: IReactProperty" ]
+    "breadcrumbList", [ "asChild: IReactProperty" ]
+    "breadcrumbPage", [ "asChild: IReactProperty" ]
+    "breadcrumbSeparator", [ "asChild: IReactProperty" ]
+    "button", [ "asChild: IReactProperty" ]
+    "calendar", [ "asChild: IReactProperty" ]
+    "card", [ "asChild: IReactProperty" ]
+    "cardAction", [ "asChild: IReactProperty" ]
+    "cardContent", [ "asChild: IReactProperty" ]
+    "cardDescription", [ "asChild: IReactProperty" ]
+    "cardFooter", [ "asChild: IReactProperty" ]
+    "cardHeader", [ "asChild: IReactProperty" ]
+    "cardTitle", [ "asChild: IReactProperty" ]
+    "carousel", [ "asChild: IReactProperty" ]
+    "carouselContent", [ "asChild: IReactProperty" ]
+    "carouselItem", [ "asChild: IReactProperty" ]
+    "carouselNext", [ "asChild: IReactProperty" ]
+    "carouselPrevious", [ "asChild: IReactProperty" ]
+    "chartContainer", [ "asChild: IReactProperty" ]
+    "checkbox", [ "asChild: IReactProperty"; "defaultChecked (value: bool option -> unit): IReactProperty"; "checked' (value: bool): IReactProperty"; "onCheckedChange (value: bool option -> unit): IReactProperty"; "disabled (value: bool): IReactProperty"; "required (value: bool): IReactProperty"; "name (value: string): IReactProperty"; "value (value: string): IReactProperty" ]
+    "collapsible", [ "asChild: IReactProperty"; "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty"; "disabled (value: bool): IReactProperty" ]
+    "collapsibleContent", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
+    "collapsibleTrigger", [ "asChild: IReactProperty" ]
+    "command", [ "asChild: IReactProperty" ]
+    "commandDialog", [ "asChild: IReactProperty" ]
+    "commandEmpty", [ "asChild: IReactProperty" ]
+    "commandGroup", [ "asChild: IReactProperty" ]
+    "commandInput", [ "asChild: IReactProperty" ]
+    "commandItem", [ "asChild: IReactProperty" ]
+    "commandList", [ "asChild: IReactProperty" ]
+    "commandSeparator", [ "asChild: IReactProperty" ]
+    "commandShortcut", [ "asChild: IReactProperty" ]
+    "contextMenu", [ "dir: directionType ()"; "onOpenChange (value: bool -> unit): IReactProperty"; "modal (value: bool): IReactProperty" ]
+    "contextMenuCheckboxItem", [ "asChild: IReactProperty"; "checked' (value: bool): IReactProperty"; "onCheckedChange (value: bool -> unit): IReactProperty"; "disabled (value: bool): IReactProperty"; "onSelect (value: Event -> unit): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "contextMenuContent", [ "asChild: IReactProperty"; "loop (value: bool): IReactProperty"; "onCloseAutoFocus (value: Event -> unit): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "onFocusOutside (value: FocusEvent -> unit): IReactProperty"; "onInteractOutside (value: Event -> unit): IReactProperty"; "forceMount (value: bool): IReactProperty"; "alignOffset (value: int): IReactProperty"; "alignOffset (value: float)"; "avoidCollisions (value: bool): IReactProperty"; "collisionBoundary (value: HTMLElement): IReactProperty"; "collisionPadding (all: int): IReactProperty"; "sticky: stickyType ()"; "hideWhenDetached (value: bool): IReactProperty" ]
+    "contextMenuGroup", [ "asChild: IReactProperty" ]
+    "contextMenuItem", [ "asChild: IReactProperty"; "disabled (value: bool): IReactProperty"; "onSelect (value: Event -> unit): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "contextMenuLabel", [ "asChild: IReactProperty" ]
+    "contextMenuPortal", [ "forceMount (value: bool): IReactProperty"; "container (value: HTMLElement): IReactProperty" ]
+    "contextMenuRadioGroup", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "onValueChange (value: string -> unit): IReactProperty" ]
+    "contextMenuRadioItem", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "disabled (value: bool): IReactProperty"; "onSelect (value: Event -> unit): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "contextMenuSeparator", [ "asChild: IReactProperty" ]
+    "contextMenuShortcut", [ "asChild: IReactProperty" ]
+    "contextMenuSub", [ "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty" ]
+    "contextMenuSubContent", [ "asChild: IReactProperty"; "loop (value: bool): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "onFocusOutside (value: FocusEvent -> unit): IReactProperty"; "onInteractOutside (value: Event -> unit): IReactProperty"; "forceMount (value: bool): IReactProperty"; "sideOffset (value: int): IReactProperty"; "sideOffset (value: float)"; "alignOffset (value: int): IReactProperty"; "alignOffset (value: float)"; "avoidCollisions (value: bool): IReactProperty"; "collisionBoundary (value: HTMLElement): IReactProperty"; "collisionPadding (all: int): IReactProperty"; "arrowPadding (value: int): IReactProperty"; "arrowPadding (value: float)"; "sticky: stickyType ()"; "hideWhenDetached (value: bool): IReactProperty" ]
+    "contextMenuSubTrigger", [ "asChild: IReactProperty"; "disabled (value: bool): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "contextMenuTrigger", [ "asChild: IReactProperty"; "disabled (value: bool): IReactProperty" ]
+    "dialog", [ "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty"; "modal (value: bool): IReactProperty" ]
+    "dialogClose", [ "asChild: IReactProperty" ]
+    "dialogContent", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty"; "onOpenAutoFocus (value: Event -> unit): IReactProperty"; "onCloseAutoFocus (value: Event -> unit): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "onInteractOutside (value: Event -> unit): IReactProperty" ]
+    "dialogDescription", [ "asChild: IReactProperty" ]
+    "dialogFooter", [ "asChild: IReactProperty" ]
+    "dialogHeader", [ "asChild: IReactProperty" ]
+    "dialogOverlay", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
+    "dialogPortal", [ "forceMount (value: bool): IReactProperty"; "container (value: HTMLElement): IReactProperty" ]
+    "dialogTitle", [ "asChild: IReactProperty" ]
+    "dialogTrigger", [ "asChild: IReactProperty" ]
+    "drawer", [ "asChild: IReactProperty" ]
+    "drawerClose", [ "asChild: IReactProperty" ]
+    "drawerContent", [ "asChild: IReactProperty" ]
+    "drawerDescription", [ "asChild: IReactProperty" ]
+    "drawerFooter", [ "asChild: IReactProperty" ]
+    "drawerHeader", [ "asChild: IReactProperty" ]
+    "drawerOverlay", [ "asChild: IReactProperty" ]
+    "drawerPortal", [ "asChild: IReactProperty" ]
+    "drawerTitle", [ "asChild: IReactProperty" ]
+    "drawerTrigger", [ "asChild: IReactProperty" ]
+    "dropdownMenu", [ "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty"; "modal (value: bool): IReactProperty"; "dir: directionType ()" ]
+    "dropdownMenuCheckboxItem", [ "asChild: IReactProperty"; "checked' (value: bool): IReactProperty"; "onCheckedChange (value: bool -> unit): IReactProperty"; "disabled (value: bool): IReactProperty"; "onSelect (value: Event -> unit): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "dropdownMenuContent", [ "asChild: IReactProperty"; "loop (value: bool): IReactProperty"; "onCloseAutoFocus (value: Event -> unit): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "onFocusOutside (value: FocusEvent -> unit): IReactProperty"; "onInteractOutside (value: Event -> unit): IReactProperty"; "forceMount (value: bool): IReactProperty"; "side: sideType ()"; "sideOffset (value: int): IReactProperty"; "sideOffset (value: float)"; "align: alignType ()"; "alignOffset (value: int): IReactProperty"; "alignOffset (value: float)"; "avoidCollisions (value: bool): IReactProperty"; "collisionBoundary (value: HTMLElement): IReactProperty"; "collisionPadding (all: int): IReactProperty"; "arrowPadding (value: int): IReactProperty"; "arrowPadding (value: float)"; "sticky: stickyType ()"; "hideWhenDetached (value: bool): IReactProperty" ]
+    "dropdownMenuGroup", [ "asChild: IReactProperty" ]
+    "dropdownMenuItem", [ "asChild: IReactProperty"; "disabled (value: bool): IReactProperty"; "onSelect (value: Event -> unit): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "dropdownMenuLabel", [ "asChild: IReactProperty" ]
+    "dropdownMenuPortal", [ "forceMount (value: bool): IReactProperty"; "container (value: HTMLElement): IReactProperty" ]
+    "dropdownMenuRadioGroup", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "onValueChange (value: string -> unit): IReactProperty" ]
+    "dropdownMenuRadioItem", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "disabled (value: bool): IReactProperty"; "onSelect (value: Event -> unit): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "dropdownMenuSeparator", [ "asChild: IReactProperty" ]
+    "dropdownMenuShortcut", [ "asChild: IReactProperty" ]
+    "dropdownMenuSub", [ "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty" ]
+    "dropdownMenuSubContent", [ "asChild: IReactProperty"; "loop (value: bool): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "onFocusOutside (value: FocusEvent -> unit): IReactProperty"; "onInteractOutside (value: Event -> unit): IReactProperty"; "forceMount (value: bool): IReactProperty"; "sideOffset (value: int): IReactProperty"; "sideOffset (value: float)"; "alignOffset (value: int): IReactProperty"; "alignOffset (value: float)"; "avoidCollisions (value: bool): IReactProperty"; "collisionBoundary (value: HTMLElement): IReactProperty"; "collisionPadding (all: int): IReactProperty"; "arrowPadding (value: int): IReactProperty"; "arrowPadding (value: float)"; "sticky: stickyType ()"; "hideWhenDetached (value: bool): IReactProperty" ]
+    "dropdownMenuSubTrigger", [ "asChild: IReactProperty"; "disabled (value: bool): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "dropdownMenuTrigger", [ "asChild: IReactProperty" ]
+    "form", [ "asChild: IReactProperty"; "onClearServerErrors (value: unit -> unit): IReactProperty" ]
+    "hoverCard", [ "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty"; "open'Delay (value: int): IReactProperty"; "open'Delay (value: float)"; "closeDelay (value: int): IReactProperty"; "closeDelay (value: float)" ]
+    "hoverCardContent", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty"; "side: sideType ()"; "sideOffset (value: int): IReactProperty"; "sideOffset (value: float)"; "align: alignType ()"; "alignOffset (value: int): IReactProperty"; "alignOffset (value: float)"; "avoidCollisions (value: bool): IReactProperty"; "collisionBoundary (value: HTMLElement): IReactProperty"; "collisionPadding (all: int): IReactProperty"; "arrowPadding (value: int): IReactProperty"; "arrowPadding (value: float)"; "sticky: stickyType ()"; "hideWhenDetached (value: bool): IReactProperty" ]
+    "hoverCardTrigger", [ "asChild: IReactProperty" ]
+    "input", [ "asChild: IReactProperty" ]
+    "inputOTP", [ "asChild: IReactProperty" ]
+    "inputOTPGroup", [ "asChild: IReactProperty" ]
+    "inputOTPSeparator", [ "asChild: IReactProperty" ]
+    "inputOTPSlot", [ "asChild: IReactProperty" ]
+    "label", [ "asChild: IReactProperty"; "htmlFor (value: string): IReactProperty" ]
+    "menubar", [ "asChild: IReactProperty"; "defaultValue (value: string): IReactProperty"; "value (value: string): IReactProperty"; "onValueChange (value: int list -> unit): IReactProperty"; "onValueChange (value: float list -> unit): IReactProperty"; "dir: directionType ()"; "loop (value: bool): IReactProperty" ]
+    "menubarCheckboxItem", [ "asChild: IReactProperty"; "checked' (value: bool): IReactProperty"; "onCheckedChange (value: bool -> unit): IReactProperty"; "disabled (value: bool): IReactProperty"; "onSelect (value: Event -> unit): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "menubarContent", [ "asChild: IReactProperty"; "loop (value: bool): IReactProperty"; "onCloseAutoFocus (value: Event -> unit): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "onFocusOutside (value: FocusEvent -> unit): IReactProperty"; "onInteractOutside (value: Event -> unit): IReactProperty"; "forceMount (value: bool): IReactProperty"; "side: sideType ()"; "sideOffset (value: int): IReactProperty"; "sideOffset (value: float)"; "align: alignType ()"; "alignOffset (value: int): IReactProperty"; "alignOffset (value: float)"; "avoidCollisions (value: bool): IReactProperty"; "collisionBoundary (value: HTMLElement): IReactProperty"; "collisionPadding (all: int): IReactProperty"; "arrowPadding (value: int): IReactProperty"; "arrowPadding (value: float)"; "sticky: stickyType ()"; "hideWhenDetached (value: bool): IReactProperty" ]
+    "menubarGroup", [ "asChild: IReactProperty" ]
+    "menubarItem", [ "asChild: IReactProperty"; "disabled (value: bool): IReactProperty"; "onSelect (value: Event -> unit): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "menubarLabel", [ "asChild: IReactProperty" ]
+    "menubarMenu", [ "asChild: IReactProperty"; "value (value: string): IReactProperty" ]
+    "menubarPortal", [ "forceMount (value: bool): IReactProperty"; "container (value: HTMLElement): IReactProperty" ]
+    "menubarRadioGroup", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "onValueChange (value: string -> unit): IReactProperty" ]
+    "menubarRadioItem", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "disabled (value: bool): IReactProperty"; "onSelect (value: Event -> unit): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "menubarSeparator", [ "asChild: IReactProperty" ]
+    "menubarShortcut", [ "asChild: IReactProperty" ]
+    "menubarSub", [ "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty" ]
+    "menubarSubContent", [ "asChild: IReactProperty"; "loop (value: bool): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "onFocusOutside (value: FocusEvent -> unit): IReactProperty"; "onInteractOutside (value: Event -> unit): IReactProperty"; "forceMount (value: bool): IReactProperty"; "sideOffset (value: int): IReactProperty"; "sideOffset (value: float)"; "alignOffset (value: int): IReactProperty"; "alignOffset (value: float)"; "avoidCollisions (value: bool): IReactProperty"; "collisionBoundary (value: HTMLElement): IReactProperty"; "collisionPadding (all: int): IReactProperty"; "arrowPadding (value: int): IReactProperty"; "arrowPadding (value: float)"; "sticky: stickyType ()"; "hideWhenDetached (value: bool): IReactProperty" ]
+    "menubarSubTrigger", [ "asChild: IReactProperty"; "disabled (value: bool): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "menubarTrigger", [ "asChild: IReactProperty" ]
+    "navigationMenu", [ "defaultValue (value: string): IReactProperty"; "value (value: string): IReactProperty"; "onValueChange (value: int list -> unit): IReactProperty"; "onValueChange (value: float list -> unit): IReactProperty"; "delayDuration (value: int): IReactProperty"; "delayDuration (value: float)"; "skipDelayDuration (value: int): IReactProperty"; "skipDelayDuration (value: float)"; "dir: directionType ()"; "orientation: orientationType ()" ]
+    "navigationMenuContent", [ "asChild: IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "onFocusOutside (value: FocusEvent -> unit): IReactProperty"; "onInteractOutside (value: Event -> unit): IReactProperty"; "forceMount (value: bool): IReactProperty" ]
+    "navigationMenuIndicator", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
+    "navigationMenuItem", [ "asChild: IReactProperty"; "value (value: string): IReactProperty" ]
+    "navigationMenuLink", [ "asChild: IReactProperty"; "active (value: bool): IReactProperty"; "onSelect (value: Event -> unit): IReactProperty" ]
+    "navigationMenuList", [ "asChild: IReactProperty" ]
+    "navigationMenuTrigger", [ "asChild: IReactProperty" ]
+    "navigationMenuViewport", [ "asChild: IReactProperty"; "forceMount (value: bool): IReactProperty" ]
+    "pagination", [ "asChild: IReactProperty" ]
+    "paginationContent", [ "asChild: IReactProperty" ]
+    "paginationEllipsis", [ "asChild: IReactProperty" ]
+    "paginationItem", [ "asChild: IReactProperty" ]
+    "paginationLink", [ "asChild: IReactProperty" ]
+    "paginationNext", [ "asChild: IReactProperty" ]
+    "paginationPrevious", [ "asChild: IReactProperty" ]
+    "popover", [ "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty"; "modal (value: bool): IReactProperty" ]
+    "popoverAnchor", [ "asChild: IReactProperty" ]
+    "popoverContent", [ "asChild: IReactProperty"; "onOpenAutoFocus (value: Event -> unit): IReactProperty"; "onCloseAutoFocus (value: Event -> unit): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "onFocusOutside (value: FocusEvent -> unit): IReactProperty"; "onInteractOutside (value: Event -> unit): IReactProperty"; "forceMount (value: bool): IReactProperty"; "side: sideType ()"; "sideOffset (value: int): IReactProperty"; "sideOffset (value: float)"; "align: alignType ()"; "alignOffset (value: int): IReactProperty"; "alignOffset (value: float)"; "avoidCollisions (value: bool): IReactProperty"; "collisionBoundary (value: HTMLElement): IReactProperty"; "collisionPadding (all: int): IReactProperty"; "arrowPadding (value: int): IReactProperty"; "arrowPadding (value: float)"; "sticky: stickyType ()"; "hideWhenDetached (value: bool): IReactProperty" ]
+    "popoverTrigger", [ "asChild: IReactProperty" ]
+    "progress", [ "asChild: IReactProperty"; "value (value: int option): IReactProperty"; "value (value: float option): IReactProperty"; "max (value: int): IReactProperty"; "max (value: float)"; "getValueLabel (value: int -> int -> string): IReactProperty" ]
+    "radioGroup", [ "asChild: IReactProperty"; "defaultValue (value: string): IReactProperty"; "value (value: string): IReactProperty"; "onValueChange (value: int list -> unit): IReactProperty"; "onValueChange (value: float list -> unit): IReactProperty"; "disabled (value: bool): IReactProperty"; "name (value: string): IReactProperty"; "required (value: bool): IReactProperty"; "orientation: orientationType ()"; "dir: directionType ()"; "loop (value: bool): IReactProperty" ]
+    "radioGroupItem", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "disabled (value: bool): IReactProperty"; "required (value: bool): IReactProperty" ]
+    "resizablePanelGroup", [ "asChild: IReactProperty" ]
+    "scrollArea", [ "asChild: IReactProperty"; "type': scrollAreaTypes.type' ()"; "scrollHideDelay (value: int): IReactProperty"; "scrollHideDelay (value: float)"; "dir: directionType ()"; "nonce (value: string): IReactProperty" ]
+    "select", [ "defaultValue (value: string): IReactProperty"; "value (value: string): IReactProperty"; "onValueChange (value: string -> unit): IReactProperty"; "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty"; "dir: directionType ()"; "name (value: string): IReactProperty"; "disabled (value: bool): IReactProperty"; "required (value: bool): IReactProperty" ]
+    "selectContent", [ "asChild: IReactProperty"; "onCloseAutoFocus (value: Event -> unit): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "position: selectContentTypes.position ()"; "side: sideType ()"; "sideOffset (value: int): IReactProperty"; "sideOffset (value: float)"; "align: alignType ()"; "alignOffset (value: int): IReactProperty"; "alignOffset (value: float)"; "avoidCollisions (value: bool): IReactProperty"; "collisionBoundary (value: HTMLElement): IReactProperty"; "collisionPadding (all: int): IReactProperty"; "arrowPadding (value: int): IReactProperty"; "arrowPadding (value: float)"; "sticky: stickyType ()"; "hideWhenDetached (value: bool): IReactProperty" ]
+    "selectGroup", [ "asChild: IReactProperty" ]
+    "selectItem", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "disabled (value: bool): IReactProperty"; "textValue (value: string): IReactProperty" ]
+    "selectLabel", [ "asChild: IReactProperty" ]
+    "selectScrollDownButton", [ "asChild: IReactProperty" ]
+    "selectScrollUpButton", [ "asChild: IReactProperty" ]
+    "selectSeparator", [ "asChild: IReactProperty" ]
+    "selectTrigger", [ "asChild: IReactProperty" ]
+    "selectValue", [ "asChild: IReactProperty"; "placeholder (value: ReactElement): IReactProperty" ]
+    "separator", [ "asChild: IReactProperty"; "orientation: orientationType ()"; "decorative (value: bool): IReactProperty" ]
+    "sheet", [ "asChild: IReactProperty" ]
+    "sheetClose", [ "asChild: IReactProperty" ]
+    "sheetContent", [ "asChild: IReactProperty" ]
+    "sheetDescription", [ "asChild: IReactProperty" ]
+    "sheetFooter", [ "asChild: IReactProperty" ]
+    "sheetHeader", [ "asChild: IReactProperty" ]
+    "sheetTitle", [ "asChild: IReactProperty" ]
+    "sheetTrigger", [ "asChild: IReactProperty" ]
+    "sidebar", [ "asChild: IReactProperty" ]
+    "sidebarContent", [ "asChild: IReactProperty" ]
+    "sidebarFooter", [ "asChild: IReactProperty" ]
+    "sidebarGroup", [ "asChild: IReactProperty" ]
+    "sidebarGroupAction", [ "asChild: IReactProperty" ]
+    "sidebarGroupContent", [ "asChild: IReactProperty" ]
+    "sidebarGroupLabel", [ "asChild: IReactProperty" ]
+    "sidebarHeader", [ "asChild: IReactProperty" ]
+    "sidebarInput", [ "asChild: IReactProperty" ]
+    "sidebarInset", [ "asChild: IReactProperty" ]
+    "sidebarMenu", [ "asChild: IReactProperty" ]
+    "sidebarMenuAction", [ "asChild: IReactProperty" ]
+    "sidebarMenuBadge", [ "asChild: IReactProperty" ]
+    "sidebarMenuButton", [ "asChild: IReactProperty" ]
+    "sidebarMenuItem", [ "asChild: IReactProperty" ]
+    "sidebarMenuSkeleton", [ "asChild: IReactProperty" ]
+    "sidebarMenuSub", [ "asChild: IReactProperty" ]
+    "sidebarMenuSubButton", [ "asChild: IReactProperty" ]
+    "sidebarMenuSubItem", [ "asChild: IReactProperty" ]
+    "sidebarProvider", [ "asChild: IReactProperty" ]
+    "sidebarRail", [ "asChild: IReactProperty" ]
+    "sidebarSeparator", [ "asChild: IReactProperty" ]
+    "sidebarTrigger", [ "asChild: IReactProperty" ]
+    "skeleton", [ "asChild: IReactProperty" ]
+    "slider", [ "asChild: IReactProperty"; "defaultValue (value: int list): IReactProperty: IReactProperty"; "defaultValue (value: float list): IReactProperty"; "value (value: int list): IReactProperty: IReactProperty"; "value (value: float list): IReactProperty"; "onValueChange (value: int list -> unit): IReactProperty"; "onValueChange (value: float list -> unit): IReactProperty"; "onValueCommit (value: int list -> unit): IReactProperty"; "onValueCommit (value: float list -> unit): IReactProperty"; "name (value: string): IReactProperty"; "disabled (value: bool): IReactProperty"; "orientation: orientationType ()"; "dir: directionType ()"; "inverted (value: bool): IReactProperty"; "min (value: int): IReactProperty"; "min (value: float)"; "max (value: int): IReactProperty"; "max (value: float)"; "step (value: int): IReactProperty"; "step (value: float)"; "minStepsBetweenThumbs (value: int): IReactProperty"; "minStepsBetweenThumbs (value: float)"; "form (value: string): IReactProperty" ]
+    "toaster", [ "asChild: IReactProperty" ]
+    "switch", [ "asChild: IReactProperty"; "defaultChecked (value: bool): IReactProperty"; "checked' (value: bool): IReactProperty"; "onCheckedChange (value: bool -> unit): IReactProperty"; "disabled (value: bool): IReactProperty"; "required (value: bool): IReactProperty"; "name (value: string): IReactProperty"; "value (value: string): IReactProperty" ]
+    "table", [ "asChild: IReactProperty" ]
+    "tableBody", [ "asChild: IReactProperty" ]
+    "tableCaption", [ "asChild: IReactProperty" ]
+    "tableCell", [ "asChild: IReactProperty" ]
+    "tableFooter", [ "asChild: IReactProperty" ]
+    "tableHead", [ "asChild: IReactProperty" ]
+    "tableHeader", [ "asChild: IReactProperty" ]
+    "tableRow", [ "asChild: IReactProperty" ]
+    "tabs", [ "asChild: IReactProperty"; "defaultValue (value: string): IReactProperty"; "value (value: string): IReactProperty"; "onValueChange (value: string -> unit): IReactProperty"; "orientation: orientationType ()"; "dir: directionType ()"; "activationMode: tabsTypes.activationMode ()" ]
+    "tabsContent", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "forceMount (value: bool): IReactProperty" ]
+    "tabsList", [ "asChild: IReactProperty"; "loop (value: bool): IReactProperty" ]
+    "tabsTrigger", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "disabled (value: bool): IReactProperty" ]
+    "textarea", [ "asChild: IReactProperty" ]
+    "toggle", [ "asChild: IReactProperty"; "defaultPressed (value: bool): IReactProperty"; "pressed (value: bool): IReactProperty"; "onPressedChange (value: bool -> unit): IReactProperty"; "disabled (value: bool): IReactProperty" ]
+    "toggleGroup", [ "asChild: IReactProperty"; "type': toggleGroupTypes.type' ()"; "value (value: string): IReactProperty"; "defaultValue (value: string): IReactProperty"; "onValueChange (value: string -> unit): IReactProperty"; "value (value: string seq): IReactProperty"; "defaultValue (value: string seq): IReactProperty"; "onValueChange (value: string -> unit): IReactProperty"; "disabled (value: bool): IReactProperty"; "rovingFocus (value: bool): IReactProperty"; "orientation: orientationType ()"; "dir: directionType ()"; "loop (value: bool): IReactProperty" ]
+    "toggleGroupItem", [ "asChild: IReactProperty"; "value (value: string): IReactProperty"; "disabled (value: bool): IReactProperty" ]
+    "tooltip", [ "defaultOpen (value: bool): IReactProperty"; "open' (value: bool): IReactProperty"; "onOpenChange (value: bool -> unit): IReactProperty"; "delayDuration (value: int): IReactProperty"; "delayDuration (value: float)"; "disableHoverableContent (value: bool): IReactProperty" ]
+    "tooltipContent", [ "asChild: IReactProperty"; "arialabel (value: string): IReactProperty"; "onEscapeKeyDown (value: KeyboardEvent -> unit): IReactProperty"; "onPointerDownOutside (value: PointerEvent -> unit): IReactProperty"; "forceMount (value: bool): IReactProperty"; "side: sideType ()"; "sideOffset (value: int): IReactProperty"; "sideOffset (value: float)"; "align: alignType ()"; "alignOffset (value: int): IReactProperty"; "alignOffset (value: float)"; "avoidCollisions (value: bool): IReactProperty"; "collisionBoundary (value: HTMLElement): IReactProperty"; "collisionPadding (all: int): IReactProperty"; "arrowPadding (value: int): IReactProperty"; "arrowPadding (value: float)"; "sticky: stickyType ()"; "hideWhenDetached (value: bool): IReactProperty" ]
+    "tooltipProvider", [ "delayDuration (value: int): IReactProperty"; "delayDuration (value: float)"; "skipDelayDuration (value: int): IReactProperty"; "skipDelayDuration (value: float)"; "disableHoverableContent (value: bool): IReactProperty" ]
+    "tooltipTrigger", [ "asChild: IReactProperty" ]
+]
 // apiReferences props end
 
 // Not auto generated props
