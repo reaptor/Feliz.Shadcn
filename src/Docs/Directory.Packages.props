@@ -13,6 +13,6 @@
     <PackageVersion Include="Fable.Promise" Version="3.2.0" />
     <PackageVersion Include="Feliz" Version="2.8.0" />
     <PackageVersion Include="Feliz.Router" Version="4.0.0" />
-    <PackageVersion Include="Feliz.Shadcn" Version="0.9.3" />
+    <PackageVersion Include="Feliz.Shadcn" Version="0.9.4" />
   </ItemGroup>
 </Project>
